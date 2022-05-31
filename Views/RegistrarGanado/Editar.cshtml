@@ -23,8 +23,8 @@
                                 </div>
                                 <div>
                                     <label>Fecha Nacimiento</label>
-                                    <input asp-for="fechaNacimiento" type="date" id="fecha" placeholder="Birth Date">
-                                    <span asp-validation-for="fechaNacimiento" class="text-danger"> </span>
+                                    <input asp-for="FechaNacimiento" type="date" id="fecha" placeholder="Birth Date">
+                                    <span asp-validation-for="FechaNacimiento" class="text-danger"> </span>
                                 </div>
                                 <div>
                                     <label>Sexo</label>
@@ -34,6 +34,11 @@
 
                                     </select>
                                     <span asp-validation-for="Sexo" class="text-danger"> </span>
+                                </div>
+                                                                <div>
+                                    <label>Raza</label>
+                                    <input asp-for="Raza" type="text" placeholder="Ingresa raza">
+                                    <span asp-validation-for="Raza" class="text-danger"> </span>
                                 </div>
                                 <div>
                                     <label>Imagen</label>

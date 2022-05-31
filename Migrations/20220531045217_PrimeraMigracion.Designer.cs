@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FundoSantaElena.Migrations
 {
     [DbContext(typeof(AplicationDbContext))]
-    [Migration("20220530170212_PrimeraMigracion")]
+    [Migration("20220531045217_PrimeraMigracion")]
     partial class PrimeraMigracion
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,6 +31,11 @@ namespace FundoSantaElena.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<string>("FechaNacimiento")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
                     b.Property<string>("Foto")
                         .IsRequired()
                         .HasMaxLength(1000)
@@ -41,19 +46,47 @@ namespace FundoSantaElena.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<string>("Raza")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
                     b.Property<string>("Sexo")
                         .IsRequired()
-                        .HasMaxLength(2)
-                        .HasColumnType("nvarchar(2)");
+                        .HasMaxLength(1)
+                        .HasColumnType("nvarchar(1)");
 
-                    b.Property<string>("fechaNacimiento")
+                    b.HasKey("Id");
+
+                    b.ToTable("Animales");
+                });
+
+            modelBuilder.Entity("FundoSantaElena.Models.ProduccionAnimal", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("AnimalId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Cantidad")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Fecha")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Animales");
+                    b.HasIndex("AnimalId");
+
+                    b.ToTable("ProduccionAnimales");
                 });
 
             modelBuilder.Entity("FundoSantaElena.Models.Usuarios", b =>
@@ -77,6 +110,17 @@ namespace FundoSantaElena.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Usuarios");
+                });
+
+            modelBuilder.Entity("FundoSantaElena.Models.ProduccionAnimal", b =>
+                {
+                    b.HasOne("FundoSantaElena.Models.Animal", "Animal")
+                        .WithMany()
+                        .HasForeignKey("AnimalId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Animal");
                 });
 #pragma warning restore 612, 618
         }

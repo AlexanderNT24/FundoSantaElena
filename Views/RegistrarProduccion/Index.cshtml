@@ -1,7 +1,8 @@
 ﻿
+
+@model FundoSantaElena.Models.ProduccionAnimal
 @{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+IEnumerable<ProduccionAnimal> produccionAnimales = ViewBag.ProduccionAnimales;
 }
 
 @{
@@ -30,31 +31,39 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                         Registro Producción
                     </div>
                     <div class="card-section">
+                        <form method="post" asp-action="Index">
                         <div>
-                            <div>
-                                <label>Nombre</label>
-                                <input type="text" placeholder="Ingresa nombre">
+                           <div>
+                                <label>Id Animal</label>
+                                <input asp-for="Animal.Id" type="number" placeholder="Ingresa Id Animal">
+                            <span asp-validation-for="Animal.Id" class="text-danger"> </span>
+                               
                             </div>
                             <div>
-                                <label>Raza</label>
-                                <input type="text" placeholder="Ingresa raza">
+                                <label>Nombre</label>
+                                <input asp-for="Animal.Nombre" type="text"  placeholder="Ingresa nombre">
+                            <span asp-validation-for="Animal.Nombre" class="text-danger"> </span>
+                               
                             </div>
                             <div>
                                 <label>Hora Ordeño</label>
-                                <input type="time" >
+                                <input asp-for="Fecha" type="text" type="datetime-local" >
+                           
+                            <span asp-validation-for="Fecha" class="text-danger"> </span>
                             </div>
                             <div>
                                 <label>Litros</label>
-                                <input type="number" placeholder="Ingresa litros">
+                                <input asp-for="Cantidad" type="number" type="number" placeholder="Ingresa litros">
+                            <span asp-validation-for="Cantidad" class="text-danger"> </span>
+                           
                             </div>
                             <div>
-                                <button style="background-color: #65d1a9;" class="button small" type="submit"
-                                    id="buttonInsert">
-                                    Guardar
-                                </button>
+                            <input style="background-color: #65d1a9;" value="Registrar" type="submit" class="button small"
+                                        asp-action="Index" asp-controller="RegistrarProduccion" />
                             </div>
 
                         </div>
+                         </form>
                     </div>
                 </div>
 
@@ -66,12 +75,51 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                     <input onkeyup="searchData()" id="searchAnimal" placeholder="Ej:Lola">
                 </div>
                 <hr>
-                <table id="data">
+<table>
+                    @if (produccionAnimales.Count()>0)
+                    {
+                    <thead>
+                        <td>@Html.DisplayNameFor(produccionAnimales=>produccionAnimales.Id)</td>
+                        <td>@Html.DisplayNameFor(produccionAnimales=>produccionAnimales.Animal.Nombre)</td>
+                        <td>@Html.DisplayNameFor(produccionAnimales=>produccionAnimales.Cantidad)</td>
+                        <td>@Html.DisplayNameFor(produccionAnimales=>produccionAnimales.Fecha)</td>
+                    </thead>
+                    <tbody  id="data">
+                        @foreach(var produccion in produccionAnimales)
+                        {
+
+                        <tr>
+                            <td>@produccion.Id</td>
+                            <td>@produccion.Animal.Nombre</td>
+
+                            <td>@produccion.Cantidad</td>
+                           <td>@produccion.Fecha</td>
+                            <td>
+                                <a asp-controller="RegistrarGanado" asp-action="Editar" asp-route-id="@produccion.Id"
+                                    class="button alert">Editar</a>
+                            </td>
+                            <td> <a asp-controller="RegistrarGanado" asp-action="Eliminar" asp-route-id="@produccion.Id"
+                                    class="button warning">Eliminar</a>
+                            </td>
+                        </tr>
+
+                        }
+
+
+                    </tbody>
+
+
+                    }
+                    else
+                    {
                     <tr>
                         <td> No hay datos..</td>
                     </tr>
+                    }
+
 
                 </table>
+
 
 
             </div>

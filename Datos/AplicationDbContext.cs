@@ -11,5 +11,7 @@ namespace FundoSantaElena.Datos
         }
         public DbSet<Usuarios> Usuarios { get; set; }
         public DbSet<Animal> Animales{ get; set; }
+        public DbSet<ProduccionAnimal> ProduccionAnimales { get; set; }
+
     }
 }

@@ -33,8 +33,8 @@ IEnumerable<Animal> animales = ViewBag.Animal;
                                 </div>
                                 <div>
                                     <label>Fecha Nacimiento</label>
-                                    <input asp-for="fechaNacimiento" type="date" id="fecha" placeholder="Birth Date">
-                                    <span asp-validation-for="fechaNacimiento" class="text-danger"> </span>
+                                    <input asp-for="FechaNacimiento" type="date" id="fecha" placeholder="Fecha Nacimiento">
+                                    <span asp-validation-for="FechaNacimiento" class="text-danger"> </span>
                                 </div>
                                 <div>
                                     <label>Sexo</label>
@@ -44,6 +44,11 @@ IEnumerable<Animal> animales = ViewBag.Animal;
 
                                     </select>
                                     <span asp-validation-for="Sexo" class="text-danger"> </span>
+                                </div>
+                                <div>
+                                    <label>Raza</label>
+                                    <input asp-for="Raza" type="text" placeholder="Ingresa raza">
+                                    <span asp-validation-for="Raza" class="text-danger"> </span>
                                 </div>
                                 <div>
                                     <label>Imagen</label>
@@ -78,9 +83,11 @@ IEnumerable<Animal> animales = ViewBag.Animal;
                     <thead>
                         <td>@Html.DisplayNameFor(animales=>animales.Id)</td>
                         <td>@Html.DisplayNameFor(animales=>animales.Nombre)</td>
-                        <td>@Html.DisplayNameFor(animales=>animales.fechaNacimiento)</td>
+                        <td>@Html.DisplayNameFor(animales=>animales.FechaNacimiento)</td>
                         <td>@Html.DisplayNameFor(animales=>animales.Sexo)</td>
+                        <td>@Html.DisplayNameFor(animales=>animales.Raza)</td>
                         <td>@Html.DisplayNameFor(animales=>animales.Foto)</td>
+                    
                     </thead>
                     <tbody  id="data">
                         @foreach(var animal in animales)
@@ -89,7 +96,7 @@ IEnumerable<Animal> animales = ViewBag.Animal;
                         <tr>
                             <td>@animal.Id</td>
                             <td>@animal.Nombre</td>
-                            <td>@animal.fechaNacimiento</td>
+                            <td>@animal.FechaNacimiento</td>
                             @if (animal.Sexo=="M")
                             {
                             <td>Masculino</td>
@@ -98,6 +105,7 @@ IEnumerable<Animal> animales = ViewBag.Animal;
                             {
                             <td>Femenino</td>
                             }
+                            <td>@animal.Raza</td>
                             <td><img src="@animal.Foto"></img></td>
                             <td>
                                 <a asp-controller="RegistrarGanado" asp-action="Editar" asp-route-id="@animal.Id"
