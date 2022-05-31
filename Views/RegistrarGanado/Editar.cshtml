@@ -1,0 +1,53 @@
+﻿@model FundoSantaElena.Models.Animal
+@{
+    ViewData["Title"] = "Editar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.4/dist/css/foundation.min.css"
+        crossorigin="anonymous">
+
+                <div class="card" style="width: 100%;">
+                    <div class="card-divider" id="title">
+                        Editar
+                    </div>
+
+                    <div class="card-section">
+                        <form method="post" asp-action="Editar">
+                            <div>
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <div>
+                                    <label>Nombre</label>
+                                    <input asp-for="Nombre" type="text" id="nombre" placeholder="Ingresa nombre">
+                                    <span asp-validation-for="Nombre" class="text-danger"> </span>
+                                </div>
+                                <div>
+                                    <label>Fecha Nacimiento</label>
+                                    <input asp-for="fechaNacimiento" type="date" id="fecha" placeholder="Birth Date">
+                                    <span asp-validation-for="fechaNacimiento" class="text-danger"> </span>
+                                </div>
+                                <div>
+                                    <label>Sexo</label>
+                                    <select id="sexo" asp-for="Sexo">
+                                        <option value="M">Macho</option>
+                                        <option value="F">Hembra</option>
+
+                                    </select>
+                                    <span asp-validation-for="Sexo" class="text-danger"> </span>
+                                </div>
+                                <div>
+                                    <label>Imagen</label>
+                                    <input asp-for="Foto" id="foto" type="url" placeholder="Ingresa imagen">
+                                    <span asp-validation-for="Foto" class="text-danger"> </span>
+                                </div>
+                                <div>
+                                    <input style="background-color: #65d1a9;" value="Editar" type="submit" class="button small"
+                                        asp-action="Editar" asp-controller="RegistrarGanado" />
+
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+
+                </div>

@@ -1,0 +1,83 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+ViewData["Title"] = "Index";
+Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <title>IndexedDB</title>
+    <!-- Compressed CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.4/dist/css/foundation.min.css"
+        crossorigin="anonymous">
+</head>
+
+<body>
+
+    <div class="grid-container">
+        <div class="grid-x grid-margin-x">
+            <div class="cell small-6">
+                <div class="card" style="width: 100%;">
+                    <div class="card-divider" id="title">
+                        Registro Producción
+                    </div>
+                    <div class="card-section">
+                        <div>
+                            <div>
+                                <label>Nombre</label>
+                                <input type="text" placeholder="Ingresa nombre">
+                            </div>
+                            <div>
+                                <label>Raza</label>
+                                <input type="text" placeholder="Ingresa raza">
+                            </div>
+                            <div>
+                                <label>Hora Ordeño</label>
+                                <input type="time" >
+                            </div>
+                            <div>
+                                <label>Litros</label>
+                                <input type="number" placeholder="Ingresa litros">
+                            </div>
+                            <div>
+                                <button style="background-color: #65d1a9;" class="button small" type="submit"
+                                    id="buttonInsert">
+                                    Guardar
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="cell small-6">
+                <div>
+                    <h4>Producción</h4>
+                    <label>Nombre Animal</label>
+                    <input onkeyup="searchData()" id="searchAnimal" placeholder="Ej:Lola">
+                </div>
+                <hr>
+                <table id="data">
+                    <tr>
+                        <td> No hay datos..</td>
+                    </tr>
+
+                </table>
+
+
+            </div>
+
+        </div>
+    </div>
+
+
+</body>

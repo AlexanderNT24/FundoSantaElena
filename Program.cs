@@ -1,7 +1,17 @@
+using FundoSantaElena.Datos;
+using Microsoft.EntityFrameworkCore;
+
+
 var builder = WebApplication.CreateBuilder(args);
+var provider=builder.Services.BuildServiceProvider();
+var configuration=provider.GetService<IConfiguration>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddDbContext<AplicationDbContext>(options =>
+options.UseSqlServer(configuration.GetConnectionString("Connexion")));
+
+
 
 var app = builder.Build();
 
@@ -22,6 +32,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Usuario}/{action=Index}/{id?}");
 
 app.Run();
