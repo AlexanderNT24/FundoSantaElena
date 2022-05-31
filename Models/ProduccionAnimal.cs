@@ -10,10 +10,9 @@ namespace FundoSantaElena.Models
         [StringLength(maximumLength: 50, ErrorMessage = "El {0} debe ser minimo {2} y maximo {1} caracteres", MinimumLength = 5)]
         public string Fecha { get; set; }
         [Required(ErrorMessage = "Cantidad obligatoria")]
-        [StringLength(maximumLength: 50, ErrorMessage = "El {0} debe ser minimo {2} y maximo {1} caracteres", MinimumLength = 5)]
+        [StringLength(maximumLength: 10, ErrorMessage = "El {0} debe ser minimo {2} y maximo {1} caracteres", MinimumLength = 0)]
         public string Cantidad { get; set; }
-        [ForeignKey("Animal")]
-        public int AnimalId { get; set; }
-        public Animal Animal { get; set; }
+        [Required(ErrorMessage = "Id Animal obligatorio")]
+        public int IdAnimal { get; set; }
     }
 }

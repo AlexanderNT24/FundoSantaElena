@@ -1,25 +1,21 @@
-﻿
-
-@model FundoSantaElena.Models.ProduccionAnimal
+﻿@model FundoSantaElena.Models.ProduccionAnimal
 @{
-IEnumerable<ProduccionAnimal> produccionAnimales = ViewBag.ProduccionAnimales;
+    IEnumerable<ProduccionAnimal> produccionAnimales = ViewBag.ProduccionAnimales;
+    IEnumerable<Animal> animales = ViewBag.Animales;
+
 }
 
 @{
-ViewData["Title"] = "Index";
-Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <title>IndexedDB</title>
-    <!-- Compressed CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.4/dist/css/foundation.min.css"
-        crossorigin="anonymous">
-</head>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.4/dist/css/foundation.min.css"
+      crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+</script>
 
 <body>
 
@@ -32,100 +28,159 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                     </div>
                     <div class="card-section">
                         <form method="post" asp-action="Index">
-                        <div>
-                           <div>
-                                <label>Id Animal</label>
-                                <input asp-for="Animal.Id" type="number" placeholder="Ingresa Id Animal">
-                            <span asp-validation-for="Animal.Id" class="text-danger"> </span>
-                               
-                            </div>
                             <div>
-                                <label>Nombre</label>
-                                <input asp-for="Animal.Nombre" type="text"  placeholder="Ingresa nombre">
-                            <span asp-validation-for="Animal.Nombre" class="text-danger"> </span>
-                               
-                            </div>
-                            <div>
-                                <label>Hora Ordeño</label>
-                                <input asp-for="Fecha" type="text" type="datetime-local" >
-                           
-                            <span asp-validation-for="Fecha" class="text-danger"> </span>
-                            </div>
-                            <div>
-                                <label>Litros</label>
-                                <input asp-for="Cantidad" type="number" type="number" placeholder="Ingresa litros">
-                            <span asp-validation-for="Cantidad" class="text-danger"> </span>
-                           
-                            </div>
-                            <div>
-                            <input style="background-color: #65d1a9;" value="Registrar" type="submit" class="button small"
-                                        asp-action="Index" asp-controller="RegistrarProduccion" />
-                            </div>
+                                <div>
+                                    <label>Animales</label>
+                                    <select asp-for="IdAnimal">
+                                        @foreach (var animal in animales)
+                                        {
 
-                        </div>
-                         </form>
+                                            <option class="NombreId" value="@animal.Id">@animal.Id. @animal.Nombre</option>
+
+                                        }
+
+
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label>Hora Ordeño</label>
+                                    <input asp-for="Fecha" type="text" type="datetime-local">
+
+                                    <span asp-validation-for="Fecha" class="text-danger"> </span>
+                                </div>
+                                <div>
+                                    <label>Litros</label>
+                                    <input asp-for="Cantidad" type="number" type="number" placeholder="Ingresa litros">
+                                    <span asp-validation-for="Cantidad" class="text-danger"> </span>
+
+                                </div>
+                                <div>
+                                    <input style="background-color: #65d1a9;" value="Registrar" type="submit" class="button small"
+                                           asp-action="Index" asp-controller="RegistrarProduccion" />
+                                </div>
+
+                            </div>
+                        </form>
                     </div>
                 </div>
 
             </div>
+
             <div class="cell small-6">
                 <div>
-                    <h4>Producción</h4>
-                    <label>Nombre Animal</label>
-                    <input onkeyup="searchData()" id="searchAnimal" placeholder="Ej:Lola">
+
+                    <canvas id="grafica" width="400" height="300"></canvas>
                 </div>
                 <hr>
-<table>
-                    @if (produccionAnimales.Count()>0)
-                    {
-                    <thead>
-                        <td>@Html.DisplayNameFor(produccionAnimales=>produccionAnimales.Id)</td>
-                        <td>@Html.DisplayNameFor(produccionAnimales=>produccionAnimales.Animal.Nombre)</td>
-                        <td>@Html.DisplayNameFor(produccionAnimales=>produccionAnimales.Cantidad)</td>
-                        <td>@Html.DisplayNameFor(produccionAnimales=>produccionAnimales.Fecha)</td>
-                    </thead>
-                    <tbody  id="data">
-                        @foreach(var produccion in produccionAnimales)
-                        {
-
-                        <tr>
-                            <td>@produccion.Id</td>
-                            <td>@produccion.Animal.Nombre</td>
-
-                            <td>@produccion.Cantidad</td>
-                           <td>@produccion.Fecha</td>
-                            <td>
-                                <a asp-controller="RegistrarGanado" asp-action="Editar" asp-route-id="@produccion.Id"
-                                    class="button alert">Editar</a>
-                            </td>
-                            <td> <a asp-controller="RegistrarGanado" asp-action="Eliminar" asp-route-id="@produccion.Id"
-                                    class="button warning">Eliminar</a>
-                            </td>
-                        </tr>
-
-                        }
-
-
-                    </tbody>
-
-
-                    }
-                    else
-                    {
-                    <tr>
-                        <td> No hay datos..</td>
-                    </tr>
-                    }
-
-
-                </table>
-
-
-
             </div>
 
         </div>
+        <h4>Producción</h4>
+        <table>
+            @if (produccionAnimales.Count() > 0)
+            {
+                <thead>
+                <td>@Html.DisplayNameFor(produccionAnimales=>produccionAnimales.Id)</td>
+                <td>@Html.DisplayNameFor(produccionAnimales=>produccionAnimales.IdAnimal)</td>
+                <td>@Html.DisplayNameFor(produccionAnimales=>produccionAnimales.Cantidad)</td>
+                <td>@Html.DisplayNameFor(produccionAnimales=>produccionAnimales.Fecha)</td>
+                </thead>
+                <tbody id="data">
+                    @foreach (var produccion in produccionAnimales)
+                    {
+
+                        <tr>
+                            <td>@produccion.Id</td>
+                            <td class="IdAnimal">@produccion.IdAnimal</td>
+                            <td class="Cantidad">@produccion.Cantidad Litros</td>
+                            <td>@produccion.Fecha</td>
+                            <td>
+                                <a asp-controller="RegistrarGanado" asp-action="Editar" asp-route-id="@produccion.Id"
+                           class="button alert">Editar</a>
+                            </td>
+                            <td>
+                                <a asp-controller="RegistrarGanado" asp-action="Eliminar" asp-route-id="@produccion.Id"
+                           class="button warning">Eliminar</a>
+                            </td>
+                        </tr>
+
+                    }
+
+
+                </tbody>
+
+
+            }
+            else
+            {
+                <tr>
+                    <td> No hay datos..</td>
+                </tr>
+            }
+
+
+        </table>
     </div>
 
 
 </body>
+
+<script>
+    let coleccionNombre = document.getElementsByClassName("NombreId");
+    let coleccionId = document.getElementsByClassName("IdAnimal");
+    let coleccionCantidad = document.getElementsByClassName("Cantidad");
+    let ids=[];
+    let nombres=[];
+    let cantidad=[];
+    for(var i=0; i<coleccionId.length; i++){
+       ids.push(coleccionId[i].innerHTML)
+    }
+    for(var i=0; i<coleccionNombre.length; i++){
+      nombres.push((nuevo={id:coleccionNombre[i].innerHTML.slice(0,3).replace('.','').replace(' ',''),nombre:coleccionNombre[i].innerHTML.slice(3,).replace('.','').replace(' ','')}));
+    }
+    for(var i=0; i<coleccionId.length; i++){
+       for(var j=0; j<nombres.length; j++){
+                console.log(nombres[j].id +" "+ids[i])
+                  if(nombres[j].id==ids[i]){
+                    ids[i]=nombres[j].nombre;
+           break;
+           }
+       }
+    }
+    console.log(ids)
+    for(var i=0; i<coleccionCantidad.length; i++){
+       const cantidades=coleccionCantidad[i].innerHTML.replace('Litros', '');
+       cantidad.push(cantidades);
+    }
+
+
+    cantidad.push(0);
+    let canva = document.getElementById("grafica").getContext("2d");
+    var barColors = ["red", "green","blue","orange","brown"];
+    var grafico = new Chart(canva, {
+        type: "bar",
+        data: {
+            labels: ids,
+            datasets:[
+                {
+                    label:"Producción Litros",
+                    backgroundColor:barColors,
+                    borderColor:"rgb(0,255,0)",
+                    data:cantidad
+                }
+            ]
+
+
+        }
+    })
+</script>
+
+@section Scripts{
+@{
+    <partial name="_ValidationScriptsPartial" />
+
+}
+
+
+}

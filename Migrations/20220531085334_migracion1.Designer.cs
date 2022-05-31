@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FundoSantaElena.Migrations
 {
     [DbContext(typeof(AplicationDbContext))]
-    [Migration("20220531045217_PrimeraMigracion")]
-    partial class PrimeraMigracion
+    [Migration("20220531085334_migracion1")]
+    partial class migracion1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -69,22 +69,20 @@ namespace FundoSantaElena.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("AnimalId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Cantidad")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("Fecha")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.HasKey("Id");
+                    b.Property<int>("IdAnimal")
+                        .HasColumnType("int");
 
-                    b.HasIndex("AnimalId");
+                    b.HasKey("Id");
 
                     b.ToTable("ProduccionAnimales");
                 });
@@ -110,17 +108,6 @@ namespace FundoSantaElena.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Usuarios");
-                });
-
-            modelBuilder.Entity("FundoSantaElena.Models.ProduccionAnimal", b =>
-                {
-                    b.HasOne("FundoSantaElena.Models.Animal", "Animal")
-                        .WithMany()
-                        .HasForeignKey("AnimalId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Animal");
                 });
 #pragma warning restore 612, 618
         }
