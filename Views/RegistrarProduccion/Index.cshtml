@@ -97,12 +97,11 @@
                             <td>@produccion.Fecha</td>
                             <td>
                                 <a asp-controller="RegistrarGanado" asp-action="Editar" asp-route-id="@produccion.Id"
-                           class="button alert">Editar</a>
+                           class="btn btn-outline-warning"><i class='bx bx-edit' ></i></a>
+                                                          <a asp-controller="RegistrarGanado" asp-action="Eliminar" asp-route-id="@produccion.Id"
+                           class="btn btn-outline-danger"><i class='bx bx-x-circle' ></i></a>
                             </td>
-                            <td>
-                                <a asp-controller="RegistrarGanado" asp-action="Eliminar" asp-route-id="@produccion.Id"
-                           class="button warning">Eliminar</a>
-                            </td>
+        
                         </tr>
 
                     }
@@ -157,7 +156,7 @@
 
     cantidad.push(0);
     let canva = document.getElementById("grafica").getContext("2d");
-    var barColors = ["red", "green","blue","orange","brown"];
+    var barColors =  ["#68B2A0", "#CDE0C9","#E0ECDE","#68B2A0", "#CDE0C9","#E0ECDE","#68B2A0", "#CDE0C9","#E0ECDE","#68B2A0", "#CDE0C9","#E0ECDE"];
     var grafico = new Chart(canva, {
         type: "bar",
         data: {

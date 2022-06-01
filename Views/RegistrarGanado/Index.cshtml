@@ -1,144 +1,147 @@
 ﻿@model FundoSantaElena.Models.Animal
 @{
-IEnumerable<Animal> animales = ViewBag.Animal;
+    IEnumerable<Animal> animales = ViewBag.Animal;
 
-    }
-    @{
+}
+@{
 
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    }
+}
 
 
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.4/dist/css/foundation.min.css"
-        crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.4/dist/css/foundation.min.css"
+      crossorigin="anonymous">
 
-    <div class="grid-container">
-        <div class="grid-x grid-margin-x">
-            <div class="cell small-6">
-                <div class="card" style="width: 100%;">
-                    <div class="card-divider" id="title">
-                        Registrar Animales
-                    </div>
+<div class="grid-container">
+    <div class="grid-x grid-margin-x">
+        <div class="cell small-6">
+            <div class="card" style="width: 100%;">
+                <div class="card-divider" id="title">
+                    Registrar Animales
+                </div>
 
-                    <div class="card-section">
-                        <form method="post" asp-action="Index">
+                <div class="card-section">
+                    <form method="post" asp-action="Index">
+                        <div>
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                             <div>
-                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                <div>
-                                    <label>Nombre</label>
-                                    <input asp-for="Nombre" type="text" id="nombre" placeholder="Ingresa nombre">
-                                    <span asp-validation-for="Nombre" class="text-danger"> </span>
-                                </div>
-                                <div>
-                                    <label>Fecha Nacimiento</label>
-                                    <input asp-for="FechaNacimiento" type="date" id="fecha" placeholder="Fecha Nacimiento">
-                                    <span asp-validation-for="FechaNacimiento" class="text-danger"> </span>
-                                </div>
-                                <div>
-                                    <label>Sexo</label>
-                                    <select id="sexo" asp-for="Sexo">
-                                        <option value="M">Macho</option>
-                                        <option value="F">Hembra</option>
+                                <label>Nombre</label>
+                                <input asp-for="Nombre" type="text" id="nombre" placeholder="Ingresa nombre">
+                                <span asp-validation-for="Nombre" class="text-danger"> </span>
+                            </div>
+                            <div>
+                                <label>Fecha Nacimiento</label>
+                                <input asp-for="FechaNacimiento" type="date" id="fecha" placeholder="Fecha Nacimiento">
+                                <span asp-validation-for="FechaNacimiento" class="text-danger"> </span>
+                            </div>
+                            <div>
+                                <label>Sexo</label>
+                                <select id="sexo" asp-for="Sexo">
+                                    <option value="M">Macho</option>
+                                    <option value="F">Hembra</option>
 
-                                    </select>
-                                    <span asp-validation-for="Sexo" class="text-danger"> </span>
-                                </div>
-                                <div>
-                                    <label>Raza</label>
-                                    <input asp-for="Raza" type="text" placeholder="Ingresa raza">
-                                    <span asp-validation-for="Raza" class="text-danger"> </span>
-                                </div>
-                                <div>
-                                    <label>Imagen</label>
-                                    <input asp-for="Foto" id="foto" type="url" placeholder="Ingresa imagen">
-                                    <span asp-validation-for="Foto" class="text-danger"> </span>
-                                </div>
-                                <div>
-                                    <input style="background-color: #65d1a9;" value="Registrar" type="submit" class="button small"
-                                        asp-action="Index" asp-controller="RegistrarGanado" />
-
-                                </div>
+                                </select>
+                                <span asp-validation-for="Sexo" class="text-danger"> </span>
+                            </div>
+                            <div>
+                                <label>Raza</label>
+                                <input asp-for="Raza" type="text" placeholder="Ingresa raza">
+                                <span asp-validation-for="Raza" class="text-danger"> </span>
+                            </div>
+                            <div>
+                                <label>Imagen</label>
+                                <input asp-for="Foto" id="foto" type="url" placeholder="Ingresa imagen">
+                                <span asp-validation-for="Foto" class="text-danger"> </span>
+                            </div>
+                            <div>
+                                <input style="background-color: #65d1a9;" value="Registrar" type="submit" class="button small"
+                                       asp-action="Index" asp-controller="RegistrarGanado" />
 
                             </div>
-                        </form>
-                    </div>
 
+                        </div>
+                    </form>
                 </div>
-
-            </div>
-            <div class="cell small-6">
-                <div>
-                    <h4>Animales</h4>
-                    <label>Nombre Animal</label>
-                    <input id="idBuscado" placeholder="Ej:Lola"/>
-                   <input style="background-color: #65d1a9;" value="Buscar" type="submit" class="button small"
-                                        asp-action="Buscar" asp-controller="RegistrarGanado" />
-                </div>
-                <hr>
-                <table>
-                    @if (animales.Count()>0)
-                    {
-                    <thead>
-                        <td>@Html.DisplayNameFor(animales=>animales.Id)</td>
-                        <td>@Html.DisplayNameFor(animales=>animales.Nombre)</td>
-                        <td>@Html.DisplayNameFor(animales=>animales.FechaNacimiento)</td>
-                        <td>@Html.DisplayNameFor(animales=>animales.Sexo)</td>
-                        <td>@Html.DisplayNameFor(animales=>animales.Raza)</td>
-                        <td>@Html.DisplayNameFor(animales=>animales.Foto)</td>
-                    
-                    </thead>
-                    <tbody  id="data">
-                        @foreach(var animal in animales)
-                        {
-
-                        <tr>
-                            <td>@animal.Id</td>
-                            <td>@animal.Nombre</td>
-                            <td>@animal.FechaNacimiento</td>
-                            @if (animal.Sexo=="M")
-                            {
-                            <td>Masculino</td>
-                            }
-                            else
-                            {
-                            <td>Femenino</td>
-                            }
-                            <td>@animal.Raza</td>
-                            <td><img src="@animal.Foto"></img></td>
-                            <td>
-                                <a asp-controller="RegistrarGanado" asp-action="Editar" asp-route-id="@animal.Id"
-                                    class="button alert">Editar</a>
-                            </td>
-                            <td> <a asp-controller="RegistrarGanado" asp-action="Eliminar" asp-route-id="@animal.Id"
-                                    class="button warning">Eliminar</a>
-                            </td>
-                        </tr>
-
-                        }
-
-
-                    </tbody>
-
-
-                    }
-                    else
-                    {
-                    <tr>
-                        <td> No hay datos..</td>
-                    </tr>
-                    }
-
-
-                </table>
-
 
             </div>
 
         </div>
+        <div class="cell small-6">
+            <div>
+                <h4>Animales</h4>
+
+            </div>
+            <hr></hr>
+            <div class="overflow-auto" style="  height:480px;overflow-y: scroll;">
+                @if (animales.Count() > 0)
+                {
+
+                    @foreach (var animal in animales)
+                    {
+
+
+                        <div class="card" style="width: 18rem;">
+                            <img src="@animal.Foto" class="card-img-top">
+                            <div class="card-body">
+                                <h5 class="card-title">@animal.Id.@animal.Nombre</h5>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">@animal.FechaNacimiento</li>
+                                <li class="list-group-item">@animal.Raza</li>
+
+                                @if (animal.Sexo == "M")
+                                {
+                                    <li class="list-group-item">Masculino</li>
+
+                                }
+                                else
+                                {
+                                    <li class="list-group-item">Femenino</li>
+
+                                }
+                            </ul>
+                            <div class="card-body">
+                                <a asp-controller="RegistrarGanado" asp-action="Editar" asp-route-id="@animal.Id"
+                           class="btn btn-outline-warning"><i class='bx bx-edit' ></i></a>
+                                <a asp-controller="RegistrarGanado" asp-action="Eliminar" asp-route-id="@animal.Id"
+                           class="btn btn-outline-danger"><i class='bx bx-x-circle' ></i></a>
+                            </div>
+                        </div>
+                        <hr></hr>
+
+
+
+
+
+                    }
+
+
+
+
+
+                }
+                else
+                {
+                    <tr>
+                        <td> No hay datos..</td>
+                    </tr>
+                }
+
+            </div>
+
+
+
+
+
+
+
+        </div>
+
     </div>
-    @section Scripts{
+</div>
+@section Scripts{
     @{
     <partial name="_ValidationScriptsPartial" />
 
