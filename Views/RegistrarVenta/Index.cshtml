@@ -1,0 +1,50 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.4/dist/css/foundation.min.css"
+      crossorigin="anonymous">
+<div class="grid-x grid-margin-x">
+    <div class="cell small-6">
+        <div class="card" style="width: 100%;">
+            <div class="card-divider" id="title">
+                Registro Venta Leche
+            </div>
+            <div class="card-section">
+                <form method="post">
+                    <div>
+                        <div>
+                            <div>
+                                <label>Fecha de Venta</label>
+                                <input type="datetime-local">
+
+                                <span class="text-danger"> </span>
+                            </div>
+                            <label>Destino de Venta</label>
+                            <select>
+                                <option class="NombreId">Quesero</option>
+                                <option class="NombreId">Empresa G</option>
+                            </select>
+                        </div>
+                        <div>
+                            
+                            <label>Litros de Leche</label>
+                            <input type="number">
+
+                            <span class="text-danger"> </span>
+                        </div>
+                        <div>
+                            <label>Costo</label>
+                            <input type="number">
+
+                            <span class="text-danger"> </span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>

@@ -1,0 +1,49 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.4/dist/css/foundation.min.css"
+      crossorigin="anonymous">
+
+<div class="grid-x grid-margin-x">
+    <div class="cell small-6">
+        <div class="card" style="width: 100%;">
+            <div class="card-divider" id="title">
+                Registro Ciclo Fertilidad
+            </div>
+            <div class="card-section">
+                <form method="post">
+                    <div>
+                        <div>
+                            <label>Animales</label>
+                            <select>
+                                <option class="NombreId">Vaca Lola</option>
+                                <option class="NombreId">Vaca Lulu</option>
+                            </select>
+                        </div>
+
+                               <div>
+                            <label>Metodo Fertilización</label>
+                            <select>
+                                <option class="NombreId">Inseminación artifcial</option>
+                                <option class="NombreId">Monta</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label>Hora Ordeño</label>
+                            <input type="datetime-local" min="2022-01-01">
+
+                            <span class="text-danger"> </span>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
