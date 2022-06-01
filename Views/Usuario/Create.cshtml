@@ -3,31 +3,38 @@
     ViewData["Title"] = "Registrarte";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<div class="container">
+<style>
+    .card{
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
+}
+</style>
+<div class="col d-flex justify-content-center">
     <div class="row col-sm-10">
         <div class="col">
-            <div class="card mt-4 text-center">
-                <div class="card-header">
-                    <h3>Registro</h3>
+            <div class="card col-md-4 offset-md-4 text-center" style="padding-left: 5px; padding-right: 5px;padding-bottom: 5px;">
+                 <div class="card-header" style="background-color:white">
+                    <h3>Registrarte</h3>
                 </div>
                 <div class="cardbody">
 
                     <form method="post" asp-action="Create">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <div class="form-group">
-                            <input asp-for="Nombre" type="text" placeholder="Usuario:"
+                            <input asp-for="Nombre" type="text" placeholder="Usuario"
                                    class="form-control" />
                             <span asp-validation-for="Nombre" class="text-danger"> </span>
                         </div>
+                         <div style="height:10px;width:100%"></div>
                         <div class="form-group">
                             <input asp-for="Contrasenia" type="password" placeholder="Contraseña"
                                    class="form-control" />
                             <span asp-validation-for="Contrasenia" class="text-danger"> </span>
                         </div>
-
-                        <input type="submit" class="btn btn-primary btn-block mt-4" asp-action="Create"
-                               asp-controller="Usuario" value="Ingresar"/>
+                        <div style="height:10px;width:100%"></div>
+                        <input type="submit" class="btn btn-success "asp-action="Create"
+                               asp-controller="Usuario" style="width:100%" value="Registrarte"/>
                     </form>
                 </div>
             </div>

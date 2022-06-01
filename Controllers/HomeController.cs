@@ -1,4 +1,5 @@
-﻿using FundoSantaElena.Models;
+﻿using FundoSantaElena.Datos;
+using FundoSantaElena.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -7,15 +8,18 @@ namespace FundoSantaElena.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly AplicationDbContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, AplicationDbContext context)
         {
+            _context = context;
             _logger = logger;
         }
 
         public IActionResult Index()
         {
-            return View();
+            IEnumerable<Animal> animales = _context.Animales;
+            return View(animales);
         }
 
         public IActionResult Privacy()

@@ -45,7 +45,7 @@
 
                                 <div>
                                     <label>Hora Ordeño</label>
-                                    <input asp-for="Fecha" type="text" type="datetime-local">
+                                    <input asp-for="Fecha" type="text" type="datetime-local" min="2022-01-01">
 
                                     <span asp-validation-for="Fecha" class="text-danger"> </span>
                                 </div>
@@ -96,10 +96,10 @@
                             <td class="Cantidad">@produccion.Cantidad Litros</td>
                             <td>@produccion.Fecha</td>
                             <td>
-                                <a asp-controller="RegistrarGanado" asp-action="Editar" asp-route-id="@produccion.Id"
-                           class="btn btn-outline-warning"><i class='bx bx-edit' ></i></a>
+                                <!--a asp-controller="RegistrarGanado" asp-action="Editar" asp-route-id="@produccion.Id"
+                           class="btn btn-outline-warning"><i class='bx bx-edit' ></i></!a>
                                                           <a asp-controller="RegistrarGanado" asp-action="Eliminar" asp-route-id="@produccion.Id"
-                           class="btn btn-outline-danger"><i class='bx bx-x-circle' ></i></a>
+                           class="btn btn-outline-danger"><i class='bx bx-x-circle' ></i></a>-->
                             </td>
         
                         </tr>
