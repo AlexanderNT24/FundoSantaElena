@@ -2,6 +2,8 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@model FundoSantaElena.Models.VentaProduccion
+
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.4/dist/css/foundation.min.css"
       crossorigin="anonymous">
 <div class="grid-x grid-margin-x">
@@ -16,29 +18,34 @@
                         <div>
                             <div>
                                 <label>Fecha de Venta</label>
-                                <input type="datetime-local">
+                                <input asp-for="Fecha" type="datetime-local">
 
-                                <span class="text-danger"> </span>
-                            </div>
+                                  <span asp-validation-for="Fecha" class="text-danger"> </span>
+                      </div>
                             <label>Destino de Venta</label>
-                            <select>
+                            <select asp-for="Destino"> 
                                 <option class="NombreId">Quesero</option>
                                 <option class="NombreId">Empresa G</option>
                             </select>
+                               <span asp-validation-for="Destino" class="text-danger"> </span>
+                    
                         </div>
                         <div>
                             
                             <label>Litros de Leche</label>
-                            <input type="number">
+                            <input asp-for="Cantidad" type="number">
 
-                            <span class="text-danger"> </span>
-                        </div>
+                               <span asp-validation-for="Cantidad" class="text-danger"> </span>
+                       </div>
                         <div>
                             <label>Costo</label>
-                            <input type="number">
+                            <input asp-for="Precio" type="number">
 
-                            <span class="text-danger"> </span>
-                        </div>
+                               <span asp-validation-for="Precio" class="text-danger"> </span>
+                      </div>
+                        <input style="background-color: #65d1a9;" value="Registrar" type="submit" class="button small"
+                               asp-action="Index" asp-controller="RegistrarVenta" />
+
                     </div>
                 </form>
             </div>

@@ -4,7 +4,7 @@
 
 namespace FundoSantaElena.Migrations
 {
-    public partial class migracion1 : Migration
+    public partial class PrimeraMigracion : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -23,6 +23,21 @@ namespace FundoSantaElena.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Animales", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "EventoAnimal",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Fecha = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Detalles = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
+                    IdAnimal = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EventoAnimal", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -53,6 +68,22 @@ namespace FundoSantaElena.Migrations
                 {
                     table.PrimaryKey("PK_Usuarios", x => x.Id);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "VentaProduccion",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Fecha = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Destino = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
+                    Cantidad = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
+                    Precio = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_VentaProduccion", x => x.Id);
+                });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -61,10 +92,16 @@ namespace FundoSantaElena.Migrations
                 name: "Animales");
 
             migrationBuilder.DropTable(
+                name: "EventoAnimal");
+
+            migrationBuilder.DropTable(
                 name: "ProduccionAnimales");
 
             migrationBuilder.DropTable(
                 name: "Usuarios");
+
+            migrationBuilder.DropTable(
+                name: "VentaProduccion");
         }
     }
 }

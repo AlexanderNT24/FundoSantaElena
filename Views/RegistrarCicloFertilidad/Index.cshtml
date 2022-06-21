@@ -2,7 +2,7 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@model FundoSantaElena.Models.Animal
+@model FundoSantaElena.Models.EventoAnimal
 @{
     IEnumerable<Animal> animales = ViewBag.Animales;
 
@@ -15,40 +15,45 @@
 <div class="grid-x grid-margin-x">
     <div class="cell small-6">
         <div class="card" style="width: 100%;">
-                <div class="card-divider text-white" id="title" style="background-color:#68B2A0;">
-                    Registrar Fertilidad
-                </div>
+            <div class="card-divider text-white" id="title" style="background-color:#68B2A0;">
+                Registrar Fertilidad
+            </div>
             <div class="card-section">
                 <form method="post">
                     <div>
                         <div>
                             <label>Animales</label>
-                            <select asp-for="Id">
+                            <select asp-for="IdAnimal">
                                 @foreach (var animal in animales)
                                 {
 
                                     <option class="NombreId" value="@animal.Id">@animal.Id. @animal.Nombre</option>
 
                                 }
-
-
                             </select>
+                            <span asp-validation-for="IdAnimal" class="text-danger"> </span>
                         </div>
 
                         <div>
                             <label>Metodo Fertilización</label>
-                            <select>
-                                <option class="NombreId">Inseminación artifcial</option>
-                                <option class="NombreId">Monta</option>
+                            <select asp-for="Detalles">
+                                <option class="NombreId" value="IA">Inseminación artifcial</option>
+                                <option class="NombreId" value="Monta">Monta</option>
                             </select>
+                            <span asp-validation-for="Detalles" class="text-danger"> </span>
                         </div>
 
                         <div>
                             <label>Fecha Fertilización</label>
-                            <input type="datetime-local" min="2022-01-01">
+                            <input asp-for="Fecha" type="datetime-local" min="2022-01-01">
 
-                            <span class="text-danger"> </span>
+                            <span asp-validation-for="Fecha" class="text-danger"> </span>
                         </div>
+
+                    </div>
+                    <div>
+                        <input style="background-color: #65d1a9;" value="Registrar" type="submit" class="button small"
+                               asp-action="Index" asp-controller="RegistrarCicloFertilidad" />
 
                     </div>
                 </form>

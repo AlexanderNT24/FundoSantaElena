@@ -17,7 +17,5 @@ namespace FundoSantaElena.Models
         [Required(ErrorMessage = "Precio obligatorio")]
         [StringLength(maximumLength: 10, ErrorMessage = "El {0} debe ser minimo {2} y maximo {1} caracteres", MinimumLength = 0)]
         public string Precio { get; set; }
-        [Required(ErrorMessage = "Id Animal obligatorio")]
-        public int IdAnimal { get; set; }
     }
 }

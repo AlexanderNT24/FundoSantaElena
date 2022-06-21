@@ -2,7 +2,7 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@model FundoSantaElena.Models.Animal
+@model FundoSantaElena.Models.EventoAnimal
 @{
     IEnumerable<Animal> animales = ViewBag.Animales;
 
@@ -14,14 +14,14 @@
     <div class="cell small-6">
         <div class="card" style="width: 100%;">
              <div class="card-divider text-white" id="title" style="background-color:#68B2A0;">
-                    Registrar Estado del Ganado
+                    Registrar Salud del Ganado
                 </div>
             <div class="card-section">
                 <form method="post">
                     <div>
                         <div>
                             <label>Animales</label>
-                            <select asp-for="Id">
+                             <select asp-for="IdAnimal">
                                 @foreach (var animal in animales)
                                 {
 
@@ -31,23 +31,29 @@
 
 
                             </select>
+                             <span asp-validation-for="IdAnimal" class="text-danger"> </span>
+                    
                         </div>
 
                         <div>
                             <label>Estado</label>
-                            <select>
-                                <option class="NombreId">Vacuna</option>
-                                <option class="NombreId">Enfermedad</option>
-                                <option class="NombreId">Preñada</option>
+                             <select asp-for="Detalles">
+                                <option class="NombreId" value="Vacuna">Vacuna</option>
+                                <option class="NombreId" value="Enfermedad">Enfermedad</option>
                             </select>
+                               <span asp-validation-for="Detalles" class="text-danger"> </span>
+                     
                         </div>
 
                         <div>
                             <label>Fecha</label>
-                            <input type="datetime-local" min="2022-01-01">
+                            <input asp-for="Fecha" type="datetime-local" min="2022-01-01">
 
-                            <span class="text-danger"> </span>
+                             <span asp-validation-for="Fecha" class="text-danger"> </span>
+                    
                         </div>
+                         <input style="background-color: #65d1a9;" value="Registrar" type="submit" class="button small"
+                               asp-action="Index" asp-controller="RegistrarEstadoGanado" />
 
                     </div>
                 </form>

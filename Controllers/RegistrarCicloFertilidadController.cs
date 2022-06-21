@@ -21,9 +21,20 @@ namespace FundoSantaElena.Controllers
         {
 
             IEnumerable<Animal> animales = _context.Animales;
-
             ViewBag.Animales = animales;
+            return View();
+        }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Index(EventoAnimal evanimal)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.EventoAnimal.Add(evanimal);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
             return View();
         }
     }
