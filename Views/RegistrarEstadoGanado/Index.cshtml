@@ -5,62 +5,190 @@
 @model FundoSantaElena.Models.EventoAnimal
 @{
     IEnumerable<Animal> animales = ViewBag.Animales;
+    IEnumerable<EventoAnimal> eventoAnimales = ViewBag.EventoAnimal;
 
 }
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.4/dist/css/foundation.min.css"
       crossorigin="anonymous">
-<div class="grid-x grid-margin-x">
-    <div class="cell small-6">
-        <div class="card" style="width: 100%;">
-             <div class="card-divider text-white" id="title" style="background-color:#68B2A0;">
+<div class="grid-container">
+    <div class="grid-x grid-margin-x">
+        <div class="cell small-6">
+            <div class="card" style="width: 100%;">
+                <div class="card-divider text-white" id="title" style="background-color:#68B2A0;">
                     Registrar Salud del Ganado
                 </div>
-            <div class="card-section">
-                <form method="post">
-                    <div>
+                <div class="card-section">
+                    <form method="post">
                         <div>
-                            <label>Animales</label>
-                             <select asp-for="IdAnimal">
-                                @foreach (var animal in animales)
-                                {
+                            <div>
+                                <label>Animales</label>
+                                <select asp-for="IdAnimal">
+                                    @foreach (var animal in animales)
+                                    {
 
-                                    <option class="NombreId" value="@animal.Id">@animal.Id. @animal.Nombre</option>
+                                        <option class="NombreId" value="@animal.Id">@animal.Id. @animal.Nombre</option>
 
-                                }
+                                    }
 
 
-                            </select>
-                             <span asp-validation-for="IdAnimal" class="text-danger"> </span>
-                    
+                                </select>
+                                <span asp-validation-for="IdAnimal" class="text-danger"> </span>
+
+                            </div>
+
+                            <div>
+                                <label>Estado</label>
+                                <select asp-for="Detalles">
+                                    <option class="NombreId" value="Vacuna">Vacuna</option>
+                                    <option class="NombreId" value="Enfermedad">Enfermedad</option>
+                                </select>
+                                <span asp-validation-for="Detalles" class="text-danger"> </span>
+
+                            </div>
+
+                            <div>
+                                <label>Fecha</label>
+                                <input asp-for="Fecha" type="datetime-local" min="2022-01-01">
+
+                                <span asp-validation-for="Fecha" class="text-danger"> </span>
+
+                            </div>
+                            <input style="background-color: #65d1a9;" value="Registrar" type="submit" class="button small"
+                                   asp-action="Index" asp-controller="RegistrarEstadoGanado" />
+
                         </div>
-
-                        <div>
-                            <label>Estado</label>
-                             <select asp-for="Detalles">
-                                <option class="NombreId" value="Vacuna">Vacuna</option>
-                                <option class="NombreId" value="Enfermedad">Enfermedad</option>
-                            </select>
-                               <span asp-validation-for="Detalles" class="text-danger"> </span>
-                     
-                        </div>
-
-                        <div>
-                            <label>Fecha</label>
-                            <input asp-for="Fecha" type="datetime-local" min="2022-01-01">
-
-                             <span asp-validation-for="Fecha" class="text-danger"> </span>
-                    
-                        </div>
-                         <input style="background-color: #65d1a9;" value="Registrar" type="submit" class="button small"
-                               asp-action="Index" asp-controller="RegistrarEstadoGanado" />
-
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
+
+        </div>
+        <div class="cell small-6">
+            <div>
+
+                <canvas id="grafica" width="400" height="300"></canvas>
+            </div>
+            <hr>
         </div>
 
     </div>
+    <h4>Salud</h4>
+    <div class="overflow" style="height:180px; overflow-y: scroll;">
+        <table>
+            @if (eventoAnimales.Count() > 0)
+            {
+                <thead>
+                <td>@Html.DisplayNameFor(eventoAnimales=>eventoAnimales.Id)</td>
+                <td>@Html.DisplayNameFor(eventoAnimales=>eventoAnimales.IdAnimal)</td>
+                <td>@Html.DisplayNameFor(eventoAnimales=>eventoAnimales.Detalles)</td>
+                <td>@Html.DisplayNameFor(eventoAnimales=>eventoAnimales.Fecha)</td>
+                </thead>
+                <tbody id="data">
+                    @foreach (var eventoAnimal in eventoAnimales)
+                    {
+                        if (!(eventoAnimal.Detalles == "IA" || eventoAnimal.Detalles == "Monta"))
+                        {
+                            <tr>
+                                <td>@eventoAnimal.Id</td>
+                                <td class="IdAnimal">@eventoAnimal.IdAnimal</td>
+                                <td class="Cantidad">@eventoAnimal.Detalles</td>
+                                <td>@eventoAnimal.Fecha</td>
+                                <td>
+                                    <div>
+                                        <a asp-controller="RegistrarEstadoGanado" asp-action="Editar" asp-route-id="@eventoAnimal.Id"
+                               class="btn btn-outline-warning"><i class='bx bx-edit'></i></a>
+                                        <a asp-controller="RegistrarEstadoGanado" asp-action="Eliminar" asp-route-id="@eventoAnimal.Id"
+                               class="btn btn-outline-danger"><i class='bx bx-x-circle'></i></a>
+                                    </div>
 
+                            </tr>
+                        }
+                        else
+                        {
+
+                            <tr>
+                                <td>@eventoAnimal.Id</td>
+                                <td class="IdAnimal">@eventoAnimal.IdAnimal</td>
+                                <td class="Cantidad">Preñada</td>
+                                <td>@eventoAnimal.Fecha</td>
+                                <td>
+                                    <div>
+                                        <a asp-controller="RegistrarEstadoGanado" asp-action="Editar" asp-route-id="@eventoAnimal.Id"
+                               class="btn btn-outline-warning"><i class='bx bx-edit'></i></a>
+                                        <a asp-controller="RegistrarEstadoGanado" asp-action="Eliminar" asp-route-id="@eventoAnimal.Id"
+                               class="btn btn-outline-danger"><i class='bx bx-x-circle'></i></a>
+                                    </div>
+                                </td>
+
+                            </tr>
+                        }
+
+
+                    }
+
+
+                </tbody>
+
+
+            }
+            else
+            {
+                <tr>
+                    <td> No hay datos..</td>
+                </tr>
+            }
+
+
+        </table>
+    </div>
 
 </div>
+<script>
+    let coleccionNombre = document.getElementsByClassName("NombreId");
+    let coleccionId = document.getElementsByClassName("IdAnimal");
+    let coleccionCantidad = document.getElementsByClassName("Cantidad");
+    let ids=[];
+    let nombres=[];
+    let cantidad=[];
+    for(var i=0; i<coleccionId.length; i++){
+       ids.push(coleccionId[i].innerHTML)
+    }
+    for(var i=0; i<coleccionNombre.length; i++){
+      nombres.push((nuevo={id:coleccionNombre[i].innerHTML.slice(0,3).replace('.','').replace(' ',''),nombre:coleccionNombre[i].innerHTML.slice(3,).replace('.','').replace(' ','')}));
+    }
+    for(var i=0; i<coleccionId.length; i++){
+       for(var j=0; j<nombres.length; j++){
+                console.log(nombres[j].id +" "+ids[i])
+                  if(nombres[j].id==ids[i]){
+                    ids[i]=nombres[j].nombre;
+           break;
+           }
+       }
+    }
+    console.log(ids)
+    for(var i=0; i<coleccionCantidad.length; i++){
+       const cantidades=coleccionCantidad[i].innerHTML.replace('Litros', '');
+       cantidad.push(cantidades);
+    }
+
+
+    cantidad.push(0);
+    let canva = document.getElementById("grafica").getContext("2d");
+    var barColors =  ["#68B2A0", "#CDE0C9","#E0ECDE","#68B2A0", "#CDE0C9","#E0ECDE","#68B2A0", "#CDE0C9","#E0ECDE","#68B2A0", "#CDE0C9","#E0ECDE"];
+    var grafico = new Chart(canva, {
+        type: "pie",
+        data: {
+            labels: ids,
+            datasets:[
+                {
+                    label:"Producción Litros",
+                    backgroundColor:barColors,
+                    borderColor:"rgb(0,255,0)",
+                    data:cantidad
+                }
+            ]
+
+
+        }
+    })
+</script>

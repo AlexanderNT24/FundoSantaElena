@@ -5,62 +5,114 @@
 @model FundoSantaElena.Models.EventoAnimal
 @{
     IEnumerable<Animal> animales = ViewBag.Animales;
+    IEnumerable<EventoAnimal> eventoAnimales = ViewBag.EventoAnimal;
 
 }
 
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.4/dist/css/foundation.min.css"
       crossorigin="anonymous">
+<div class="grid-container">
+    <div class="grid-x grid-margin-x">
+        <div class="cell small-6">
+            <div class="card" style="width: 100%;">
+                <div class="card-divider text-white" id="title" style="background-color:#68B2A0;">
+                    Registrar Fertilidad
+                </div>
+                <div class="card-section">
+                    <form method="post">
+                        <div>
+                            <div>
+                                <label>Animales</label>
+                                <select asp-for="IdAnimal">
+                                    @foreach (var animal in animales)
+                                    {
 
-<div class="grid-x grid-margin-x">
-    <div class="cell small-6">
-        <div class="card" style="width: 100%;">
-            <div class="card-divider text-white" id="title" style="background-color:#68B2A0;">
-                Registrar Fertilidad
+                                        <option class="NombreId" value="@animal.Id">@animal.Id. @animal.Nombre</option>
+
+                                    }
+                                </select>
+                                <span asp-validation-for="IdAnimal" class="text-danger"> </span>
+                            </div>
+
+                            <div>
+                                <label>Metodo Fertilización</label>
+                                <select asp-for="Detalles">
+                                    <option class="NombreId" value="IA">Inseminación artifcial</option>
+                                    <option class="NombreId" value="Monta">Monta</option>
+                                </select>
+                                <span asp-validation-for="Detalles" class="text-danger"> </span>
+                            </div>
+
+                            <div>
+                                <label>Fecha Fertilización</label>
+                                <input asp-for="Fecha" type="datetime-local" min="2022-01-01">
+
+                                <span asp-validation-for="Fecha" class="text-danger"> </span>
+                            </div>
+
+                        </div>
+                        <div>
+                            <input style="background-color: #65d1a9;" value="Registrar" type="submit" class="button small"
+                                   asp-action="Index" asp-controller="RegistrarCicloFertilidad" />
+
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="card-section">
-                <form method="post">
-                    <div>
-                        <div>
-                            <label>Animales</label>
-                            <select asp-for="IdAnimal">
-                                @foreach (var animal in animales)
-                                {
 
-                                    <option class="NombreId" value="@animal.Id">@animal.Id. @animal.Nombre</option>
-
-                                }
-                            </select>
-                            <span asp-validation-for="IdAnimal" class="text-danger"> </span>
-                        </div>
-
-                        <div>
-                            <label>Metodo Fertilización</label>
-                            <select asp-for="Detalles">
-                                <option class="NombreId" value="IA">Inseminación artifcial</option>
-                                <option class="NombreId" value="Monta">Monta</option>
-                            </select>
-                            <span asp-validation-for="Detalles" class="text-danger"> </span>
-                        </div>
-
-                        <div>
-                            <label>Fecha Fertilización</label>
-                            <input asp-for="Fecha" type="datetime-local" min="2022-01-01">
-
-                            <span asp-validation-for="Fecha" class="text-danger"> </span>
-                        </div>
-
-                    </div>
-                    <div>
-                        <input style="background-color: #65d1a9;" value="Registrar" type="submit" class="button small"
-                               asp-action="Index" asp-controller="RegistrarCicloFertilidad" />
-
-                    </div>
-                </form>
-            </div>
         </div>
+
 
     </div>
 
+    <h4>Fertilidad</h4>
 
+<div class="overflow" style="height:180px; overflow-y: scroll;">
+    <table>
+        @if (eventoAnimales.Count() > 0)
+        {
+            <thead>
+            <td>@Html.DisplayNameFor(eventoAnimales=>eventoAnimales.IdAnimal)</td>
+            <td>@Html.DisplayNameFor(eventoAnimales=>eventoAnimales.Detalles)</td>
+            <td>@Html.DisplayNameFor(eventoAnimales=>eventoAnimales.Fecha)</td>
+            </thead>
+            <tbody id="data">
+                @foreach (var eventoAnimal in eventoAnimales)
+                {
+                    if (eventoAnimal.Detalles == "IA" || eventoAnimal.Detalles == "Monta")
+                    {
+                        <tr>
+                            <td class="IdAnimal">@eventoAnimal.IdAnimal</td>
+                            <td class="Cantidad">@eventoAnimal.Detalles</td>
+                            <td>@eventoAnimal.Fecha</td>
+                            <td>
+                                <a asp-controller="RegistrarCicloFertilidad" asp-action="Editar" asp-route-id="@eventoAnimal.Id"
+                                class="btn btn-outline-warning"><i class='bx bx-edit' ></i></a>
+                                                               <a asp-controller="RegistrarCicloFertilidad" asp-action="Eliminar" asp-route-id="@eventoAnimal.Id"
+                                class="btn btn-outline-danger"><i class='bx bx-x-circle' ></i></a>
+                </td>
+
+                        </tr>
+
+                    }
+
+
+                }
+
+
+            </tbody>
+
+
+        }
+        else
+        {
+            <tr>
+                <td> No hay datos..</td>
+            </tr>
+        }
+
+
+    </table>
 </div>
+    </div>

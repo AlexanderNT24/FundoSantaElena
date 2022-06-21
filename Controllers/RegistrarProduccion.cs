@@ -37,5 +37,57 @@ namespace FundoSantaElena.Controllers
             }
             return View();
         }
+        public IActionResult Editar(int? id)
+        {
+            IEnumerable<ProduccionAnimal> produccionAnimales = _context.ProduccionAnimales;
+            IEnumerable<Animal> animales = _context.Animales;
+            ViewBag.ProduccionAnimales = produccionAnimales;
+            ViewBag.Animales = animales;
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            var prodAnimal = _context.ProduccionAnimales.Find(id);
+            if (prodAnimal == null)
+            {
+                return NotFound();
+            }
+            return View(prodAnimal);
+        }
+
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Editar(ProduccionAnimal prodAnimal)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.ProduccionAnimales.Update(prodAnimal);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
+
+        public IActionResult Eliminar(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            var prodAnimal = _context.ProduccionAnimales.Find(id);
+            if (prodAnimal == null)
+            {
+                return NotFound();
+            }
+            if (ModelState.IsValid)
+            {
+                _context.ProduccionAnimales.Remove(prodAnimal);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
     }
 }

@@ -96,10 +96,10 @@
                             <td class="Cantidad">@produccion.Cantidad Litros</td>
                             <td>@produccion.Fecha</td>
                             <td>
-                                <!--a asp-controller="RegistrarGanado" asp-action="Editar" asp-route-id="@produccion.Id"
-                           class="btn btn-outline-warning"><i class='bx bx-edit' ></i></!a>
-                                                          <a asp-controller="RegistrarGanado" asp-action="Eliminar" asp-route-id="@produccion.Id"
-                           class="btn btn-outline-danger"><i class='bx bx-x-circle' ></i></a>-->
+                                <a asp-controller="RegistrarProduccion" asp-action="Editar" asp-route-id="@produccion.Id"
+                           class="btn btn-outline-warning"><i class='bx bx-edit' ></i></a>
+                                                          <a asp-controller="RegistrarProduccion" asp-action="Eliminar" asp-route-id="@produccion.Id"
+                           class="btn btn-outline-danger"><i class='bx bx-x-circle' ></i></a>
                             </td>
         
                         </tr>

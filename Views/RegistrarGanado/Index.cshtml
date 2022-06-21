@@ -37,7 +37,8 @@
         }
 
     }
-    </style>
+</style>
+
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.4/dist/css/foundation.min.css"
       crossorigin="anonymous">
 
@@ -102,51 +103,56 @@
             </div>
             <hr></hr>
 
-            <div class="overflow" style="height:480px;width:400px; overflow-y: scroll;">
+            <div class="overflow" style="height:480px;width:480px; overflow-y: scroll;">
                 @if (animales.Count() > 0)
                 {
 
                     @foreach (var animal in animales)
                     {
+                        <div class="cardAmp" style="width: 18rem;">
+                            <div class="card mb-3" style="max-width: 540px;">
 
-                        <div class="grid-container">
-                            <div class="cardAmp" style="width: 18rem;">
-                                <img src="@animal.Foto" class="card-img-top">
-                                <div class="card-body">
-                                    <h5 class="card-title">@animal.Id.@animal.Nombre</h5>
-                                </div>
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">@animal.FechaNacimiento</li>
-                                    <li class="list-group-item">@animal.Raza</li>
+                                <div class="row no-gutters">
+                                    <div class="col-md-4">
+                                        <img src="@animal.Foto" class="card-circle" style="padding-top: 12px;">
+                                        @if (animal.Sexo == "M")
+                                        {
+                                            <p class="card-text"><small class="text-muted"><i class='bx bx-male-sign'></i></small></p>
 
-                                    @if (animal.Sexo == "M")
-                                    {
-                                        <li class="list-group-item">Masculino</li>
+                                        }
+                                        else
+                                        {
+                                            <p class="card-text"><small class="text-muted"><i class='bx bx-female-sign'></i></small></p>
 
-                                    }
-                                    else
-                                    {
-                                        <li class="list-group-item">Femenino</li>
+                                        }
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h6 class="card-title" style="margin-bottom: 0px;">@animal.Id.@animal.Nombre <small class="text-muted">@animal.FechaNacimiento</small></h6>
 
-                                    }
-                                </ul>
-                                <div class="card-body">
-                                    <a asp-controller="RegistrarGanado" asp-action="Editar" asp-route-id="@animal.Id"
-                               class="btn btn-outline-warning"><i class='bx bx-edit'></i></a>
-                                    <a asp-controller="RegistrarGanado" asp-action="Eliminar" asp-route-id="@animal.Id"
-                               class="btn btn-outline-danger"><i class='bx bx-x-circle'></i></a>
+                                            <p class="card-text"><small class="text-muted">@animal.Raza</small></p>
+
+                                            <div>
+                                                <a asp-controller="RegistrarGanado" asp-action="Editar" asp-route-id="@animal.Id"
+                                           class="btn btn-outline-warning"><i class='bx bx-edit'></i></a>
+                                                <a asp-controller="RegistrarGanado" asp-action="Eliminar" asp-route-id="@animal.Id"
+                                           class="btn btn-outline-danger"><i class='bx bx-x-circle'></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
+
                         </div>
-                        <div style="height:35px;width:100%"></div>
 
                     }
                 }
                 else
                 {
-                    
-                        <li> No hay datos..</li>
-                   
+
+                    <li> No hay datos..</li>
+
                 }
 
             </div>

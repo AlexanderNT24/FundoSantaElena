@@ -51,20 +51,7 @@ namespace FundoSantaElena.Controllers
             return View(animal);
         }
 
-        public IActionResult Buscar(string? id)
-        {
-     
-            if (id == null || id == "")
-            {
-                return NotFound();
-            }
-            var animal = _context.Animales.Find(id);
-            if (animal == null)
-            {
-                return NotFound();
-            }
-            return View(animal);
-        }
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
