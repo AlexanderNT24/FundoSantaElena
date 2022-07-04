@@ -148,14 +148,14 @@
     let canva = document.getElementById("grafica").getContext("2d");
     var barColors =  ["#68B2A0", "#CDE0C9","#E0ECDE","#68B2A0", "#CDE0C9","#E0ECDE","#68B2A0", "#CDE0C9","#E0ECDE","#68B2A0", "#CDE0C9","#E0ECDE"];
     var grafico = new Chart(canva, {
-        type: "bar",
+        type: "pie",
         data: {
             labels: ids,
             datasets:[
                 {
                     label:"Producción Litros",
                     backgroundColor:barColors,
-                    borderColor:"rgb(0,255,0)",
+                    borderColor:"rgb(255,255,255)",
                     data:cantidad
                 }
             ]

@@ -10,7 +10,7 @@ namespace FundoSantaElena.Models
         [StringLength(maximumLength:50,ErrorMessage ="El {0} debe ser minimo {2} y maximo {1} caracteres",MinimumLength  =5)]
         public string Nombre { get; set; }
         [Required(ErrorMessage = "Contraseña obligatoria")]
-        [StringLength(maximumLength: 50, ErrorMessage = "El {0} debe ser minimo {2} y maximo {1} caracteres", MinimumLength = 5)]
+        [StringLength(maximumLength: 200, ErrorMessage = "El {0} debe ser minimo {2} y maximo {1} caracteres", MinimumLength = 5)]
         public string Contrasenia { get; set; }
     }
 }

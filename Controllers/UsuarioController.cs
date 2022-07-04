@@ -1,7 +1,13 @@
 ﻿using FundoSantaElena.Datos;
 using FundoSantaElena.Models;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
+using System.Security.Claims;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace FundoSantaElena.Controllers
 {
@@ -12,29 +18,38 @@ namespace FundoSantaElena.Controllers
         {
             _context = context;
         }
-        public IActionResult Index(Usuarios usuario)
+        public IActionResult Index()
         {
             IEnumerable<Usuarios> usuarios = _context.Usuarios;
+            return View();
+        }
+
+
+        [HttpPost]
+        public IActionResult Login(Usuarios usuario)
+        {
+            IEnumerable<Usuarios> usuarios = _context.Usuarios;
+
             if (ModelState.IsValid)
             {
-                
-                    foreach (var usuarioDb in usuarios)
+
+                foreach (var usuarioDb in usuarios)
+                {
+                    if (usuario.Nombre == usuarioDb.Nombre)
                     {
-                        if (usuario.Nombre == usuarioDb.Nombre)
+                        if (usuario.Contrasenia == usuarioDb.Contrasenia)
                         {
-                            if (usuario.Contrasenia == usuarioDb.Contrasenia)
-                            {
-                                RedirectToAction("../RegistrarGanado");
-                            }
+                            return RedirectToAction("Index", "Home");
                         }
-
                     }
-                
-                
+
+                }
+
+
             }
+    
+            return RedirectToAction("Index");
 
-
-            return View();
         }
 
         public IActionResult Create()
@@ -46,7 +61,6 @@ namespace FundoSantaElena.Controllers
         [HttpPost]
         public IActionResult Create(Usuarios usuario)
         {
-            Debug.WriteLine(usuario.Nombre);
             if (ModelState.IsValid)
             {
                 _context.Usuarios.Add(usuario);
@@ -55,5 +69,6 @@ namespace FundoSantaElena.Controllers
             }
             return View();
         }
+
     }
 }

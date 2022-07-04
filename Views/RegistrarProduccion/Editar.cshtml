@@ -19,41 +19,41 @@
 
     <div class="card-section">
 
-                <form method="post" asp-action="Index">
-                            <div>
-                                <div>
-                                    <label>Animales</label>
-                                    <select asp-for="IdAnimal">
+        <form method="post" asp-action="Index">
+            <div>
+                <div>
+                    <label>Animales</label>
+                    <select asp-for="IdAnimal">
                         @foreach (var animal in animales)
                         {
 
-                                                <option class="NombreId" value="@animal.Id">@animal.Id. @animal.Nombre</option>
+                            <option class="NombreId" value="@animal.Id">@animal.Id. @animal.Nombre</option>
 
                         }
 
 
-                                    </select>
-                                </div>
+                    </select>
+                </div>
 
-                                <div>
-                                    <label>Hora Ordeño</label>
-                                    <input asp-for="Fecha" type="text" type="datetime-local" min="2022-01-01">
+                <div>
+                    <label>Hora Ordeño</label>
+                    <input asp-for="Fecha" type="text" type="datetime-local" min="2022-01-01">
 
-                                    <span asp-validation-for="Fecha" class="text-danger"> </span>
-                                </div>
-                                <div>
-                                    <label>Litros</label>
-                                    <input asp-for="Cantidad" type="number" type="number" placeholder="Ingresa litros">
-                                    <span asp-validation-for="Cantidad" class="text-danger"> </span>
+                    <span asp-validation-for="Fecha" class="text-danger"> </span>
+                </div>
+                <div>
+                    <label>Litros</label>
+                    <input asp-for="Cantidad" type="number" type="number" placeholder="Ingresa litros">
+                    <span asp-validation-for="Cantidad" class="text-danger"> </span>
 
-                                </div>
-                                <div>
-                                    <input style="background-color: #65d1a9;" value="Registrar" type="submit" class="button small"
-                                           asp-action="Editar" asp-controller="RegistrarProduccion" />
-                                </div>
+                </div>
+                <div>
+                    <input style="background-color: #65d1a9;" value="Registrar" type="submit" class="button small"
+                           asp-action="Editar" asp-controller="RegistrarProduccion" />
+                </div>
 
-                            </div>
-                        </form>
+            </div>
+        </form>
 
 
 

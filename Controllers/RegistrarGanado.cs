@@ -39,12 +39,12 @@ namespace FundoSantaElena.Controllers
 
         public IActionResult Editar(int? id)
         {
-            if(id==null || id == 0)
+            if (id == null || id == 0)
             {
                 return NotFound();
             }
             var animal = _context.Animales.Find(id);
-            if (animal==null)
+            if (animal == null)
             {
                 return NotFound();
             }
