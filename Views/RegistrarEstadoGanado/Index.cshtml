@@ -40,8 +40,8 @@
                             <div>
                                 <label>Estado</label>
                                 <select asp-for="Detalles">
-                                    <option class="NombreId" value="Vacuna">Vacuna</option>
-                                    <option class="NombreId" value="Enfermedad">Enfermedad</option>
+                                    <option class="NombreEvento" value="Vacuna">Vacuna</option>
+                                    <option class="NombreEvento" value="Enfermedad">Enfermedad</option>
                                 </select>
                                 <span asp-validation-for="Detalles" class="text-danger"> </span>
 
@@ -92,7 +92,7 @@
                                 <td>@eventoAnimal.Id</td>
                                 <td class="IdAnimal">@eventoAnimal.IdAnimal</td>
                                 <td class="Cantidad">@eventoAnimal.Detalles</td>
-                                <td>@eventoAnimal.Fecha</td>
+                                <td >@eventoAnimal.Fecha</td>
                                 <td>
                                     <div>
                                         <a asp-controller="RegistrarEstadoGanado" asp-action="Editar" asp-route-id="@eventoAnimal.Id"
@@ -144,47 +144,51 @@
 
 </div>
 <script>
-    let coleccionNombre = document.getElementsByClassName("NombreId");
-    let coleccionId = document.getElementsByClassName("IdAnimal");
-    let coleccionCantidad = document.getElementsByClassName("Cantidad");
-    let ids=[];
-    let nombres=[];
-    let cantidad=[];
-    for(var i=0; i<coleccionId.length; i++){
-       ids.push(coleccionId[i].innerHTML)
-    }
-    for(var i=0; i<coleccionNombre.length; i++){
-      nombres.push((nuevo={id:coleccionNombre[i].innerHTML.slice(0,3).replace('.','').replace(' ',''),nombre:coleccionNombre[i].innerHTML.slice(3,).replace('.','').replace(' ','')}));
-    }
-    for(var i=0; i<coleccionId.length; i++){
-       for(var j=0; j<nombres.length; j++){
-                console.log(nombres[j].id +" "+ids[i])
-                  if(nombres[j].id==ids[i]){
-                    ids[i]=nombres[j].nombre;
-           break;
-           }
-       }
-    }
-    console.log(ids)
-    for(var i=0; i<coleccionCantidad.length; i++){
-       const cantidades=coleccionCantidad[i].innerHTML.replace('Litros', '');
-       cantidad.push(cantidades);
-    }
 
+    let coleccionEventos = document.getElementsByClassName("NombreEvento");
+    let coleccionEventosAnimales=document.getElementsByClassName("Cantidad");
+    let eventos=[];
+    let cantidadEventos=[];
+    let eventosAnimales=[];
 
-    cantidad.push(0);
+    for(var i=0; i<coleccionEventos.length; i++){
+
+       eventos.push(coleccionEventos[i].innerHTML);
+
+    }
+    eventos.push('Preñada');
+    let contVacuna=0;
+    let contPre=0;
+    let contEnferm=0;
+    for(var i=0; i<coleccionEventosAnimales.length; i++){
+      if(coleccionEventosAnimales[i].innerHTML=='Vacuna'){
+           contVacuna++;
+      }
+      if(coleccionEventosAnimales[i].innerHTML=='Enfermedad'){
+           contEnferm++;
+      }
+      if(coleccionEventosAnimales[i].innerHTML=='Preñada'){
+           contPre++;
+      }
+       eventosAnimales.push(coleccionEventosAnimales[i].innerHTML);
+
+    }
+    cantidadEventos.push(contVacuna);
+    cantidadEventos.push(contEnferm);
+    cantidadEventos.push(contPre);
+    console.log(eventosAnimales);
     let canva = document.getElementById("grafica").getContext("2d");
     var barColors =  ["#68B2A0", "#CDE0C9","#E0ECDE","#68B2A0", "#CDE0C9","#E0ECDE","#68B2A0", "#CDE0C9","#E0ECDE","#68B2A0", "#CDE0C9","#E0ECDE"];
     var grafico = new Chart(canva, {
         type: "pie",
         data: {
-            labels: ids,
+            labels: eventos,
             datasets:[
                 {
-                    label:"Producción Litros",
+                    label:"Eventos",
                     backgroundColor:barColors,
                     borderColor:"rgb(0,255,0)",
-                    data:cantidad
+                    data:cantidadEventos
                 }
             ]
 
