@@ -28,7 +28,7 @@
                                     @foreach (var animal in animales)
                                     {
 
-                                        <option class="NombreId" value="@animal.Id">@animal.Id. @animal.Nombre</option>
+                                        <option class="NombreId" value="@animal.Id">@animal.Nombre</option>
 
                                     }
                                 </select>
@@ -46,14 +46,14 @@
 
                             <div>
                                 <label>Fecha Fertilización</label>
-                                <input asp-for="Fecha" type="datetime-local" min="2022-01-01">
+                                <input asp-for="Fecha" type="date" min="2022-01-01">
 
                                 <span asp-validation-for="Fecha" class="text-danger"> </span>
                             </div>
 
                         </div>
                         <div>
-                            <input style="background-color: #65d1a9;" value="Registrar" type="submit" class="button small"
+                            <input id="boton" style="background-color: #65d1a9;" value="Registrar" type="submit" class="button small"
                                    asp-action="Index" asp-controller="RegistrarCicloFertilidad" />
 
                         </div>

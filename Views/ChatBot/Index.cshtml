@@ -78,9 +78,9 @@
                       </h5><a onclick="datos()" href="#" class="link-info">Info</a>
 
                       
-                      <div  class="card-body msg_card_body" style="height:480px; overflow-y: scroll;
+                      <div   class="card-body msg_card_body" style="height:480px; overflow-y: scroll;
                       border-radius: 15px !important;background-color: rgba(0,0,0,0.4) !important;">
-                              <div id="chat" th:each="comentario,status : ${comentarios}">
+                              <div  id="chat" th:each="comentario,status : ${comentarios}">
                                 <div class="d-flex justify-content-start mb-4">
 
                        <div class="img_cont_msg">
@@ -111,7 +111,7 @@
 		
 								<textarea id="Mensaje" class="form-control type_msg" placeholder="Escribe..."></textarea>
 								<div class="input-group-append">
-                                    <button onclick="agregarComentario()" type="button" class="btn btn-success"><i class='bx bxs-send'></i></button>
+                                    <button id="boton" onclick="agregarComentario()" type="button" class="btn btn-success"><i class='bx bxs-send'></i></button>
 								</div>
 							</div>
 						</div>
@@ -135,6 +135,7 @@
                         
                        document.getElementById('chat').innerHTML += "<div id='mensaje' class='d-flex justify-content-end mb-4'><div class='msg_cotainer_send'>"+valor+"</div><div class='img_cont_msg'><img src='https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png' class='rounded-circle user_img_msg'></div></div>"; 
                       let respuesta="";
+                      let adicional="";
                       valor=valor.toLowerCase();
                        if(valor.includes("registro")){
                           respuesta ="En la parte derecha podrás encontrar distintos campos, llena todos y seguido presiona el botón registrar.";
@@ -144,16 +145,33 @@
                             respuesta ="En un momento estas contactando con un desarrollador.";
                              window.open("https://api.whatsapp.com/send?phone=51955516189&text=Le%20hablamos%20del%20fundo%20necesitamos%20ayuda", "Diseño Web", "width=300, height=200")
                        }
+                       else if(valor.includes("datos")){
+                            respuesta ="Para vizualizar los datos, puedes verlos en el apartado inferior de cada registro";
+                      }
+                      else if(valor.includes("graficas")){
+                            respuesta ="Para vizualizar los datos en una grafica, puedes verlos en apartado derecho de cada registro";
+                      }
+                      else if(valor.includes("editar")){
+                            respuesta ="¿Te equivocaste con algún dato? Puedes modificarlo haciendo click en el boton amarillo en el apartado de datos, ubicado en la parte inferior de cada registro";
+                      }
+                      else if(valor.includes("eliminar")){
+                            respuesta ="¿Quieres eliminar algún dato? Puedes eliminarlo haciendo click en el boton rojo en el apartado de datos, ubicado en la parte inferior de cada registro";
+                      }
                        else if(valor.includes("ayuda")){
-                            respuesta ="¿En que deseas ayuda? puedo ayudarte en registro de ganado o si necesitas ayuda a contactar a un desarrollador";
-                         
+                            respuesta ="¿En que deseas ayuda? Puedo ayudarte en:";
+                            adicional=" <div class='d-flex justify-content-start mb-4'><div class='img_cont_msg'><img src='https://thumbs.dreamstime.com/b/avatar-de-una-vaca-105121631.jpg' class='rounded-circle bot_img_msg'> </div><div class='msg_cotainer'>Registro de datos.</div></div>";
+                            adicional=adicional+" <div class='d-flex justify-content-start mb-4'><div class='img_cont_msg'><img src='https://thumbs.dreamstime.com/b/avatar-de-una-vaca-105121631.jpg' class='rounded-circle bot_img_msg'> </div><div class='msg_cotainer'>Editar datos.</div></div>";
+                            adicional=adicional+" <div class='d-flex justify-content-start mb-4'><div class='img_cont_msg'><img src='https://thumbs.dreamstime.com/b/avatar-de-una-vaca-105121631.jpg' class='rounded-circle bot_img_msg'> </div><div class='msg_cotainer'>Eliminar datos.</div></div>";
+                            adicional=adicional+" <div class='d-flex justify-content-start mb-4'><div class='img_cont_msg'><img src='https://thumbs.dreamstime.com/b/avatar-de-una-vaca-105121631.jpg' class='rounded-circle bot_img_msg'> </div><div class='msg_cotainer'>¿Que son las graficas?</div></div>";
+                            adicional=adicional+" <div class='d-flex justify-content-start mb-4'><div class='img_cont_msg'><img src='https://thumbs.dreamstime.com/b/avatar-de-una-vaca-105121631.jpg' class='rounded-circle bot_img_msg'> </div><div class='msg_cotainer'>Contactar con un desarrollador.</div></div>";
                        }
                        
                        else{
                           respuesta ="Lo siento no te entiendo.";
                         
                        }
-                       let contenido=" <div class='d-flex justify-content-start mb-4'><div class='img_cont_msg'><img src='https://thumbs.dreamstime.com/b/avatar-de-una-vaca-105121631.jpg' class='rounded-circle bot_img_msg'> </div><div class='msg_cotainer'>"+respuesta+"</div></div>"
+
+                       let contenido=" <div class='d-flex justify-content-start mb-4'><div class='img_cont_msg'><img src='https://thumbs.dreamstime.com/b/avatar-de-una-vaca-105121631.jpg' class='rounded-circle bot_img_msg'> </div><div class='msg_cotainer'>"+respuesta+"</div></div>"+adicional;
                        document.getElementById('chat').innerHTML += contenido;
                   
                   }

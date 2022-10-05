@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FundoSantaElena.Migrations
 {
     [DbContext(typeof(AplicationDbContext))]
-    [Migration("20220928024833_PrimeraMigracion")]
+    [Migration("20221005233136_PrimeraMigracion")]
     partial class PrimeraMigracion
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

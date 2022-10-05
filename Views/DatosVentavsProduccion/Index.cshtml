@@ -1,4 +1,183 @@
-﻿@{
-    ViewData["Title"] = "Index";
+﻿
+@{
+    IEnumerable<ProduccionAnimal> produccionAnimales = ViewBag.ProduccionAnimales;
+    IEnumerable<VentaProduccion> ventas = ViewBag.VentaProduccion;
+
+}
+@model FundoSantaElena.Models.ProduccionAnimal
+
+@{
+    ViewData["Title"] = "Venta vs Produccion";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+<h3>Producción vs Ventas</h3>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Fecha</th>
+      <th scope="col">Cantidad</th>
+ 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+       <td>
+                             
+                       
+                                <label>Animales</label>
+                                <form method="post">
+                                    <input id="filtroFecha" asp-for="Fecha" type="date" />
+           
+                       
+                          
+                            <input id="boto n" style="background-color: #65d1a9;" value="Buscar" type="submit" class="button small"
+                                   asp-action="Index" asp-controller="DatosVentavsProduccion" />
+
+                    </form>
+                    <script>
+                    
+                    
+                    </script>
+
+       </td>
+      <td>
+      <input class="form-range" min="0" max="5" type="range" list="tickmarks">
+
+<datalist id="tickmarks">
+  <option value="1">1</option>
+  <option value="2">2</option>
+  <option value="3">3</option>
+  <option value="4">4</option>
+  <option value="5">5</option>
+</datalist>
+       </td>
+
+    </tr>
+        
+
+
+    
+      
+
+
+   
+
+  </tbody>
+</table>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6" style="">
+                <div class="overflow" style="height:400px; overflow-y: scroll;">
+  <h4>Producción</h4>
+        <table class="table">
+            @if (produccionAnimales.Count() > 0)
+            {
+                <thead>
+                <td>@Html.DisplayNameFor(produccionAnimales=>produccionAnimales.Id)</td>
+                <td>@Html.DisplayNameFor(produccionAnimales=>produccionAnimales.IdAnimal)</td>
+                <td>@Html.DisplayNameFor(produccionAnimales=>produccionAnimales.Cantidad)</td>
+                <td>@Html.DisplayNameFor(produccionAnimales=>produccionAnimales.Fecha)</td>
+                </thead>
+                <tbody id="data">
+                    @foreach (var produccion in produccionAnimales)
+                    {
+
+                        <tr>
+                            <td>@produccion.Id</td>
+                            <td class="IdAnimal">@produccion.IdAnimal</td>
+                            <td class="Cantidad">@produccion.Cantidad Litros</td>
+                            <td>@produccion.Fecha</td>
+
+        
+                        </tr>
+
+                    }
+
+
+                </tbody>
+
+
+            }
+            else
+            {
+                <tr>
+                    <td> No hay datos..</td>
+                </tr>
+            }
+
+
+        </table>
+            </div>
+      
+
+
+        </div>
+
+        <div class="col-lg-6">
+                <h4>Ventas</h4>
+    <div class="overflow" style="height:400px; overflow-y: scroll;">
+        <table class="table">
+            @if (ventas.Count() > 0)
+            {
+                <thead>
+                <td>@Html.DisplayNameFor(ventas=>ventas.Id)</td>
+                <td>Destino</td>
+                <td>@Html.DisplayNameFor(ventas=>ventas.Cantidad)</td>
+                <td>Precio</td>
+                <td>@Html.DisplayNameFor(ventas=>ventas.Fecha)</td>
+                </thead>
+                <tbody id="data">
+                    @foreach (var venta in ventas)
+                    {
+
+                        <tr>
+                            <td>@venta.Id</td>
+                            <td class="IdAnimal">@venta.Destino</td>
+                            <td class="Cantidad">@venta.Cantidad Litros</td>
+                            <td>$ @venta.Precio</td>
+                            <td>@venta.Fecha</td>
+
+
+                        </tr>
+
+                    }
+
+
+                </tbody>
+
+
+            }
+            else
+            {
+                <tr>
+                    <td> No hay datos..</td>
+                </tr>
+            }
+
+
+        </table>
+    </div>
+
+
+        </div>
+
+    </div>
+
+    <div style="height:20px;width:100%"></div>
+
+    <div class="row">
+        <div class="col-lg-6">
+            
+
+
+        </div>
+        <div class="col-lg-6">
+            
+
+
+        </div>
+    </div>
+</div>
+
