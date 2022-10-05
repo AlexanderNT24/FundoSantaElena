@@ -1,0 +1,170 @@
+﻿
+    <style>
+        .cardAmp:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+        }
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #ffffff;
+            border-radius: 10px;
+        }
+
+        
+    </style>
+     <style>
+   
+
+
+        
+	.img_cont_msg{
+			height: 40px;
+			width: 40px;
+	}
+    		.bot_img_msg{
+			height: 40px;
+			width: 40px;
+			border:1.5px solid #f5f6fa;
+		
+		}
+        .user_img_msg{
+            height: 40px;
+			width: 40px;
+			border:1.5px solid #f5f6fa;
+        
+        }
+
+    
+    .msg_cotainer{
+        margin-top: auto;
+        margin-bottom: auto;
+        margin-left: 10px;
+        border-radius: 25px;
+        background-color: #82ccdd;
+        padding: 10px;
+        position: relative;
+    }
+    	.msg_cotainer_send{
+		margin-top: auto;
+		margin-bottom: auto;
+		margin-right: 10px;
+		border-radius: 25px;
+		background-color: #78e08f;
+		padding: 10px;
+		position: relative;
+	}
+    .msg_time{
+		position: absolute;
+		left: 0;
+		bottom: -15px;
+		color: rgba(255,255,255,0.5);
+		font-size: 10px;
+	}
+        </style>
+        <center>
+            <div class="overflow" style="overflow-y: scroll;">
+                <div class="col" id="mensajes">   
+                    <div class="card" style="background-color: #2C6975 !important;">
+                      <h5 class="card-header" style="color:white;">                       <div class="img_cont_msg">
+							<img src="https://thumbs.dreamstime.com/b/avatar-de-una-vaca-105121631.jpg" class="rounded-circle bot_img_msg">
+					  </div>Benito Bot
+
+                      
+                      </h5><a onclick="datos()" href="#" class="link-info">Info</a>
+
+                      
+                      <div  class="card-body msg_card_body" style="height:480px; overflow-y: scroll;
+                      border-radius: 15px !important;background-color: rgba(0,0,0,0.4) !important;">
+                              <div id="chat" th:each="comentario,status : ${comentarios}">
+                                <div class="d-flex justify-content-start mb-4">
+
+                       <div class="img_cont_msg">
+							<img src="https://thumbs.dreamstime.com/b/avatar-de-una-vaca-105121631.jpg" class="rounded-circle bot_img_msg">
+					  </div>
+                                   <div class="msg_cotainer">
+									Hola ¿En que te puedo ayudar?
+								</div>
+
+
+							</div>
+                            <div class="d-flex justify-content-end mb-4">
+								<div class="msg_cotainer_send">
+									Hola Benito, necesito ayuda en...
+
+								</div>
+								<div class="img_cont_msg">
+							<img src="https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png" class="rounded-circle user_img_msg">
+								</div>
+							</div>
+                     				
+                                </div>
+          
+                                  
+                              </div>
+                          <div class="card-footer">
+							<div class="input-group">
+		
+								<textarea id="Mensaje" class="form-control type_msg" placeholder="Escribe..."></textarea>
+								<div class="input-group-append">
+                                    <button onclick="agregarComentario()" type="button" class="btn btn-success"><i class='bx bxs-send'></i></button>
+								</div>
+							</div>
+						</div>
+                          </div>  
+                  </div>
+              </div>
+            </div> 
+        </center>
+              <script>
+              function datos(){
+                  Swal.fire('¿Quien es Benito Bot?','Benito es un asistente que te ayudará con todas tus consultas y dudas.','question')
+              }
+
+
+              function agregarComentario(){
+                  
+                 
+                 let valor=document.getElementById("Mensaje").value;
+                 document.getElementById("Mensaje").value=null;
+                  if(valor!=""){
+                        
+                       document.getElementById('chat').innerHTML += "<div id='mensaje' class='d-flex justify-content-end mb-4'><div class='msg_cotainer_send'>"+valor+"</div><div class='img_cont_msg'><img src='https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png' class='rounded-circle user_img_msg'></div></div>"; 
+                      let respuesta="";
+                      valor=valor.toLowerCase();
+                       if(valor.includes("registro")){
+                          respuesta ="En la parte derecha podrás encontrar distintos campos, llena todos y seguido presiona el botón registrar.";
+                           
+                       }
+                       else if(valor.includes("contactar")){
+                            respuesta ="En un momento estas contactando con un desarrollador.";
+                             window.open("https://api.whatsapp.com/send?phone=51955516189&text=Le%20hablamos%20del%20fundo%20necesitamos%20ayuda", "Diseño Web", "width=300, height=200")
+                       }
+                       else if(valor.includes("ayuda")){
+                            respuesta ="¿En que deseas ayuda? puedo ayudarte en registro de ganado o si necesitas ayuda a contactar a un desarrollador";
+                         
+                       }
+                       
+                       else{
+                          respuesta ="Lo siento no te entiendo.";
+                        
+                       }
+                       let contenido=" <div class='d-flex justify-content-start mb-4'><div class='img_cont_msg'><img src='https://thumbs.dreamstime.com/b/avatar-de-una-vaca-105121631.jpg' class='rounded-circle bot_img_msg'> </div><div class='msg_cotainer'>"+respuesta+"</div></div>"
+                       document.getElementById('chat').innerHTML += contenido;
+                  
+                  }
+             
+                  
+                  
+                  
+                 
+              }
+              
+              </script>        
+                 
+
+      
