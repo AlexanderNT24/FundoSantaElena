@@ -2,7 +2,7 @@
 
 namespace FundoSantaElena.Models
 {
-    public class Animal
+    public class Animal 
     {
         [Key]
         public int Id { get; set; }
@@ -21,6 +21,7 @@ namespace FundoSantaElena.Models
         [Required(ErrorMessage = "Raza obligatoria")]
         [StringLength(maximumLength: 50, ErrorMessage = "El {0} debe ser minimo {2} y maximo {1} caracteres", MinimumLength = 5)]
         public string Raza { get; set; }
+
 
     }
 }

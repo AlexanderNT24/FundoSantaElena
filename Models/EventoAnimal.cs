@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using FundoSantaElena.Interfaces;
+using System.ComponentModel.DataAnnotations;
+
 namespace FundoSantaElena.Models
 {
     public class EventoAnimal
@@ -13,5 +15,6 @@ namespace FundoSantaElena.Models
         public string Detalles { get; set; }
         [Required(ErrorMessage = "Id Animal obligatorio")]
         public int IdAnimal { get; set; }
+
     }
 }

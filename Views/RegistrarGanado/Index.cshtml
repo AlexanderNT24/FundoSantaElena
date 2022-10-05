@@ -75,7 +75,7 @@
                             </div>
                             <div>
                                 <label>Raza</label>
-                                <input asp-for="Raza" type="text" placeholder="Ingresa raza">
+                                <input id="raza" asp-for="Raza" type="text" placeholder="Ingresa raza">
                                 <span asp-validation-for="Raza" class="text-danger"> </span>
                             </div>
                             <div>
@@ -84,7 +84,7 @@
                                 <span asp-validation-for="Foto" class="text-danger"> </span>
                             </div>
                             <div>
-                                <input style="background-color: #65d1a9;" value="Registrar" type="submit" class="button small"
+                                <input id="boton" style="background-color: #65d1a9;" value="Registrar" type="submit" class="button small"
                                        asp-action="Index" asp-controller="RegistrarGanado" />
 
                             </div>

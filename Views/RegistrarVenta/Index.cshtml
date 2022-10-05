@@ -5,7 +5,7 @@
 @model FundoSantaElena.Models.VentaProduccion
 @{
     IEnumerable<VentaProduccion> ventas = ViewBag.VentaProduccion;
-
+     float stock = ViewBag.Stock;
 }
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.4/dist/css/foundation.min.css"
@@ -38,7 +38,7 @@
                             <div>
 
                                 <label>Litros de Leche</label>
-                                <input asp-for="Cantidad" type="number">
+                                <input asp-for="Cantidad" type="number" value=@stock max="@stock" min=0>
 
                                 <span asp-validation-for="Cantidad" class="text-danger"> </span>
                             </div>
@@ -58,8 +58,8 @@
 
         </div>
         <div class="cell small-6">
+            <span>Stock de: @stock</span>
             <div>
-
                 <canvas id="grafica" width="400" height="300"></canvas>
             </div>
             <hr>

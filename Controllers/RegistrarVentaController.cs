@@ -13,6 +13,7 @@ namespace FundoSantaElena.Controllers
 {
     public class RegistrarVentaController : Controller
     {
+        
         private readonly AplicationDbContext _context;
         public RegistrarVentaController(AplicationDbContext context)
         {
@@ -22,6 +23,7 @@ namespace FundoSantaElena.Controllers
         {
 
             IEnumerable<VentaProduccion> venta = _context.VentaProduccion;
+            ViewBag.Stock= RegistrarProduccion.litraje;
             ViewBag.VentaProduccion = venta;
             return View();
         }
@@ -33,6 +35,7 @@ namespace FundoSantaElena.Controllers
             if (ModelState.IsValid)
             {
                 _context.VentaProduccion.Add(produccion);
+                RegistrarProduccion.litraje = RegistrarProduccion.litraje -float.Parse( produccion.Cantidad);
                 _context.SaveChanges();
                 return RedirectToAction("Index");
             }

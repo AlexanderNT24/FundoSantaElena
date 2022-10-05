@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FundoSantaElena.Migrations
 {
     [DbContext(typeof(AplicationDbContext))]
-    [Migration("20220621075829_PrimeraMigracion")]
+    [Migration("20220928024833_PrimeraMigracion")]
     partial class PrimeraMigracion
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -123,8 +123,8 @@ namespace FundoSantaElena.Migrations
 
                     b.Property<string>("Contrasenia")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("Nombre")
                         .IsRequired()

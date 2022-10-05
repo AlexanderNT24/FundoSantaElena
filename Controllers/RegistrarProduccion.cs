@@ -7,6 +7,7 @@ namespace FundoSantaElena.Controllers
 {
     public class RegistrarProduccion : Controller
     {
+        public static float litraje;
         private readonly AplicationDbContext _context;
         public RegistrarProduccion(AplicationDbContext context)
         {
@@ -14,8 +15,13 @@ namespace FundoSantaElena.Controllers
         }
         public IActionResult Index()
         {
+            litraje = 0;
             IEnumerable<ProduccionAnimal> produccionAnimales = _context.ProduccionAnimales;
             IEnumerable<Animal> animales = _context.Animales;
+            foreach(ProduccionAnimal produccionAnimal in produccionAnimales)
+            {
+                litraje=litraje+float.Parse(produccionAnimal.Cantidad);
+            }
             ViewBag.ProduccionAnimales = produccionAnimales;
             ViewBag.Animales = animales;
             return View();
@@ -25,12 +31,14 @@ namespace FundoSantaElena.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Index(ProduccionAnimal prodAnimal)
         {
+            
             Debug.WriteLine(prodAnimal.Cantidad);
             Debug.WriteLine(prodAnimal.IdAnimal);
             Debug.WriteLine(prodAnimal.Fecha);
             Debug.WriteLine(ModelState.IsValid);
             if (ModelState.IsValid)
             {
+                litraje = float.Parse(prodAnimal.Cantidad) + litraje;
                 _context.ProduccionAnimales.Add(prodAnimal);
                 _context.SaveChanges();
                 return RedirectToAction("Index");

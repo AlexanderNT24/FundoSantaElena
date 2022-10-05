@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+using FundoSantaElena.Interfaces;
+
 namespace FundoSantaElena.Models
 {
-    public class ProduccionAnimal
+    public class ProduccionAnimal : IValidarDatosProduccionAnimal
     {
         [Key]
         public int Id { get; set; }
@@ -14,5 +15,12 @@ namespace FundoSantaElena.Models
         public string Cantidad { get; set; }
         [Required(ErrorMessage = "Id Animal obligatorio")]
         public int IdAnimal { get; set; }
+
+        public bool ValidarDatos(Animal animal)
+        {
+
+            if (animal.Id == 0) return false;
+            return true;
+        }
     }
 }
