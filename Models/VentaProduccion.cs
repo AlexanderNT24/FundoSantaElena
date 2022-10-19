@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace FundoSantaElena.Models
 {
-    public class VentaProduccion
+    public class VentaProduccion: IValidarDatosEventoAnimal
     {
         [Key]
         public int Id { get; set; }
@@ -20,7 +20,11 @@ namespace FundoSantaElena.Models
         [Required(ErrorMessage = "Precio obligatorio")]
         [StringLength(maximumLength: 10, ErrorMessage = "El {0} debe ser minimo {2} y maximo {1} caracteres", MinimumLength = 0)]
         public string Precio { get; set; }
-
+        public bool ValidarEventos(EventoAnimal evento)
+        {
+            if (evento.Id == 0) return false;
+            return true;
+        }
 
     }
 }

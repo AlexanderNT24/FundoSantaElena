@@ -1,8 +1,13 @@
-﻿
-@{
+﻿@{
+    IEnumerable<Animal> animales = ViewBag.Animales;
     IEnumerable<ProduccionAnimal> produccionAnimales = ViewBag.ProduccionAnimales;
     IEnumerable<VentaProduccion> ventas = ViewBag.VentaProduccion;
-
+    var totalProduccion = ViewBag.TotalProduccion;
+    var totalVenta = ViewBag.TotalVenta;
+    var totalVentaCantidad = ViewBag.TotalVentaCantidad;
+    var post = ViewBag.Post;
+    var perdida = ViewBag.Perdida;
+    var totalProduccionAnimal=ViewBag.TotalProduccionAnimal;
 }
 @model FundoSantaElena.Models.ProduccionAnimal
 
@@ -10,155 +15,232 @@
     ViewData["Title"] = "Venta vs Produccion";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.4/dist/css/foundation.min.css"
+      crossorigin="anonymous">
+<h3><i class='bx bx-bar-chart-square'></i> Reporte Producción vs Venta</h3>
 
-<h3>Producción vs Ventas</h3>
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">Fecha</th>
-      <th scope="col">Cantidad</th>
- 
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-       <td>
-                             
-                       
-                                <label>Animales</label>
-                                <form method="post">
-                                    <input id="filtroFecha" asp-for="Fecha" type="date" />
-           
-                       
-                          
-                            <input id="boto n" style="background-color: #65d1a9;" value="Buscar" type="submit" class="button small"
-                                   asp-action="Index" asp-controller="DatosVentavsProduccion" />
+<form method="post" id="filtro">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Fecha</th>
+                <th scope="col">Animal</th>
 
-                    </form>
-                    <script>
-                    
-                    
-                    </script>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><input onchange="enviarFormulario()" required id="filtroFecha" asp-for="Fecha" type="date" /> </td>
+                <td>
 
-       </td>
-      <td>
-      <input class="form-range" min="0" max="5" type="range" list="tickmarks">
+                    <select onchange="enviarFormulario()"  asp-for="IdAnimal">
+                        <option class="NombreId" value="0">Ninguno</option>
+                        @foreach (var animal in animales)
+                        {
 
-<datalist id="tickmarks">
-  <option value="1">1</option>
-  <option value="2">2</option>
-  <option value="3">3</option>
-  <option value="4">4</option>
-  <option value="5">5</option>
-</datalist>
-       </td>
+                            <option class="NombreId" value="@animal.Id">@animal.Nombre</option>
 
-    </tr>
-        
+                        }
+                    </select>
+                    <span asp-validation-for="IdAnimal" class="text-danger"> </span>
+
+                </td>
 
 
-    
-      
+            </tr>
+        </tbody>
+    </table>
+
+</form>
+<script>
+    function enviarFormulario(){
+        document.getElementById("filtro").submit();
+    }
 
 
-   
+</script>
 
-  </tbody>
-</table>
 
 <div class="container">
-    <div class="row">
-        <div class="col-lg-6" style="">
-                <div class="overflow" style="height:400px; overflow-y: scroll;">
-  <h4>Producción</h4>
-        <table class="table">
-            @if (produccionAnimales.Count() > 0)
-            {
-                <thead>
-                <td>@Html.DisplayNameFor(produccionAnimales=>produccionAnimales.Id)</td>
-                <td>@Html.DisplayNameFor(produccionAnimales=>produccionAnimales.IdAnimal)</td>
-                <td>@Html.DisplayNameFor(produccionAnimales=>produccionAnimales.Cantidad)</td>
-                <td>@Html.DisplayNameFor(produccionAnimales=>produccionAnimales.Fecha)</td>
-                </thead>
-                <tbody id="data">
-                    @foreach (var produccion in produccionAnimales)
-                    {
 
-                        <tr>
-                            <td>@produccion.Id</td>
-                            <td class="IdAnimal">@produccion.IdAnimal</td>
-                            <td class="Cantidad">@produccion.Cantidad Litros</td>
-                            <td>@produccion.Fecha</td>
+    <div class="row">
+        @if (totalProduccion != 0 && totalVenta != 0)
+        {
+          
+
+            <div class="col-lg-3" >
+
+                <div class="card" style="background-color:#85b0e4; color:white">
+                   <div class="card-divider" style="background-color:#659cdf">
+                        <h5><i class='bx bx-trending-up'></i> Producción</h5>
+                    </div>
+                    <div class="card-section">
+
+                        <p> @totalProduccion Litros</p>
+                    </div>
+  
+                </div>
+            </div>
+            
+            <div class="col-lg-3">
+                <div class="card" style="background-color:#1bb787; color:white">
+                    <div class="card-divider"  style="background-color:#48c59f;">
+                        <h5><i class='bx bx-money-withdraw'></i> Venta</h5>
+                    </div>
+                    <div class="card-section">
+
+
+                        <p>S/.@totalVenta </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="card" style="background-color:#35b3c0; color:white">
+                    <div class="card-divider" style="background-color:#5ec3cf">
+                        <h5><i class='bx bx-happy-alt' ></i> Venta Litros</h5>
+                    </div>
+                    <div class="card-section">
+
+                        <p>@totalVentaCantidad Litros </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="card" style="background-color:#ed6b77; color:white">
+                    <div class="card-divider" style="background-color:#ef8a90">
+                        <h5><i class='bx bx-sad' ></i> Perdida</h5>
+                    </div>
+                    <div class="card-section">
+
+                        <p>@perdida Litros</p>
+                    </div>
+                </div>
+            </div>
+
+        }
+        
+        @if (totalProduccionAnimal > 0)
+        {
+            
+            <div class="col-lg-4">
+                <div class="card" style="background-color:#bfa53d; color:white">
+                    <div class="card-divider" style="background-color:#a0861b">
+                        <h5><i class='bx bx-trending-up'></i> Producción por animal</h5>
+                    </div>
+                    <div class="card-section">
+
+                        <p>@totalProduccionAnimal Litros</p>
+                    </div>
+                </div>
+            </div>
+        }
+
+
 
         
-                        </tr>
 
+        @if (post)
+        {
+            <form method="get">
+                <input id="boton" style="background-color: #65d1a9;" value="Reiniciar" type="submit" class="button small" asp-action="Index" asp-controller="DatosVentavsProduccion" />
+            </form>
+        }
+    </div>
+
+    <div class="row">
+        <div class="col-lg-6" style="">
+
+            <h4>Producción</h4>
+
+            <div class="overflow" style="height:400px; overflow-y: scroll;">
+                <table class="table">
+                    @if (produccionAnimales.Count() > 0)
+                    {
+                        <thead>
+                        <td>@Html.DisplayNameFor(produccionAnimales=>produccionAnimales.Id)</td>
+                        <td>@Html.DisplayNameFor(produccionAnimales=>produccionAnimales.IdAnimal)</td>
+                        <td>@Html.DisplayNameFor(produccionAnimales=>produccionAnimales.Cantidad)</td>
+                        <td>@Html.DisplayNameFor(produccionAnimales=>produccionAnimales.Fecha)</td>
+                        </thead>
+                        <tbody id="data">
+                            @foreach (var produccion in produccionAnimales)
+                            {
+                                <tr>
+                                    <td>@produccion.Id</td>
+                                    <td class="IdAnimal">@produccion.IdAnimal</td>
+                                    <td class="Cantidad">@produccion.Cantidad Litros</td>
+                                    <td>@produccion.Fecha</td>
+                                </tr>
+
+                            }
+
+
+                        </tbody>
+
+
+                    }
+                    else
+                    {
+                        <tr>
+                            <td> No hubo producción ese día</td>
+                        </tr>
                     }
 
 
-                </tbody>
-
-
-            }
-            else
-            {
-                <tr>
-                    <td> No hay datos..</td>
-                </tr>
-            }
-
-
-        </table>
+                </table>
             </div>
-      
+
 
 
         </div>
 
         <div class="col-lg-6">
-                <h4>Ventas</h4>
-    <div class="overflow" style="height:400px; overflow-y: scroll;">
-        <table class="table">
-            @if (ventas.Count() > 0)
-            {
-                <thead>
-                <td>@Html.DisplayNameFor(ventas=>ventas.Id)</td>
-                <td>Destino</td>
-                <td>@Html.DisplayNameFor(ventas=>ventas.Cantidad)</td>
-                <td>Precio</td>
-                <td>@Html.DisplayNameFor(ventas=>ventas.Fecha)</td>
-                </thead>
-                <tbody id="data">
-                    @foreach (var venta in ventas)
+            <h4>Ventas</h4>
+
+
+
+            <div class="overflow" style="height:400px; overflow-y: scroll;">
+                <table class="table">
+                    @if (ventas.Count() > 0)
                     {
+                        <thead>
+                        <td>@Html.DisplayNameFor(ventas=>ventas.Id)</td>
+                        <td>Destino</td>
+                        <td>@Html.DisplayNameFor(ventas=>ventas.Cantidad)</td>
+                        <td>Precio</td>
+                        <td>@Html.DisplayNameFor(ventas=>ventas.Fecha)</td>
+                        </thead>
+                        <tbody id="data">
+                            @foreach (var venta in ventas)
+                            {
 
+                                <tr>
+                                    <td>@venta.Id</td>
+                                    <td class="IdAnimal">@venta.Destino</td>
+                                    <td class="Cantidad">@venta.Cantidad Litros</td>
+                                    <td>S/. @venta.Precio</td>
+                                    <td>@venta.Fecha</td>
+
+
+                                </tr>
+
+                            }
+
+
+                        </tbody>
+
+
+                    }
+                    else
+                    {
                         <tr>
-                            <td>@venta.Id</td>
-                            <td class="IdAnimal">@venta.Destino</td>
-                            <td class="Cantidad">@venta.Cantidad Litros</td>
-                            <td>$ @venta.Precio</td>
-                            <td>@venta.Fecha</td>
-
-
+                            <td>  No hubo producción ese día</td>
                         </tr>
-
                     }
 
 
-                </tbody>
-
-
-            }
-            else
-            {
-                <tr>
-                    <td> No hay datos..</td>
-                </tr>
-            }
-
-
-        </table>
-    </div>
+                </table>
+            </div>
 
 
         </div>
@@ -169,14 +251,8 @@
 
     <div class="row">
         <div class="col-lg-6">
-            
-
-
         </div>
         <div class="col-lg-6">
-            
-
-
         </div>
     </div>
 </div>
