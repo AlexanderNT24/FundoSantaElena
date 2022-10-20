@@ -4,58 +4,57 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.4/dist/css/foundation.min.css"
-      crossorigin="anonymous">
 
-<div class="card" style="width: 100%;">
-    <div class="card-divider" id="title">
-        Editar
-    </div>
+            <div class="card" style="width: 100%;">
+                <div class="card-header" id="title" style="background-color:#68B2A0; color:white">
+                    Registrar Animales
+                </div>
+                <div class="card-body">
+                    <form method="post" asp-action="Index">
+                        <div>
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-floating mb-3">
+                                <input class="form-control" asp-for="Nombre" type="text" id="nombre" placeholder="Ingresa nombre">
+                                <label for="nombre">Nombre</label>
+                                <span asp-validation-for="Nombre" class="text-danger"> </span>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input class="form-control" asp-for="FechaNacimiento" type="date" id="fecha" placeholder="Fecha Nacimiento">
+                                <label for="fecha">Fecha de nacimiento</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <select class="form-select" id="sexo" asp-for="Sexo">
+                                    <option value="M">Macho</option>
+                                    <option value="F">Hembra</option>
+                                </select>
+                                <label for="sexo">Sexo</label>
+                                <span asp-validation-for="Sexo" class="text-danger"> </span>
+                            </div>
 
-    <div class="card-section">
-        <form method="post" asp-action="Editar">
-            <div>
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div>
-                    <label>Nombre</label>
-                    <input asp-for="Nombre" type="text" id="nombre" placeholder="Ingresa nombre">
-                    <span asp-validation-for="Nombre" class="text-danger"> </span>
-                </div>
-                <div>
-                    <label>Fecha Nacimiento</label>
-                    <input asp-for="FechaNacimiento" type="date" id="fecha" placeholder="Birth Date">
-                    <span asp-validation-for="FechaNacimiento" class="text-danger"> </span>
-                </div>
-                <div>
-                    <label>Sexo</label>
-                    <select id="sexo" asp-for="Sexo">
-                        <option value="M">Macho</option>
-                        <option value="F">Hembra</option>
 
-                    </select>
-                    <span asp-validation-for="Sexo" class="text-danger"> </span>
-                </div>
-                <div>
-                    <label>Raza</label>
-                    <input asp-for="Raza" type="text" placeholder="Ingresa raza">
-                    <span asp-validation-for="Raza" class="text-danger"> </span>
-                </div>
-                <div>
-                    <label>Imagen</label>
-                    <input asp-for="Foto" id="foto" type="url" placeholder="Ingresa imagen">
-                    <span asp-validation-for="Foto" class="text-danger"> </span>
-                </div>
-                <div>
-                    <input style="background-color: #65d1a9;" value="Editar" type="submit" class="button small"
-                           asp-action="Editar" asp-controller="RegistrarGanado" />
+                            <div class="form-floating mb-3">
+                                <input class="form-control" type="text" id="raza" asp-for="Raza" type="text" placeholder="Ingresa raza">
+                                <label for="raza">Ingresa raza</label>
+                                <span asp-validation-for="Raza" class="text-danger"> </span>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input class="form-control" asp-for="Foto" id="foto" type="url" placeholder="Ingresa imagen">
+                                <label for="foto">Imagen</label>
+                                <span asp-validation-for="Foto" class="text-danger"> </span>
 
-                </div>
+                            </div>
 
+                            <div>
+                                <input style="background-color: #65d1a9;" class="btn btn-success" id="boton" value="Registrar" type="submit" 
+                                       asp-action="Editar" asp-controller="RegistrarGanado" />
+
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
             </div>
-        </form>
-    </div>
 
-</div>
 @section Scripts{
 @{
     <partial name="_ValidationScriptsPartial" />

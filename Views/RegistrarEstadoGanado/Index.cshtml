@@ -8,53 +8,49 @@
     IEnumerable<EventoAnimal> eventoAnimales = ViewBag.EventoAnimal;
 
 }
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.4/dist/css/foundation.min.css"
-      crossorigin="anonymous">
-<div class="grid-container">
-    <div class="grid-x grid-margin-x">
-        <div class="cell small-6">
+<div class="container text-center">
+    <div class="row">
+        <div class="col">
             <div class="card" style="width: 100%;">
-                <div class="card-divider text-white" id="title" style="background-color:#68B2A0;">
+                <div class="card-header text-white" id="title" style="background-color:#68B2A0;">
                     Registrar Salud del Ganado
                 </div>
-                <div class="card-section">
+                <div class="card-body">
                     <form method="post">
                         <div>
-                            <div>
-                                <label>Animales</label>
-                                <select id="animal" asp-for="IdAnimal">
+                            <div class="form-floating mb-3">
+                                <select class="form-select" id="animal" asp-for="IdAnimal">
                                     @foreach (var animal in animales)
                                     {
 
                                         <option class="NombreId" value="@animal.Id">@animal.Nombre</option>
 
                                     }
-
-
                                 </select>
+                                <label for="animal">Animales</label>
                                 <span asp-validation-for="IdAnimal" class="text-danger"> </span>
-
                             </div>
 
-                            <div>
-                                <label>Estado</label>
-                                <select id="estado" asp-for="Detalles">
+
+
+                            <div class="form-floating mb-3">
+                                <select class="form-select" id="estado" asp-for="Detalles">
                                     <option class="NombreEvento" value="Vacuna">Vacuna</option>
                                     <option class="NombreEvento" value="Enfermedad">Enfermedad</option>
                                 </select>
+                                <label for="estado">Estado</label>
                                 <span asp-validation-for="Detalles" class="text-danger"> </span>
-
                             </div>
 
-                            <div>
-                                <label>Fecha</label>
-                                <input id="fecha" asp-for="Fecha" type="date" min="2022-01-01">
 
+
+
+                            <div class="form-floating mb-3">
+                                <input type="date" class="form-control" id="fecha" asp-for="Fecha">
+                                <label for="fecha">Fecha</label>
                                 <span asp-validation-for="Fecha" class="text-danger"> </span>
-
                             </div>
-                            <input id="boton" style="background-color: #65d1a9;" value="Registrar" type="submit" class="button small"
+                            <input id="boton" style="background-color: #65d1a9;" value="Registrar" type="submit" class="btn btn-success"
                                    asp-action="Index" asp-controller="RegistrarEstadoGanado" />
 
                         </div>
@@ -63,18 +59,21 @@
             </div>
 
         </div>
-        <div class="cell small-6">
+        <div class="col">
             <div>
 
                 <canvas id="grafica" width="400" height="300"></canvas>
             </div>
             <hr>
-        </div>
 
+        </div>
     </div>
+
+</div>
+<div class="row">
     <h4>Salud</h4>
     <div class="overflow" style="height:180px; overflow-y: scroll;">
-        <table>
+        <table class="table table-hover">
             @if (eventoAnimales.Count() > 0)
             {
                 <thead>
@@ -92,7 +91,7 @@
                                 <td>@eventoAnimal.Id</td>
                                 <td class="IdAnimal">@eventoAnimal.IdAnimal</td>
                                 <td class="Cantidad">@eventoAnimal.Detalles</td>
-                                <td >@eventoAnimal.Fecha</td>
+                                <td>@eventoAnimal.Fecha</td>
                                 <td>
                                     <div>
                                         <a asp-controller="RegistrarEstadoGanado" asp-action="Editar" asp-route-id="@eventoAnimal.Id"
@@ -141,7 +140,6 @@
 
         </table>
     </div>
-
 </div>
 <script>
 

@@ -38,53 +38,50 @@
 
     }
 </style>
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.4/dist/css/foundation.min.css"
-      crossorigin="anonymous">
-
-<div class="grid-container">
-    <div class="grid-x grid-margin-x">
-        <div class="cell small-6">
+<div class="container text-center">
+    <div class="row">
+        <div class="col">
             <div class="card" style="width: 100%;">
-                <div class="card-divider text-white" id="title" style="background-color:#68B2A0;">
+                <div class="card-header" id="title" style="background-color:#68B2A0; color:white">
                     Registrar Animales
                 </div>
-
-                <div class="card-section">
+                <div class="card-body">
                     <form method="post" asp-action="Index">
                         <div>
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                            <div>
-                                <label>Nombre</label>
-                                <input asp-for="Nombre" type="text" id="nombre" placeholder="Ingresa nombre">
+                            <div class="form-floating mb-3">
+                                <input class="form-control" asp-for="Nombre" type="text" id="nombre" placeholder="Ingresa nombre">
+                                <label for="nombre">Nombre</label>
                                 <span asp-validation-for="Nombre" class="text-danger"> </span>
                             </div>
-                            <div>
-                                <label>Fecha Nacimiento</label>
-                                <input asp-for="FechaNacimiento" type="date" id="fecha" placeholder="Fecha Nacimiento">
-                                <span asp-validation-for="FechaNacimiento" class="text-danger"> </span>
+                            <div class="form-floating mb-3">
+                                <input class="form-control" asp-for="FechaNacimiento" type="date" id="fecha" placeholder="Fecha Nacimiento">
+                                <label for="fecha">Fecha de nacimiento</label>
                             </div>
-                            <div>
-                                <label>Sexo</label>
-                                <select id="sexo" asp-for="Sexo">
+                            <div class="form-floating mb-3">
+                                <select class="form-select" id="sexo" asp-for="Sexo">
                                     <option value="M">Macho</option>
                                     <option value="F">Hembra</option>
-
                                 </select>
+                                <label for="sexo">Sexo</label>
                                 <span asp-validation-for="Sexo" class="text-danger"> </span>
                             </div>
-                            <div>
-                                <label>Raza</label>
-                                <input id="raza" asp-for="Raza" type="text" placeholder="Ingresa raza">
+
+
+                            <div class="form-floating mb-3">
+                                <input class="form-control" type="text" id="raza" asp-for="Raza" type="text" placeholder="Ingresa raza">
+                                <label for="raza">Ingresa raza</label>
                                 <span asp-validation-for="Raza" class="text-danger"> </span>
                             </div>
-                            <div>
-                                <label>Imagen</label>
-                                <input asp-for="Foto" id="foto" type="url" placeholder="Ingresa imagen">
+                            <div class="form-floating mb-3">
+                                <input class="form-control" asp-for="Foto" id="foto" type="url" placeholder="Ingresa imagen">
+                                <label for="foto">Imagen</label>
                                 <span asp-validation-for="Foto" class="text-danger"> </span>
+
                             </div>
+
                             <div>
-                                <input id="boton" style="background-color: #65d1a9;" value="Registrar" type="submit" class="button small"
+                                <input style="background-color: #65d1a9;" class="btn btn-success" id="boton" value="Registrar" type="submit" 
                                        asp-action="Index" asp-controller="RegistrarGanado" />
 
                             </div>
@@ -92,16 +89,15 @@
                         </div>
                     </form>
                 </div>
-
             </div>
 
         </div>
-        <div class="cell small-6">
+        <div class="col">
             <div>
                 <h4>Animales</h4>
 
             </div>
-            <hr></hr>
+            <hr>
 
             <div class="overflow" style="height:480px;width:480px; overflow-y: scroll;">
                 @if (animales.Count() > 0)
@@ -111,10 +107,9 @@
                     {
                         <div class="cardAmp" style="width: 18rem;">
                             <div class="card mb-3" style="max-width: 540px;">
-
-                                <div class="row no-gutters">
+                                <div class="row g-0">
                                     <div class="col-md-4">
-                                        <img src="@animal.Foto" class="card-circle" style="padding-top: 12px;">
+                                        <img src="@animal.Foto" class="img-fluid rounded-start">
                                         @if (animal.Sexo == "M")
                                         {
                                             <p class="card-text"><small class="text-muted"><i class='bx bx-male-sign'></i></small></p>
@@ -140,18 +135,17 @@
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
-
                         </div>
+
 
                     }
                 }
                 else
                 {
 
-                    <li> No hay datos..</li>
+                    <span> No hay datos..</span>
 
                 }
 
@@ -159,14 +153,11 @@
 
 
 
-
-
-
-
         </div>
-
     </div>
 </div>
+
+
 @section Scripts{
     @{
     <partial name="_ValidationScriptsPartial" />

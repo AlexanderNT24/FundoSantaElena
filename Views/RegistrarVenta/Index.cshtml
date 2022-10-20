@@ -5,116 +5,118 @@
 @model FundoSantaElena.Models.VentaProduccion
 @{
     IEnumerable<VentaProduccion> ventas = ViewBag.VentaProduccion;
-     float stock = ViewBag.Stock;
+    float stock = ViewBag.Stock;
 }
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.4/dist/css/foundation.min.css"
-      crossorigin="anonymous">
-<div class="grid-container">
-    <div class="grid-x grid-margin-x">
-        <div class="cell small-6">
-            <div class="card" style="width: 100%;">
-                <div class="card-divider text-white" id="title" style="background-color:#68B2A0;">
+<div class="container text-center">
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-header" id="title" style="background-color:#68B2A0; color:white">
                     Registrar Venta de Leche
                 </div>
-                <div class="card-section">
+                <div class="card-body">
+
                     <form method="post">
+                        <div class="form-floating mb-3">
+                            <input asp-for="Fecha" type="date" class="form-control" id="Fecha">
+                            <label for="Fecha">Fecha de Venta</label>
+                            <span asp-validation-for="Fecha" class="text-danger"> </span>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <select class="form-select" asp-for="Destino" id="Destino">
+                                <option class="NombreId">Quesero</option>
+                                <option class="NombreId">Empresa G</option>
+                            </select>
+                            <label for="Destino">Destino de Venta</label>
+                            <span asp-validation-for="Destino" class="text-danger"> </span>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input class="form-control" asp-for="Cantidad" type="number" value=@stock max="@stock" min=0 id="Cantidad">
+                            <label for="Cantidad">Litros de Leche</label>
+                            <span asp-validation-for="Cantidad" class="text-danger"> </span>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input class="form-control" asp-for="Precio" type="number" id="Precio">
+                            <label for="Precio">Costo</label>
+                            <span asp-validation-for="Precio" class="text-danger"> </span>
+                        </div>
                         <div>
-                            <div>
-                                <div>
-                                    <label>Fecha de Venta</label>
-                                    <input asp-for="Fecha" type="date">
-
-                                    <span asp-validation-for="Fecha" class="text-danger"> </span>
-                                </div>
-                                <label>Destino de Venta</label>
-                                <select asp-for="Destino">
-                                    <option class="NombreId">Quesero</option>
-                                    <option class="NombreId">Empresa G</option>
-                                </select>
-                                <span asp-validation-for="Destino" class="text-danger"> </span>
-
-                            </div>
-                            <div>
-
-                                <label>Litros de Leche</label>
-                                <input asp-for="Cantidad" type="number" value=@stock max="@stock" min=0>
-
-                                <span asp-validation-for="Cantidad" class="text-danger"> </span>
-                            </div>
-                            <div>
-                                <label>Costo</label>
-                                <input asp-for="Precio" type="number">
-
-                                <span asp-validation-for="Precio" class="text-danger"> </span>
-                            </div>
-                            <input  id="boton" style="background-color: #65d1a9;" value="Registrar" type="submit" class="button small"
+                            <input id="boton" class="btn btn-success" style="background-color: #65d1a9;" value="Registrar" type="submit"
                                    asp-action="Index" asp-controller="RegistrarVenta" />
-
                         </div>
                     </form>
+
                 </div>
             </div>
-
         </div>
-        <div class="cell small-6">
-            <span>Stock de: @stock</span>
-            <div>
-                <canvas id="grafica" width="400" height="300"></canvas>
+        <div class="col">
+            <div class="cell small-6">
+                <span>Stock de: @stock</span>
+                <div>
+                    <canvas id="grafica" width="400" height="300"></canvas>
+                </div>
+                <hr>
             </div>
-            <hr>
+
+        </div>
+    </div>
+    <div class="row">
+
+        <h4>Ventas</h4>
+        <div class="overflow" style="height:180px; overflow-y: scroll;">
+            <table class="table table-hover">
+                @if (ventas.Count() > 0)
+                {
+                    <thead>
+                    <td>@Html.DisplayNameFor(ventas=>ventas.Id)</td>
+                    <td>@Html.DisplayNameFor(ventas=>ventas.Destino)</td>
+                    <td>@Html.DisplayNameFor(ventas=>ventas.Cantidad)</td>
+                    <td>@Html.DisplayNameFor(ventas=>ventas.Precio)</td>
+                    <td>@Html.DisplayNameFor(ventas=>ventas.Fecha)</td>
+                    </thead>
+                    <tbody id="data">
+                        @foreach (var venta in ventas)
+                        {
+
+                            <tr>
+                                <td>@venta.Id</td>
+                                <td class="IdAnimal">@venta.Destino</td>
+                                <td class="Cantidad">@venta.Cantidad Litros</td>
+                                <td>$ @venta.Precio</td>
+                                <td>@venta.Fecha</td>
+                                <td>
+                                    <a asp-controller="RegistrarVenta" asp-action="Editar" asp-route-id="@venta.Id"
+                               class="btn btn-outline-warning"><i class='bx bx-edit'></i></a>
+                                    <a asp-controller="RegistrarVenta" asp-action="Eliminar" asp-route-id="@venta.Id"
+                               class="btn btn-outline-danger"><i class='bx bx-x-circle'></i></a>
+                                </td>
+
+                            </tr>
+
+                        }
+
+
+                    </tbody>
+
+
+                }
+                else
+                {
+                    <tr>
+                        <td> No hay datos..</td>
+                    </tr>
+                }
+
+
+            </table>
         </div>
 
-    </div>
-    <h4>Ventas</h4>
-    <div class="overflow" style="height:180px; overflow-y: scroll;">
-        <table>
-            @if (ventas.Count() > 0)
-            {
-                <thead>
-                <td>@Html.DisplayNameFor(ventas=>ventas.Id)</td>
-                <td>@Html.DisplayNameFor(ventas=>ventas.Destino)</td>
-                <td>@Html.DisplayNameFor(ventas=>ventas.Cantidad)</td>
-                <td>@Html.DisplayNameFor(ventas=>ventas.Precio)</td>
-                <td>@Html.DisplayNameFor(ventas=>ventas.Fecha)</td>
-                </thead>
-                <tbody id="data">
-                    @foreach (var venta in ventas)
-                    {
 
-                        <tr>
-                            <td>@venta.Id</td>
-                            <td class="IdAnimal">@venta.Destino</td>
-                            <td class="Cantidad">@venta.Cantidad Litros</td>
-                            <td>$ @venta.Precio</td>
-                            <td>@venta.Fecha</td>
-                            <td>
-                                <a asp-controller="RegistrarVenta" asp-action="Editar" asp-route-id="@venta.Id"
-                           class="btn btn-outline-warning"><i class='bx bx-edit'></i></a>
-                                <a asp-controller="RegistrarVenta" asp-action="Eliminar" asp-route-id="@venta.Id" 
-                           class="btn btn-outline-danger"><i class='bx bx-x-circle'></i></a>
-                            </td>
-
-                        </tr>
-
-                    }
-
-
-                </tbody>
-
-
-            }
-            else
-            {
-                <tr>
-                    <td> No hay datos..</td>
-                </tr>
-            }
-
-
-        </table>
     </div>
 </div>
+
+
 <script>
 
     let coleccionEventos = document.getElementsByClassName("NombreEvento");

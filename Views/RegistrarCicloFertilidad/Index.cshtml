@@ -9,22 +9,20 @@
 
 }
 
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.4/dist/css/foundation.min.css"
-      crossorigin="anonymous">
-<div class="grid-container">
-    <div class="grid-x grid-margin-x">
-        <div class="cell small-6">
-            <div class="card" style="width: 100%;">
-                <div class="card-divider text-white" id="title" style="background-color:#68B2A0;">
+<div class="container text-center">
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-header" id="title" style="background-color:#68B2A0; color:white">
                     Registrar Fertilidad
+
                 </div>
-                <div class="card-section">
+                <div class="card-body">
                     <form method="post">
                         <div>
-                            <div>
-                                <label>Animales</label>
-                                <select asp-for="IdAnimal">
+
+                            <div class="form-floating mb-3">
+                                <select class="form-select" asp-for="IdAnimal" id="IdAnimal">
                                     @foreach (var animal in animales)
                                     {
 
@@ -32,87 +30,90 @@
 
                                     }
                                 </select>
+                                <label for="IdAnimal">Animales</label>
                                 <span asp-validation-for="IdAnimal" class="text-danger"> </span>
-                            </div>
 
-                            <div>
-                                <label>Metodo Fertilización</label>
-                                <select asp-for="Detalles">
+
+                            </div>
+                            <div class="form-floating mb-3">
+                                <select class="form-select" asp-for="Detalles" id="Detalles">
                                     <option class="NombreId" value="IA">Inseminación artifcial</option>
                                     <option class="NombreId" value="Monta">Monta</option>
                                 </select>
+                                <label for="Detalles">Metodo Fertilización</label>
                                 <span asp-validation-for="Detalles" class="text-danger"> </span>
                             </div>
 
-                            <div>
-                                <label>Fecha Fertilización</label>
-                                <input asp-for="Fecha" type="date" min="2022-01-01">
 
+
+                            <div class="form-floating mb-3">
+                                <input type="date" class="form-control" id="Fecha" asp-for="Fecha" type="date">
+                                <label for="Fecha">Fecha Fertilización</label>
                                 <span asp-validation-for="Fecha" class="text-danger"> </span>
                             </div>
 
                         </div>
                         <div>
-                            <input id="boton" style="background-color: #65d1a9;" value="Registrar" type="submit" class="button small"
+                            <input id="boton" style="background-color: #65d1a9;" value="Registrar" type="submit" class="btn btn-success"
                                    asp-action="Index" asp-controller="RegistrarCicloFertilidad" />
 
                         </div>
                     </form>
                 </div>
             </div>
-
         </div>
+        <div class="col">
+             <h4>Fertilidad</h4>
 
-
-    </div>
-
-    <h4>Fertilidad</h4>
-
-<div class="overflow" style="height:180px; overflow-y: scroll;">
-    <table>
-        @if (eventoAnimales.Count() > 0)
-        {
-            <thead>
-            <td>@Html.DisplayNameFor(eventoAnimales=>eventoAnimales.IdAnimal)</td>
-            <td>@Html.DisplayNameFor(eventoAnimales=>eventoAnimales.Detalles)</td>
-            <td>@Html.DisplayNameFor(eventoAnimales=>eventoAnimales.Fecha)</td>
-            </thead>
-            <tbody id="data">
-                @foreach (var eventoAnimal in eventoAnimales)
+        <div class="overflow" style="height:258px; overflow-y: scroll;">
+            <table class="table table-hover">
+                @if (eventoAnimales.Count() > 0)
                 {
-                    if (eventoAnimal.Detalles == "IA" || eventoAnimal.Detalles == "Monta")
-                    {
-                        <tr>
-                            <td class="IdAnimal">@eventoAnimal.IdAnimal</td>
-                            <td class="Cantidad">@eventoAnimal.Detalles</td>
-                            <td>@eventoAnimal.Fecha</td>
-                            <td>
-                                <a asp-controller="RegistrarCicloFertilidad" asp-action="Editar" asp-route-id="@eventoAnimal.Id"
-                                class="btn btn-outline-warning"><i class='bx bx-edit' ></i></a>
-                                                               <a asp-controller="RegistrarCicloFertilidad" asp-action="Eliminar" asp-route-id="@eventoAnimal.Id"
-                                class="btn btn-outline-danger"><i class='bx bx-x-circle' ></i></a>
-                </td>
+                    <thead>
+                    <td>@Html.DisplayNameFor(eventoAnimales=>eventoAnimales.IdAnimal)</td>
+                    <td>@Html.DisplayNameFor(eventoAnimales=>eventoAnimales.Detalles)</td>
+                    <td>@Html.DisplayNameFor(eventoAnimales=>eventoAnimales.Fecha)</td>
+                    </thead>
+                    <tbody id="data">
+                        @foreach (var eventoAnimal in eventoAnimales)
+                        {
+                            if (eventoAnimal.Detalles == "IA" || eventoAnimal.Detalles == "Monta")
+                            {
+                                <tr>
+                                    <td class="IdAnimal">@eventoAnimal.IdAnimal</td>
+                                    <td class="Cantidad">@eventoAnimal.Detalles</td>
+                                    <td>@eventoAnimal.Fecha</td>
+                                    <td>
+                                        <a asp-controller="RegistrarCicloFertilidad" asp-action="Editar" asp-route-id="@eventoAnimal.Id"
+                               class="btn btn-outline-warning"><i class='bx bx-edit'></i></a>
+                                        <a asp-controller="RegistrarCicloFertilidad" asp-action="Eliminar" asp-route-id="@eventoAnimal.Id"
+                               class="btn btn-outline-danger"><i class='bx bx-x-circle'></i></a>
+                                    </td>
 
-                        </tr>
+                                </tr>
 
-                    }
+                            }
+
+
+                        }
+
+
+                    </tbody>
 
 
                 }
+                else
+                {
+                    <tr>
+                        <td> No hay datos..</td>
+                    </tr>
+                }
 
 
-            </tbody>
+            </table>
+        </div>
 
-
-        }
-        else
-        {
-            <tr>
-                <td> No hay datos..</td>
-            </tr>
-        }
-
-
-    </table>
-</div>
+        </div>
     </div>
+</div>
+

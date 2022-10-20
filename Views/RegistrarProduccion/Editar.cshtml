@@ -9,57 +9,49 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.4/dist/css/foundation.min.css"
-      crossorigin="anonymous">
-
-<div class="card" style="width: 100%;">
-    <div class="card-divider" id="title">
-        Editar
-    </div>
-
-    <div class="card-section">
-
-        <form method="post" asp-action="Index">
-            <div>
-                <div>
-                    <label>Animales</label>
-                    <select asp-for="IdAnimal">
-                        @foreach (var animal in animales)
-                        {
-
-                            <option class="NombreId" value="@animal.Id">@animal.Id. @animal.Nombre</option>
-
-                        }
-
-
-                    </select>
-                </div>
-
-                <div>
-                    <label>Hora Ordeño</label>
-                    <input asp-for="Fecha" type="text" type="date">
-
-                    <span asp-validation-for="Fecha" class="text-danger"> </span>
-                </div>
-                <div>
-                    <label>Litros</label>
-                    <input asp-for="Cantidad" type="number" type="number" placeholder="Ingresa litros">
-                    <span asp-validation-for="Cantidad" class="text-danger"> </span>
+                <div class="card-header" id="title" style="background-color:#68B2A0; color:white">
+                    Registrar Producción
 
                 </div>
-                <div>
-                    <input style="background-color: #65d1a9;" value="Registrar" type="submit" class="button small"
-                           asp-action="Editar" asp-controller="RegistrarProduccion" />
-                </div>
+                <div class="card-body">
+                    <form method="post" asp-action="Index">
+                        <div>
 
+                            <div class="form-floating mb-3">
+                                <select class="form-select" asp-for="IdAnimal" id="IdAnimal">
+                                    @foreach (var animal in animales)
+                                    {
+
+                                        <option class="NombreId" value="@animal.Id">@animal.Nombre</option>
+
+                                    }
+                                </select>
+                                <label for="IdAnimal">Animales</label>
+
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="Fecha" asp-for="Fecha" type="date">
+                                <label for="Fecha">Hora Ordeño</label>
+                                <span asp-validation-for="Fecha" class="text-danger"> </span>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input class="form-control" id="Cantidad" asp-for="Cantidad" type="number" type="number" placeholder="Ingresa litros">
+                                <label for="Cantidad">Litros</label>
+                                <span asp-validation-for="Cantidad" class="text-danger"> </span>
+                            </div>
+
+                            <div>
+                                <input id="boton" class="btn btn-success" style="background-color: #65d1a9;" value="Registrar" type="submit"
+                                       asp-action="Editar" asp-controller="RegistrarProduccion" />
+                            </div>
+
+                        </div>
+                    </form>
+
+                </div>
             </div>
-        </form>
 
 
-
-    </div>
-
-</div>
 @section Scripts{
 @{
     <partial name="_ValidationScriptsPartial" />
