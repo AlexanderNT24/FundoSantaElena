@@ -31,18 +31,23 @@
 
                     <form method="post">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-                        <input asp-for="Nombre" type="text" placeholder="Usuario"
-                               class="form-control" />
-                       <span asp-validation-for="Nombre" class="text-danger"> </span>
+                        
+                        <div class="form-floating mb-3">
+                            <input class="form-control" asp-for="Nombre" type="text" placeholder="Usuario" id="Nombre">
+                            <label for="Nombre">Nombre</label>
+                             <span asp-validation-for="Nombre" class="text-danger"> </span>
+                        </div>
+                      
                        
                         <div style="height:10px;width:100%"></div>
 
-                        <input asp-for="Contrasenia" type="password" placeholder="Contraseña"
-                               class="form-control" />
-                          <span asp-validation-for="Contrasenia" class="text-danger"> </span>
-                       
+                        <div class="form-floating mb-3">
+                            <input class="form-control" asp-for="Contrasenia" type="password" placeholder="Contraseña" id="Contrasenia">
+                            <label for="Contrasenia">Contraseña</label>
+                             <span asp-validation-for="Contrasenia" class="text-danger"> </span>
+                        </div>
 
+                  
                         <div>
                             <input type="submit" class="btn btn-primary btn-block mt-4" asp-action="Login"
                                    asp-controller="Usuario" style="width:100%" value="Iniciar Sesión" />
