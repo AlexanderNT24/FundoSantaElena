@@ -16,16 +16,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<style>
-
-
-    .cardAmp:hover {
-        transform: scale(1.05);
-        box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
-    }
-
-
-</style>
 
 <h3><i class='bx bx-bar-chart-square'></i> Reporte Producción vs Venta</h3>
 
@@ -69,7 +59,7 @@
                                                 @foreach (var animal in animales)
                                                 {
 
-                                                <option class="NombreId" value="@animal.Id">@animal.Nombre</option>
+                                                    <option class="NombreId" value="@animal.Id">@animal.Nombre</option>
 
                                                 }
                                         </select>
@@ -86,9 +76,9 @@
 
                 @if (post)
                 {
-                    <form method="get">
-                        <input id="boton" class="btn btn-link" value="Reiniciar" type="submit" asp-action="Index" asp-controller="DatosVentavsProduccion" />
-                    </form>
+                        <form method="get">
+                            <input id="boton" class="btn btn-link" value="Reiniciar" type="submit" asp-action="Index" asp-controller="DatosVentavsProduccion" />
+                        </form>
                 }
             </div>
         </div>
@@ -101,7 +91,7 @@
         function tomarFecha(){
 
               let e = new Date()
-              
+
               let valor= document.getElementById("fechaFiltro").value;
               let fechaActual=e.getFullYear() +"-"+ (e.getMonth()+1) +"-"+ e.getDate();
 
@@ -117,15 +107,15 @@
               let fechaRango=e.getFullYear() +"-"+ (e.getMonth()+1) +"-"+ e.getDate();
               console.log(parseInt(e.getMonth()+1))
              if(parseInt(e.getMonth()+1) <10){
-                  
+
                   fechaRango=e.getFullYear() +"-0"+ (e.getMonth()+1) +"-"+ e.getDate();
               }
-               
+
              if(parseInt(e.getDate()) <10){
-                  
+
                   fechaRango=e.getFullYear() +"-"+ (e.getMonth()+1) +"-0"+ e.getDate();
               }
-         
+
                             if(valor=='hoy'){
               document.getElementById("Fecha").value =fechaActual;
               document.getElementById("filtro").submit();
@@ -133,8 +123,8 @@
            document.getElementById("Fecha").type ='text';
              document.getElementById("Fecha").value =fechaRango+"/"+fechaActual ;
             document.getElementById("filtro").submit();}
-              
-           
+
+
         }
         function enviarFormulario(){
             document.getElementById("filtro").submit();
@@ -147,75 +137,75 @@
 <div class="container">
      <div style="height:10px;width:100%"></div>
     <div class="row">
-        @if (totalProduccion != 0  )
+        @if (totalProduccion != 0)
         {
 
 
-            <div class="col-lg-3">
+                <div class="col-lg-3">
 
-                <div class="card cardAmp" style="background-color:#85b0e4; color:white">
-                    <div class="card-divider" style="background-color:#659cdf">
-                        <h5><i class='bx bx-trending-up'></i> Producción</h5>
-                    </div>
-                    <div class="card-section">
+                    <div class="card cardAmp" style="background-color:#85b0e4; color:white">
+                        <div class="card-divider" style="background-color:#659cdf">
+                            <h5><i class='bx bx-trending-up'></i> Producción</h5>
+                        </div>
+                        <div class="card-section">
 
-                        <p> @totalProduccion Litros</p>
-                    </div>
+                            <p> @totalProduccion Litros</p>
+                        </div>
 
-                </div>
-            </div>
-
-            <div class="col-lg-3">
-                <div class="card cardAmp" style="background-color:#1bb787; color:white">
-                    <div class="card-divider" style="background-color:#48c59f;">
-                        <h5><i class='bx bx-money-withdraw'></i> Venta</h5>
-                    </div>
-                    <div class="card-section">
-
-
-                        <p>S/.@totalVenta </p>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-3">
-                <div class="card cardAmp" style="background-color:#35b3c0; color:white">
-                    <div class="card-divider" style="background-color:#5ec3cf">
-                        <h5><i class='bx bx-happy-alt'></i> Venta Total</h5>
-                    </div>
-                    <div class="card-section">
 
-                        <p>@totalVentaCantidad Litros </p>
+                <div class="col-lg-3">
+                    <div class="card cardAmp" style="background-color:#1bb787; color:white">
+                        <div class="card-divider" style="background-color:#48c59f;">
+                            <h5><i class='bx bx-money-withdraw'></i> Venta</h5>
+                        </div>
+                        <div class="card-section">
+
+
+                            <p>S/.@totalVenta </p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-3">
-                <div class="card cardAmp" style="background-color:#ed6b77; color:white">
-                    <div class="card-divider" style="background-color:#ef8a90">
-                        <h5><i class='bx bx-sad'></i> Perdida</h5>
-                    </div>
-                    <div class="card-section">
+                <div class="col-lg-3">
+                    <div class="card cardAmp" style="background-color:#35b3c0; color:white">
+                        <div class="card-divider" style="background-color:#5ec3cf">
+                            <h5><i class='bx bx-happy-alt'></i> Venta Total</h5>
+                        </div>
+                        <div class="card-section">
 
-                        <p>@perdida Litros</p>
+                            <p>@totalVentaCantidad Litros </p>
+                        </div>
                     </div>
                 </div>
-            </div>
+                <div class="col-lg-3">
+                    <div class="card cardAmp" style="background-color:#ed6b77; color:white">
+                        <div class="card-divider" style="background-color:#ef8a90">
+                            <h5><i class='bx bx-sad'></i> Perdida</h5>
+                        </div>
+                        <div class="card-section">
+
+                            <p>@perdida Litros</p>
+                        </div>
+                    </div>
+                </div>
 
         }
         <div style="height:10px;width:100%"></div>
         @if (totalProduccionAnimal > 0)
         {
-             
-            <div class="col-lg-4">
-                <div class="card cardAmp" style="background-color:#bfa53d; color:white">
-                    <div class="card-divider" style="background-color:#a0861b">
-                        <h5><i class='bx bx-trending-up'></i> Producción por animal</h5>
-                    </div>
-                    <div class="card-section">
 
-                        <p>@totalProduccionAnimal Litros</p>
+                <div class="col-lg-4">
+                    <div class="card cardAmp" style="background-color:#bfa53d; color:white">
+                        <div class="card-divider" style="background-color:#a0861b">
+                            <h5><i class='bx bx-trending-up'></i> Producción por animal</h5>
+                        </div>
+                        <div class="card-section">
+
+                            <p>@totalProduccionAnimal Litros</p>
+                        </div>
                     </div>
                 </div>
-            </div>
         }
         <div style="height:10px;width:100%"></div>
 
@@ -233,34 +223,34 @@
                 <table class="table">
                     @if (produccionAnimales.Count() > 0)
                     {
-                        <thead>
-                        <td>@Html.DisplayNameFor(produccionAnimales=>produccionAnimales.Id)</td>
-                        <td>@Html.DisplayNameFor(produccionAnimales=>produccionAnimales.IdAnimal)</td>
-                        <td>@Html.DisplayNameFor(produccionAnimales=>produccionAnimales.Cantidad)</td>
-                        <td>@Html.DisplayNameFor(produccionAnimales=>produccionAnimales.Fecha)</td>
-                        </thead>
-                        <tbody id="data">
+                            <thead>
+                            <td>@Html.DisplayNameFor(produccionAnimales=>produccionAnimales.Id)</td>
+                            <td>@Html.DisplayNameFor(produccionAnimales=>produccionAnimales.IdAnimal)</td>
+                            <td>@Html.DisplayNameFor(produccionAnimales=>produccionAnimales.Cantidad)</td>
+                            <td>@Html.DisplayNameFor(produccionAnimales=>produccionAnimales.Fecha)</td>
+                            </thead>
+                            <tbody id="data">
                             @foreach (var produccion in produccionAnimales)
                             {
-                                <tr>
-                                    <td>@produccion.Id</td>
-                                    <td class="IdAnimal">@produccion.IdAnimal</td>
-                                    <td class="Cantidad">@produccion.Cantidad Litros</td>
-                                    <td>@produccion.Fecha</td>
-                                </tr>
+                                        <tr>
+                                            <td>@produccion.Id</td>
+                                            <td class="IdAnimal">@produccion.IdAnimal</td>
+                                            <td class="Cantidad">@produccion.Cantidad Litros</td>
+                                            <td>@produccion.Fecha</td>
+                                        </tr>
 
                             }
 
 
-                        </tbody>
+                            </tbody>
 
 
                     }
                     else
                     {
-                        <tr>
-                            <td> No hubo producción ese día</td>
-                        </tr>
+                            <tr>
+                                <td> No hubo producción ese día</td>
+                            </tr>
                     }
 
 
@@ -280,39 +270,39 @@
                 <table class="table">
                     @if (ventas.Count() > 0)
                     {
-                        <thead>
-                        <td>@Html.DisplayNameFor(ventas=>ventas.Id)</td>
-                        <td>Destino</td>
-                        <td>@Html.DisplayNameFor(ventas=>ventas.Cantidad)</td>
-                        <td>Precio</td>
-                        <td>@Html.DisplayNameFor(ventas=>ventas.Fecha)</td>
-                        </thead>
-                        <tbody id="data">
+                            <thead>
+                            <td>@Html.DisplayNameFor(ventas=>ventas.Id)</td>
+                            <td>Destino</td>
+                            <td>@Html.DisplayNameFor(ventas=>ventas.Cantidad)</td>
+                            <td>Precio</td>
+                            <td>@Html.DisplayNameFor(ventas=>ventas.Fecha)</td>
+                            </thead>
+                            <tbody id="data">
                             @foreach (var venta in ventas)
                             {
 
-                                <tr>
-                                    <td>@venta.Id</td>
-                                    <td class="IdAnimal">@venta.Destino</td>
-                                    <td class="Cantidad">@venta.Cantidad Litros</td>
-                                    <td>S/. @venta.Precio</td>
-                                    <td>@venta.Fecha</td>
+                                        <tr>
+                                            <td>@venta.Id</td>
+                                            <td class="IdAnimal">@venta.Destino</td>
+                                            <td class="Cantidad">@venta.Cantidad Litros</td>
+                                            <td>S/. @venta.Precio</td>
+                                            <td>@venta.Fecha</td>
 
 
-                                </tr>
+                                        </tr>
 
                             }
 
 
-                        </tbody>
+                            </tbody>
 
 
                     }
                     else
                     {
-                        <tr>
-                            <td>  No hubo producción ese día</td>
-                        </tr>
+                            <tr>
+                                <td>  No hubo producción ese día</td>
+                            </tr>
                     }
 
 

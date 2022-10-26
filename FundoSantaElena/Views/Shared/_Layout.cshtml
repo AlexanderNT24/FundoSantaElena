@@ -10,85 +10,90 @@
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"> </script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<style>
-    ::-webkit-scrollbar {
-        width: 10px;
-    }
+    <style>
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
 
 
-    ::-webkit-scrollbar-track {
-        border-radius: 10px;
-    }
+        ::-webkit-scrollbar-track {
+            border-radius: 10px;
+        }
 
-    ::-webkit-scrollbar-thumb {
-        background: #68B2A0;
-        border-radius: 10px;
-    }
+        ::-webkit-scrollbar-thumb {
+            background: #68B2A0;
+            border-radius: 10px;
+        }
 
         ::-webkit-scrollbar-thumb:hover {
             background: #198754;
         }
 
-</style>
+        .cardAmp:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+        }
+
+    </style>
 </head>
 <body>
     <div class="barra">
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3" style="background-color: #2C6975 !important;">
-            
-             <div class="container-fluid">
-              <a class="navbar-brand text-white" asp-area="" asp-controller="Home" asp-action="Index">  <i class='bx bxs-home-alt-2'></i> FundoSantaElena</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                 
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between " id="navbarSupportedContent">
-                    <ul class="navbar-nav flex-grow-1">
+        <header>
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3" style="background-color: #2C6975 !important;">
 
-                        <li class="nav-item dropdown">
-                            <a  class="nav-link dropdown-toggle text-white" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Ganado
-                            </a>
-                            <ul class="dropdown-menu " aria-labelledby="navbarDropdown">
-                                <li><a asp-action="Index" asp-controller="RegistrarGanado" class="dropdown-item" ><i class='bx bxs-keyboard'></i> Registrar Ganado</a></li>
-                                 <li><a asp-action="Index" asp-controller="RegistrarEstadoGanado" class="dropdown-item"><i class='bx bxs-capsule'></i> Estado del ganado</a></li>
-                           
-                                <li><a asp-action="Index" asp-controller="RegistrarCicloFertilidad" class="dropdown-item "> <i class='bx bxs-calendar'></i> Ciclo Fertilidad</a></li>
-                               </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-white"  id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Producción
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a asp-action="Index" asp-controller="RegistrarProduccion" class="dropdown-item" ><i class='bx bxs-cheese' ></i> Producción diaria</a></li>
-                                
-                                <li><a asp-action="Index" asp-controller="RegistrarVenta"class="dropdown-item"><i class='bx bx-money-withdraw'></i> Registrar Venta</a></li>
-                            </ul>
-                        </li>
-                       <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-white"  id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Reportes
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a asp-action="Index" asp-controller="DatosVentavsProduccion" class="dropdown-item" ><i class='bx bxs-bar-chart-square' ></i> Producción vs Venta</a></li>
-                               
-                            </ul>
-                        </li>
-                        <li class="nav-item ">
-                           <a class="nav-link text-white" asp-area="" asp-controller="ChatBot" asp-action="Index">Ayuda</a>
-                        </li>
-                        <li class="nav-item " style="margin-right: auto !important">
-                           <a class="nav-link text-white" asp-area="" asp-controller="Usuario" asp-action="Index">Salir</a>
-                        </li>
-                    </ul>
+                <div class="container-fluid">
+                    <a class="navbar-brand text-white" asp-area="" asp-controller="Home" asp-action="Index">  <i class='bx bxs-home-alt-2'></i> FundoSantaElena</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                    </button>
+                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between " id="navbarSupportedContent">
+                        <ul class="navbar-nav flex-grow-1">
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-white" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Ganado
+                                </a>
+                                <ul class="dropdown-menu " aria-labelledby="navbarDropdown">
+                                    <li><a asp-action="Index" asp-controller="RegistrarGanado" class="dropdown-item"><i class='bx bxs-keyboard'></i> Registrar Ganado</a></li>
+                                    <li><a asp-action="Index" asp-controller="RegistrarEstadoGanado" class="dropdown-item"><i class='bx bxs-capsule'></i> Estado del ganado</a></li>
+
+                                    <li><a asp-action="Index" asp-controller="RegistrarCicloFertilidad" class="dropdown-item "> <i class='bx bxs-calendar'></i> Ciclo Fertilidad</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-white" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Producción
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a asp-action="Index" asp-controller="RegistrarProduccion" class="dropdown-item"><i class='bx bxs-cheese'></i> Producción diaria</a></li>
+
+                                    <li><a asp-action="Index" asp-controller="RegistrarVenta" class="dropdown-item"><i class='bx bx-money-withdraw'></i> Registrar Venta</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-white" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Reportes
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a asp-action="Index" asp-controller="DatosVentavsProduccion" class="dropdown-item"><i class='bx bxs-bar-chart-square'></i> Producción vs Venta</a></li>
+                                    <li><a asp-action="Index" asp-controller="DatosEstadoAnimalvsProduccion" class="dropdown-item"><i class='bx bxs-heart'></i> Producción vs Estado Animal</a></li>
+
+                                </ul>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link text-white" asp-area="" asp-controller="ChatBot" asp-action="Index">Ayuda</a>
+                            </li>
+                            <li class="nav-item " style="margin-right: auto !important">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Usuario" asp-action="Index">Salir</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-           
-       
-        </nav>
-    </header>
-     </div>
+
+
+            </nav>
+        </header>
+    </div>
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
