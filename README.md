@@ -24,3 +24,10 @@ Razor
 Asp
 .Net
 ```
+#### Para desplegar el proyecto
+- Eliminar la carpeta Migrations
+- Ejecutar los siguientes comando en la consola del administrados de paquetes
+ ```
+>add-migration PrimeraMigracion
+>update-database
+```
