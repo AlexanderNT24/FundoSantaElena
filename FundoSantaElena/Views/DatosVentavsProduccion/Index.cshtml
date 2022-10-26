@@ -51,7 +51,7 @@
                             <tr>
                                 <td>
                                     <div class="form-floating mb-3">
-                                        <input class="form-control" id="Fecha" onchange="enviarFormulario()" required id="filtroFecha" asp-for="Fecha" type="date">
+                                        <input class="form-control" id="Fecha" onchange="enviarFormulario()" required asp-for="Fecha" type="date">
                                         <label for="Fecha">Fecha</label>
 
 
@@ -78,8 +78,6 @@
                                     </div>
 
                                 </td>
-
-
                             </tr>
                         </tbody>
                     </table>
@@ -102,19 +100,41 @@
 <script>
         function tomarFecha(){
 
-              let today = new Date();
-              var day = today.getDate();
+              let e = new Date()
+              
+              let valor= document.getElementById("fechaFiltro").value;
+              let fechaActual=e.getFullYear() +"-"+ (e.getMonth()+1) +"-"+ e.getDate();
 
-              var month = today.getMonth() + 1;
+              if(valor=='semana'){
+              e.setDate(e.getDate()-7)
+              }
+              else if(valor=='mes'){
+                e.setMonth(e.getMonth() - 1);
 
-              var year = today.getFullYear();
-
-              console.log(`${month}/${day}/${year}`);
-            let valorInput= document.getElementById("fechaFiltro").value;
-            let valorInputFecha=document.getElementById("filtro");
-            valorInputFecha.value=day+'-'+month+'-'+year;
-            console.log(valorInputFecha.value);
-            document.getElementById("filtro").submit();
+              } else if(valor=='anio'){
+              e.setMonth(e.getMonth() - 12)
+              }
+              let fechaRango=e.getFullYear() +"-"+ (e.getMonth()+1) +"-"+ e.getDate();
+              console.log(parseInt(e.getMonth()+1))
+             if(parseInt(e.getMonth()+1) <10){
+                  
+                  fechaRango=e.getFullYear() +"-0"+ (e.getMonth()+1) +"-"+ e.getDate();
+              }
+               
+             if(parseInt(e.getDate()) <10){
+                  
+                  fechaRango=e.getFullYear() +"-"+ (e.getMonth()+1) +"-0"+ e.getDate();
+              }
+         
+                            if(valor=='hoy'){
+              document.getElementById("Fecha").value =fechaActual;
+              document.getElementById("filtro").submit();
+              }else{console.log(fechaRango)
+           document.getElementById("Fecha").type ='text';
+             document.getElementById("Fecha").value =fechaRango+"/"+fechaActual ;
+            document.getElementById("filtro").submit();}
+              
+           
         }
         function enviarFormulario(){
             document.getElementById("filtro").submit();
@@ -127,7 +147,7 @@
 <div class="container">
      <div style="height:10px;width:100%"></div>
     <div class="row">
-        @if (totalProduccion != 0 && totalVenta != 0)
+        @if (totalProduccion != 0  )
         {
 
 
@@ -197,7 +217,7 @@
                 </div>
             </div>
         }
-
+        <div style="height:10px;width:100%"></div>
 
 
 
