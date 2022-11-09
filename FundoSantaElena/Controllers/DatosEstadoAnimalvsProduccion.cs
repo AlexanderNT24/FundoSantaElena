@@ -13,7 +13,7 @@ namespace FundoSantaElena.Controllers
     {
         private readonly AplicationDbContext _context;
 
-        public DatosEstadoAnimalvsProduccion(ILogger<DatosVentavsProduccion> logger, AplicationDbContext context)
+        public DatosEstadoAnimalvsProduccion(AplicationDbContext context)
         {
             _context = context;
 

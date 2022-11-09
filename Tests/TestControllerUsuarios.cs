@@ -3,6 +3,7 @@ using FundoSantaElena.Datos;
 using FundoSantaElena.Interfaces;
 using FundoSantaElena.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Moq;
 using NUnit.Framework;
@@ -18,15 +19,16 @@ namespace Tests
 {
     public class TestControllerUsuarios
     {
-        private readonly ILogger<HomeController> _logger;
-        private readonly AplicationDbContext _context;
         [Test]
-        public void Index()
+        public void TestIndex()
         {
-            UsuarioController controller = new UsuarioController(_context);
-            ViewResult result = controller.Index() as ViewResult;
-            Assert.IsNotNull(result);
-        }
 
+            var optionsBuilder = new DbContextOptionsBuilder<AplicationDbContext>();
+            var context = new Mock<AplicationDbContext>(optionsBuilder.Options);
+            var controller = new UsuarioController(context.Object);
+            var result = controller.Index() as ViewResult;
+            Assert.IsNotNull(result);
+
+        }
     }
 }
