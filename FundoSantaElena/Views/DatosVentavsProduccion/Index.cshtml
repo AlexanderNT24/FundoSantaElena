@@ -178,6 +178,8 @@
                         </div>
                     </div>
                 </div>
+            @if (perdida>=0)
+            {
                 <div class="col-lg-3">
                     <div class="card cardAmp" style="background-color:#ed6b77; color:white">
                         <div class="card-divider" style="background-color:#ef8a90">
@@ -189,6 +191,22 @@
                         </div>
                     </div>
                 </div>
+            }
+            else
+            {
+                  <div class="col-lg-3">
+                    <div class="card cardAmp" style="background-color:#c0a0c3; color:white">
+                        <div class="card-divider" style="background-color:#dfcae1">
+                            <h5><i class='bx bx-question-mark'></i> Litraje no registrado</h5>
+                        </div>
+                        <div class="card-section">
+
+                            <p>@Math.Abs(perdida) Litros</p>
+                        </div>
+                    </div>
+                </div>
+            }
+
 
         }
         <div style="height:10px;width:100%"></div>

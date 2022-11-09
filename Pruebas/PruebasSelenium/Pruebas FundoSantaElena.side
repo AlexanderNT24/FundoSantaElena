@@ -1291,6 +1291,271 @@
       ],
       "value": ""
     }]
+  }, {
+    "id": "034248ca-036b-41a8-baeb-585135cc558a",
+    "name": "TestChatBot",
+    "commands": [{
+      "id": "6ff32669-0adb-4b26-a083-0a86e4e329d1",
+      "comment": "",
+      "command": "open",
+      "target": "https://localhost:7214/Home",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "ce6137ef-02f2-4378-b4f6-9a37c8765d61",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "779x472",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "8d76fcfe-ff97-44c9-8422-56d9244b48ec",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Ayuda",
+      "targets": [
+        ["linkText=Ayuda", "linkText"],
+        ["css=.nav-item:nth-child(4) > .nav-link", "css:finder"],
+        ["xpath=//a[contains(text(),'Ayuda')]", "xpath:link"],
+        ["xpath=//div[@id='navbarSupportedContent']/ul/li[4]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/ChatBot')]", "xpath:href"],
+        ["xpath=//li[4]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Ayuda')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "44cc5310-4c92-415a-9c6e-d6c1f5204c50",
+      "comment": "",
+      "command": "click",
+      "target": "id=Mensaje",
+      "targets": [
+        ["id=Mensaje", "id"],
+        ["css=#Mensaje", "css:finder"],
+        ["xpath=//textarea[@id='Mensaje']", "xpath:attributes"],
+        ["xpath=//div[@id='mensajes']/div/div[2]/div/textarea", "xpath:idRelative"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "4f37cd2c-5c2a-4848-b444-d376e718323c",
+      "comment": "",
+      "command": "type",
+      "target": "id=Mensaje",
+      "targets": [
+        ["id=Mensaje", "id"],
+        ["css=#Mensaje", "css:finder"],
+        ["xpath=//textarea[@id='Mensaje']", "xpath:attributes"],
+        ["xpath=//div[@id='mensajes']/div/div[2]/div/textarea", "xpath:idRelative"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": "ayuda"
+    }, {
+      "id": "6290f436-e035-488f-9434-1c6a76ce158c",
+      "comment": "",
+      "command": "click",
+      "target": "css=.bxs-send",
+      "targets": [
+        ["css=.bxs-send", "css:finder"],
+        ["xpath=//button[@id='boton']/i", "xpath:idRelative"],
+        ["xpath=//button/i", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "cfea17fb-5445-4771-b8ab-222a5165cbdf",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=.bxs-send",
+      "targets": [
+        ["css=.bxs-send", "css:finder"],
+        ["xpath=//button[@id='boton']/i", "xpath:idRelative"],
+        ["xpath=//button/i", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c675b31e-077e-4cfc-af79-000ceb20897e",
+      "comment": "",
+      "command": "mouseOut",
+      "target": "css=.bxs-send",
+      "targets": [
+        ["css=.bxs-send", "css:finder"],
+        ["xpath=//button[@id='boton']/i", "xpath:idRelative"],
+        ["xpath=//button/i", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "7f3a619a-883f-4d9b-8fd1-b6414f3b4f0c",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.d-flex:nth-child(4) > .msg_cotainer",
+      "targets": [
+        ["css=.d-flex:nth-child(4) > .msg_cotainer", "css:finder"],
+        ["xpath=//div[@id='chat']/div[4]/div[2]", "xpath:idRelative"],
+        ["xpath=//div[4]/div[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b4217ff5-bedd-4298-af11-02c373f2d6c2",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.d-flex:nth-child(5) > .msg_cotainer",
+      "targets": [
+        ["css=.d-flex:nth-child(5) > .msg_cotainer", "css:finder"],
+        ["xpath=//div[@id='chat']/div[5]/div[2]", "xpath:idRelative"],
+        ["xpath=//div[5]/div[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "61be0fa7-dc6d-4b46-939b-7dba902e617e",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.d-flex:nth-child(6) > .msg_cotainer",
+      "targets": [
+        ["css=.d-flex:nth-child(6) > .msg_cotainer", "css:finder"],
+        ["xpath=//div[@id='chat']/div[6]/div[2]", "xpath:idRelative"],
+        ["xpath=//div[6]/div[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "6bd2c65c-7fad-48a0-b979-c3a10d533921",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.d-flex:nth-child(7) > .msg_cotainer",
+      "targets": [
+        ["css=.d-flex:nth-child(7) > .msg_cotainer", "css:finder"],
+        ["xpath=//div[@id='chat']/div[7]/div[2]", "xpath:idRelative"],
+        ["xpath=//div[7]/div[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "3faab820-fff4-4e84-99cc-c6a9798e71ea",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.d-flex:nth-child(8) > .msg_cotainer",
+      "targets": [
+        ["css=.d-flex:nth-child(8) > .msg_cotainer", "css:finder"],
+        ["xpath=//div[@id='chat']/div[8]/div[2]", "xpath:idRelative"],
+        ["xpath=//div[8]/div[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "3725a630-fb49-4bc4-b797-4d618792d1da",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.d-flex:nth-child(9) > .msg_cotainer",
+      "targets": [
+        ["css=.d-flex:nth-child(9) > .msg_cotainer", "css:finder"],
+        ["xpath=//div[@id='chat']/div[9]/div[2]", "xpath:idRelative"],
+        ["xpath=//div[9]/div[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "7e903e06-37bf-497c-a04e-df5075336d87",
+      "comment": "",
+      "command": "click",
+      "target": "id=Mensaje",
+      "targets": [
+        ["id=Mensaje", "id"],
+        ["css=#Mensaje", "css:finder"],
+        ["xpath=//textarea[@id='Mensaje']", "xpath:attributes"],
+        ["xpath=//div[@id='mensajes']/div/div[2]/div/textarea", "xpath:idRelative"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "36dfe4a7-def8-4efb-9aca-46c4b413cb4a",
+      "comment": "",
+      "command": "type",
+      "target": "id=Mensaje",
+      "targets": [
+        ["id=Mensaje", "id"],
+        ["css=#Mensaje", "css:finder"],
+        ["xpath=//textarea[@id='Mensaje']", "xpath:attributes"],
+        ["xpath=//div[@id='mensajes']/div/div[2]/div/textarea", "xpath:idRelative"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": "registro"
+    }, {
+      "id": "9e550a5c-3346-4dbd-a8db-51d0f3cf72c4",
+      "comment": "",
+      "command": "click",
+      "target": "css=.bxs-send",
+      "targets": [
+        ["css=.bxs-send", "css:finder"],
+        ["xpath=//button[@id='boton']/i", "xpath:idRelative"],
+        ["xpath=//button/i", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d8f311a0-0888-43a8-bc6d-6282c57e4255",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.d-flex:nth-child(11) > .msg_cotainer",
+      "targets": [
+        ["css=.d-flex:nth-child(11) > .msg_cotainer", "css:finder"],
+        ["xpath=//div[@id='chat']/div[11]/div[2]", "xpath:idRelative"],
+        ["xpath=//div[11]/div[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "79ce9c2f-c30f-4600-a510-51a74d037e81",
+      "comment": "",
+      "command": "click",
+      "target": "id=Mensaje",
+      "targets": [
+        ["id=Mensaje", "id"],
+        ["css=#Mensaje", "css:finder"],
+        ["xpath=//textarea[@id='Mensaje']", "xpath:attributes"],
+        ["xpath=//div[@id='mensajes']/div/div[2]/div/textarea", "xpath:idRelative"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c411474b-4ca1-4243-867a-3cdb67ee2dfc",
+      "comment": "",
+      "command": "type",
+      "target": "id=Mensaje",
+      "targets": [
+        ["id=Mensaje", "id"],
+        ["css=#Mensaje", "css:finder"],
+        ["xpath=//textarea[@id='Mensaje']", "xpath:attributes"],
+        ["xpath=//div[@id='mensajes']/div/div[2]/div/textarea", "xpath:idRelative"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": "editar"
+    }, {
+      "id": "0fef1d51-0ec5-4bc2-a64e-33d81f9e848d",
+      "comment": "",
+      "command": "click",
+      "target": "css=.bxs-send",
+      "targets": [
+        ["css=.bxs-send", "css:finder"],
+        ["xpath=//button[@id='boton']/i", "xpath:idRelative"],
+        ["xpath=//button/i", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ac817ed6-1261-47f3-83b9-6976c97f020d",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=.bxs-send",
+      "targets": [
+        ["css=.bxs-send", "css:finder"],
+        ["xpath=//button[@id='boton']/i", "xpath:idRelative"],
+        ["xpath=//button/i", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "9236727c-6fc6-4959-9b1d-2bc4163f8621",
+      "comment": "",
+      "command": "mouseOut",
+      "target": "css=.bxs-send",
+      "targets": [
+        ["css=.bxs-send", "css:finder"],
+        ["xpath=//button[@id='boton']/i", "xpath:idRelative"],
+        ["xpath=//button/i", "xpath:position"]
+      ],
+      "value": ""
+    }]
   }],
   "suites": [{
     "id": "5189d80d-1b9b-4506-b4fc-afe8c4c4c21d",

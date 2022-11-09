@@ -10,16 +10,17 @@ namespace FundoSantaElena.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly AplicationDbContext _context;
 
-        public HomeController(ILogger<HomeController> logger, AplicationDbContext context)
+        public HomeController(AplicationDbContext context)
         {
             _context = context;
-            _logger = logger;
+
         }
 
         public IActionResult Index()
         {
             IEnumerable<Animal> animales = _context.Animales;
-            return View(animales);
+            ViewBag.Animales = animales;
+            return View();
         }
 
         public IActionResult Privacy()
