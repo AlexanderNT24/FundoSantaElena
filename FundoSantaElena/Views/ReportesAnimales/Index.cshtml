@@ -1,0 +1,295 @@
+﻿@model FundoSantaElena.Models.Animal
+@{
+    IEnumerable<Animal> animales = ViewBag.Animal;
+    IEnumerable<EventoAnimal> eventoAnimal = ViewBag.EventoAnimal;
+
+
+}
+@{
+
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<style>
+
+    .cardAmp:hover {
+        transform: scale(1.05);
+        box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+        cursor: pointer;
+    }
+
+
+
+    .timeline {
+        width: 5000px;
+        height: 20px;
+        list-style: none;
+        text-align: justify;
+        margin: 80px auto;
+        background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(255,255,255,0)), color-stop(45%, rgba(255,255,255,0)), color-stop(51%, rgba(191,128,11,1)), color-stop(57%, rgba(255,255,255,0)), color-stop(100%, rgba(255,255,255,0)));
+        background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 45%, rgba(191,128,11,1) 51%, rgba(255,255,255,0) 57%, rgba(255,255,255,0) 100%);
+    }
+
+        .timeline:after {
+            display: inline-block;
+            content: "";
+            width: 100%;
+        }
+
+        .timeline li {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            background: #F2BB13;
+            text-align: center;
+            line-height: 1.2;
+            position: relative;
+            border-radius: 50%;
+        }
+
+            .timeline li:before {
+                display: inline-block;
+                content: attr(data-year);
+                font-size: 16px;
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .timeline li:nth-child(odd):before {
+                top: -40px;
+            }
+
+            .timeline li:nth-child(even):before {
+                bottom: -40px;
+            }
+
+            .timeline li:after {
+                display: inline-block;
+                content: attr(data-text);
+                font-size: 16px;
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .timeline li:nth-child(odd):after {
+                bottom: 0;
+                margin-bottom: -10px;
+                transform: translate(-50%, 100%);
+            }
+
+            .timeline li:nth-child(even):after {
+                top: 0;
+                margin-top: -10px;
+                transform: translate(-50%, -100%);
+            }
+</style>
+
+
+
+@if (eventoAnimal != null)
+{
+
+    <div id="myModal" class="modal fade" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Detalles para animal</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="rt-container">
+                        <div class="col">
+                            <div class="Scriptcontent">
+
+
+
+                                @if (eventoAnimal.Count() == 0)
+                                {
+
+                                    <p>No hay registros</p>
+                                }
+                                else
+                                {
+
+                                    <h5 class="modal-title">Salud</h5>
+
+                                    <div id="linea" style="overflow-x: scroll; ">
+
+                                        <ul class="timeline">
+                                            @foreach (var evento in eventoAnimal)
+                                            {
+                                                <li data-year=@evento.Fecha data-text=@evento.Detalles></li>
+
+                                            }
+                                        </ul>
+                                    </div>
+                                    <div hidden id="tabla" style="height:480px; overflow-y: scroll; ">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Fecha</th>
+                                                    <th scope="col">Detalle</th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var evento in eventoAnimal)
+                                                {
+                                                    <tr>
+                                                        <th scope="row">@evento.Fecha</th>
+                                                        <td>@evento.Detalles</td>
+                                                    </tr>
+
+
+
+                                                }
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                }
+
+
+
+
+
+
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <div class="form-check form-switch">
+                        <input onchange="cambiarModo()" class="form-check-input" type="checkbox" id="cambiar" checked>
+                        <label class="form-check-label" id="cambiarTexto" for="flexSwitchCheckChecked">Grafica</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+
+
+<div class="container text-center">
+    <div class="row">
+
+        <div class="col">
+            <div>
+                <h4>Ganado Vacuno</h4>
+
+            </div>
+            <form method="post" id="filtro">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Filtrar</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+
+                            <td>
+                                <div class="form-floating">
+                                    <input class="form-control" id="IdAnimal" onchange="enviarFormulario()" required asp-for="Id" type="number">
+                                    <label for="IdAnimal">Animal Id</label>
+                                    <span asp-validation-for="Id" class="text-danger"> </span>
+                                </div>
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </form>
+            <hr>
+
+            <div class="overflow" style="height:480px; overflow-y: scroll; display: flex;flex-flow: row wrap;">
+                @if (animales.Count() > 0)
+                {
+
+                    @foreach (var animal in animales)
+                    {
+                        @if (animal.Sexo == "F")
+                        {
+
+                            <div style="width: 18rem; margin-left: 10px;">
+                                <div onclick="datosVaca(@animal.Id)" class="card mb-3 cardAmp" style="max-width: 540px;">
+                                    <div class="row g-0">
+                                        <div class="col-md-4">
+                                            <img src="@animal.Foto" class="img-fluid rounded-start">
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="card-body">
+                                                <h6 class="card-title" style="margin-bottom: 0px;">@animal.Id.@animal.Nombre</h6>
+
+                                                <p class="card-text"><small class="text-muted">@animal.Raza</small></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+
+
+                    }
+                }
+                else
+                {
+
+                    <span> No hay datos..</span>
+
+                }
+
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+<script>
+        $(document).ready(function(){
+        $("#myModal").modal('show');
+    });
+    function datosVaca(animal){
+        document.getElementById("IdAnimal").value =animal;
+        enviarFormulario();
+    }
+            function enviarFormulario(){
+                document.getElementById("filtro").submit();
+            }
+            function cambiarModo(){
+                let valor=document.getElementById("cambiarTexto").innerHTML;
+                if(valor=="Tabla"){
+                    document.getElementById("cambiarTexto").innerHTML="Grafica";
+                     document.getElementById("linea").hidden=false;
+                     document.getElementById("tabla").hidden=true;
+                }else{
+                      document.getElementById("linea").hidden=true;
+                     document.getElementById("tabla").hidden=false;
+                    document.getElementById("cambiarTexto").innerHTML="Tabla";
+                }
+            }
+</script>
+
+@section Scripts{
+    @{
+    <partial name="_ValidationScriptsPartial" />
+
+    }
+
+
+    }

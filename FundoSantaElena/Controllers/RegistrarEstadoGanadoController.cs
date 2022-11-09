@@ -23,6 +23,7 @@ namespace FundoSantaElena.Controllers
             ViewBag.Animales = animales;
             IEnumerable<EventoAnimal> eventoAnimales = _context.EventoAnimal;
             ViewBag.EventoAnimal = eventoAnimales;
+            ViewBag.Registrar = false;
             return View();
         }
 
@@ -34,7 +35,13 @@ namespace FundoSantaElena.Controllers
             {
                 _context.EventoAnimal.Add(evanimal);
                 _context.SaveChanges();
-                return RedirectToAction("Index");
+
+                IEnumerable<Animal> animales = _context.Animales;
+                ViewBag.Animales = animales;
+                IEnumerable<EventoAnimal> eventoAnimales = _context.EventoAnimal;
+                ViewBag.EventoAnimal = eventoAnimales;
+                ViewBag.Registrar = true;
+                return View();
             }
             return View();
         }

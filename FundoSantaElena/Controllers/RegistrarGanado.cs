@@ -9,17 +9,19 @@ namespace FundoSantaElena.Controllers
 {
     public class RegistrarGanado : Controller
     {
+
         private readonly AplicationDbContext _context;
         public RegistrarGanado(AplicationDbContext context)
         {
             _context = context;
         }
+        
         public IActionResult Index()
         {
 
             IEnumerable<Animal> animales = _context.Animales;
             ViewBag.Animal = animales;
-
+            ViewBag.Registrar = false;
             return View();
         }
 
@@ -32,8 +34,12 @@ namespace FundoSantaElena.Controllers
             {
                 _context.Animales.Add(animal);
                 _context.SaveChanges();
-                return RedirectToAction("Index");
+                IEnumerable<Animal> animales = _context.Animales;
+                ViewBag.Animal = animales;
+                ViewBag.Registrar = true;
+                return View();
             }
+            ViewBag.Registrar = false;
             return View();
         }
 

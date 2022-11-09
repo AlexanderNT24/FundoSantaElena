@@ -6,6 +6,19 @@
 @{
     IEnumerable<Animal> animales = ViewBag.Animales;
     IEnumerable<EventoAnimal> eventoAnimales = ViewBag.EventoAnimal;
+    var registrar = ViewBag.Registrar;
+}
+@if (registrar==true)
+{
+    <script>
+        Swal.fire({
+  position: 'top-end',
+  icon: 'success',
+  title: 'Registrado',
+  showConfirmButton: false,
+  timer: 1500
+})
+    </script>
 
 }
 <div class="container text-center">

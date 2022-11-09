@@ -25,6 +25,7 @@ namespace FundoSantaElena.Controllers
             IEnumerable<VentaProduccion> venta = _context.VentaProduccion;
             ViewBag.Stock= RegistrarProduccion.litraje;
             ViewBag.VentaProduccion = venta;
+            ViewBag.Registrar = false;
             return View();
         }
 
@@ -37,7 +38,11 @@ namespace FundoSantaElena.Controllers
                 _context.VentaProduccion.Add(produccion);
                 RegistrarProduccion.litraje = RegistrarProduccion.litraje -float.Parse( produccion.Cantidad);
                 _context.SaveChanges();
-                return RedirectToAction("Index");
+                IEnumerable<VentaProduccion> venta = _context.VentaProduccion;
+                ViewBag.Stock = RegistrarProduccion.litraje;
+                ViewBag.VentaProduccion = venta;
+                ViewBag.Registrar = true;
+                return View();
             }
             return View();
         }
