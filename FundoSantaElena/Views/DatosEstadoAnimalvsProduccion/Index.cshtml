@@ -2,6 +2,9 @@
     IEnumerable<Animal> animales = ViewBag.Animales;
     IEnumerable<ProduccionAnimal> produccionAnimales = ViewBag.ProduccionAnimales;
     IEnumerable<EventoAnimal> eventoAnimales =  ViewBag.EventoAnimal;
+    var filtroFecha = ViewBag.FiltroFecha;
+    var filtroAnimal = ViewBag.FiltroAnimal;
+    var post = ViewBag.Post;
 }
 @model FundoSantaElena.Models.ProduccionAnimal
 
@@ -13,7 +16,12 @@
 
 
 <h3><i class='bx bx-bar-chart-square'></i> Reporte Producción vs Estado Animal</h3>
-
+@if(@filtroFecha!=""){
+    <h6 class="text-muted">@filtroFecha</h6>
+}
+@if(@filtroAnimal!=""){
+    <h6 class="text-muted">@filtroAnimal</h6>
+}
 <div class="accordion accordion-flush" id="accordionFlushExample">
     <div class="accordion-item">
         <h2 class="accordion-header" id="flush-headingOne">
@@ -44,7 +52,7 @@
 
                                 <td>
                                     <div class="form-floating">
-                                        <select class="form-select" id="IdAnimal" onchange="enviarFormulario()" name="IdAnimal">
+                                        <select class="form-select" id="IdAnimal" onchange="enviarFormulario()" asp-for="IdAnimal">
                                             <option class="NombreId" value="0">Ninguno</option>
                                                 @foreach (var animal in animales)
                                                 {
@@ -63,7 +71,12 @@
                     </table>
 
                 </form>
-
+                @if (post)
+                {
+                    <form method="get">
+                        <input id="boton" class="btn btn-link" value="Reiniciar" type="submit" asp-action="Index" asp-controller="DatosEstadoAnimalvsProduccion" />
+                    </form>
+                }
 
             </div>
         </div>
@@ -141,7 +154,7 @@
                     {
                         <thead>
                         <td>@Html.DisplayNameFor(produccionAnimales=>produccionAnimales.Id)</td>
-                        <td>@Html.DisplayNameFor(produccionAnimales=>produccionAnimales.IdAnimal)</td>
+                        <td>Nombre</td>
                         <td>@Html.DisplayNameFor(produccionAnimales=>produccionAnimales.Cantidad)</td>
                         <td>@Html.DisplayNameFor(produccionAnimales=>produccionAnimales.Fecha)</td>
                         </thead>
@@ -150,7 +163,7 @@
                             {
                                 <tr>
                                     <td>@produccion.Id</td>
-                                    <td class="IdAnimal">@produccion.IdAnimal</td>
+                                    <td class="IdAnimal">@produccion.Animal.Nombre</td>
                                     <td class="Cantidad">@produccion.Cantidad Litros</td>
                                     <td>@produccion.Fecha</td>
                                 </tr>
