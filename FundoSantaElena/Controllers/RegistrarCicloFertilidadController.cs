@@ -32,18 +32,20 @@ namespace FundoSantaElena.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Index(EventoAnimal evanimal)
         {
-            if (ModelState.IsValid)
-            {
-                _context.EventoAnimal.Add(evanimal);
-                _context.SaveChanges();
-                IEnumerable<Animal> animales = _context.Animales;
-                ViewBag.Animales = animales;
-                IEnumerable<EventoAnimal> eventoAnimales = _context.EventoAnimal;
-                ViewBag.EventoAnimal = eventoAnimales;
-                ViewBag.Registrar = true;
-                return View();
-            }
-            return View();
+            IEnumerable<Animal> animales = _context.Animales;
+            ViewBag.Animales = animales;
+            IEnumerable<EventoAnimal> eventoAnimales = _context.EventoAnimal;
+            ViewBag.EventoAnimal = eventoAnimales;
+            ViewBag.Registrar = true;
+            evanimal.Animal = _context.Animales.Find(evanimal.IdAnimal);
+            
+             _context.EventoAnimal.Add(evanimal);
+             _context.SaveChanges();
+                
+
+                
+             return View();
+
         }
 
         public IActionResult Editar(int? id)
@@ -70,13 +72,9 @@ namespace FundoSantaElena.Controllers
         {
             IEnumerable<Animal> animales = _context.Animales;
             ViewBag.Animales = animales;
-            if (ModelState.IsValid)
-            {
-                _context.EventoAnimal.Update(evanimal);
-                _context.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View();
+            _context.EventoAnimal.Update(evanimal);
+            _context.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         public IActionResult Eliminar(int? id)

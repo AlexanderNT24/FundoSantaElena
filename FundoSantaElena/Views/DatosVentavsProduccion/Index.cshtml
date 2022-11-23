@@ -117,7 +117,7 @@
               }
 
                             if(valor=='hoy'){
-              document.getElementById("Fecha").value =fechaActual;
+              document.getElementById("Fecha").value =fechaRango;
               document.getElementById("filtro").submit();
               }else{console.log(fechaRango)
            document.getElementById("Fecha").type ='text';
@@ -252,7 +252,7 @@
                             {
                                         <tr>
                                             <td>@produccion.Id</td>
-                                            <td class="IdAnimal">@produccion.IdAnimal</td>
+                                            <td class="IdAnimal">@produccion.Animal.Nombre</td>
                                             <td class="Cantidad">@produccion.Cantidad Litros</td>
                                             <td>@produccion.Fecha</td>
                                         </tr>

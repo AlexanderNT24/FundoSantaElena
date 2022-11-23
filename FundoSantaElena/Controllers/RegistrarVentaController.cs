@@ -23,7 +23,7 @@ namespace FundoSantaElena.Controllers
         {
 
             IEnumerable<VentaProduccion> venta = _context.VentaProduccion;
-            ViewBag.Stock= RegistrarProduccion.litraje;
+
             ViewBag.VentaProduccion = venta;
             ViewBag.Registrar = false;
             return View();
@@ -36,10 +36,10 @@ namespace FundoSantaElena.Controllers
             if (ModelState.IsValid)
             {
                 _context.VentaProduccion.Add(produccion);
-                RegistrarProduccion.litraje = RegistrarProduccion.litraje -float.Parse( produccion.Cantidad);
+
                 _context.SaveChanges();
                 IEnumerable<VentaProduccion> venta = _context.VentaProduccion;
-                ViewBag.Stock = RegistrarProduccion.litraje;
+
                 ViewBag.VentaProduccion = venta;
                 ViewBag.Registrar = true;
                 return View();

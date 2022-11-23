@@ -391,6 +391,13 @@
         ["xpath=//div[3]/div/div/div/img", "xpath:position"]
       ],
       "value": ""
+    }, {
+      "id": "7c240381-ba5e-4cbf-a74e-b90ccb683296",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.swal2-title",
+      "targets": [],
+      "value": ""
     }]
   }, {
     "id": "bb4f6990-f725-49b2-bf36-b944aa319ab4",
@@ -529,6 +536,13 @@
         ["xpath=//canvas", "xpath:position"]
       ],
       "value": ""
+    }, {
+      "id": "4e8a8c52-5307-4726-a36f-cb3271a8cff4",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.swal2-title",
+      "targets": [],
+      "value": ""
     }]
   }, {
     "id": "e24a304d-8f96-4aa1-ae31-a5d59d1a9a23",
@@ -653,6 +667,13 @@
         ["xpath=//input[@id='boton']", "xpath:attributes"],
         ["xpath=//div[2]/input", "xpath:position"]
       ],
+      "value": ""
+    }, {
+      "id": "06877601-5a80-4557-87f7-7cced60aa93e",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.swal2-title",
+      "targets": [],
       "value": ""
     }]
   }, {
@@ -806,6 +827,13 @@
         ["xpath=//canvas[@id='grafica']", "xpath:attributes"],
         ["xpath=//canvas", "xpath:position"]
       ],
+      "value": ""
+    }, {
+      "id": "57c88a48-a5e0-48a4-9201-2f4307706d46",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.swal2-title",
+      "targets": [],
       "value": ""
     }]
   }, {
@@ -1002,6 +1030,13 @@
         ["xpath=//canvas[@id='grafica']", "xpath:attributes"],
         ["xpath=//canvas", "xpath:position"]
       ],
+      "value": ""
+    }, {
+      "id": "7c06b456-1027-441d-a0b1-5db37b7bb554",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.swal2-title",
+      "targets": [],
       "value": ""
     }]
   }, {

@@ -19,9 +19,9 @@ namespace FundoSantaElena.Controllers
         public IActionResult Index()
         {
 
-            IEnumerable<Animal> animales = _context.Animales;
+            IEnumerable<Animal> animales = _context.Animales.ToList();
             ViewBag.Animales = animales;
-            IEnumerable<EventoAnimal> eventoAnimales = _context.EventoAnimal;
+            IEnumerable<EventoAnimal> eventoAnimales = _context.EventoAnimal.ToList();
             ViewBag.EventoAnimal = eventoAnimales;
             ViewBag.Registrar = false;
             return View();
@@ -31,18 +31,16 @@ namespace FundoSantaElena.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Index(EventoAnimal evanimal)
         {
-            if (ModelState.IsValid)
-            {
-                _context.EventoAnimal.Add(evanimal);
-                _context.SaveChanges();
+            IEnumerable<EventoAnimal> eventoAnimales = _context.EventoAnimal;
+            ViewBag.EventoAnimal = eventoAnimales;
+            IEnumerable<Animal> animales = _context.Animales;
+            ViewBag.Animales = animales;
+            ViewBag.Registrar = true;         
+            evanimal.Animal= _context.Animales.Find(evanimal.IdAnimal);
 
-                IEnumerable<Animal> animales = _context.Animales;
-                ViewBag.Animales = animales;
-                IEnumerable<EventoAnimal> eventoAnimales = _context.EventoAnimal;
-                ViewBag.EventoAnimal = eventoAnimales;
-                ViewBag.Registrar = true;
-                return View();
-            }
+            //Error al necesitar de un animal
+            _context.EventoAnimal.Add(evanimal);
+            _context.SaveChanges();
             return View();
         }
         public IActionResult Editar(int? id)
@@ -67,13 +65,12 @@ namespace FundoSantaElena.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Editar(EventoAnimal evanimal)
         {
-            if (ModelState.IsValid)
-            {
-                _context.EventoAnimal.Update(evanimal);
-                _context.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View();
+            IEnumerable<Animal> animales = _context.Animales;
+            ViewBag.Animales = animales;
+            _context.EventoAnimal.Update(evanimal);
+            _context.SaveChanges();
+            return RedirectToAction("Index");
+
         }
 
         public IActionResult Eliminar(int? id)

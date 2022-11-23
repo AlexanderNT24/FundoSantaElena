@@ -1,0 +1,8 @@
+{
+    "pregunta":["ayuda","registro","Editar ","Eliminar ","graficas","asda"],
+    "respuesta":["¿En que deseas ayuda? Puedo ayudarte en:",
+    "En la parte derecha podrás encontrar distintos campos, llena todos y seguido presiona el botón registrar.",
+    "¿Te equivocaste con algún dato? Puedes modificarlo haciendo click en el boton amarillo en el apartado de datos, ubicado en la parte inferior de cada registro",
+    "¿Quieres eliminar algún dato? Puedes eliminarlo haciendo click en el boton rojo en el apartado de datos, ubicado en la parte inferior de cada registro",
+    "Para vizualizar los datos en una grafica, puedes verlos en apartado derecho de cada registro","Lo siento no te entiendo."]
+}

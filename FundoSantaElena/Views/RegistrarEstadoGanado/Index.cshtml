@@ -35,7 +35,6 @@
                                 <select class="form-select" id="animal" asp-for="IdAnimal">
                                     @foreach (var animal in animales)
                                     {
-
                                         <option class="NombreId" value="@animal.Id">@animal.Nombre</option>
 
                                     }
@@ -91,7 +90,7 @@
             {
                 <thead>
                 <td>@Html.DisplayNameFor(eventoAnimales=>eventoAnimales.Id)</td>
-                <td>@Html.DisplayNameFor(eventoAnimales=>eventoAnimales.IdAnimal)</td>
+                <td>Nombre</td>
                 <td>@Html.DisplayNameFor(eventoAnimales=>eventoAnimales.Detalles)</td>
                 <td>@Html.DisplayNameFor(eventoAnimales=>eventoAnimales.Fecha)</td>
                 </thead>
@@ -102,7 +101,7 @@
                         {
                             <tr>
                                 <td>@eventoAnimal.Id</td>
-                                <td class="IdAnimal">@eventoAnimal.IdAnimal</td>
+                                <td class="IdAnimal">@eventoAnimal.Animal.Nombre</td>
                                 <td class="Cantidad">@eventoAnimal.Detalles</td>
                                 <td>@eventoAnimal.Fecha</td>
                                 <td>
@@ -120,7 +119,7 @@
 
                             <tr>
                                 <td>@eventoAnimal.Id</td>
-                                <td class="IdAnimal">@eventoAnimal.IdAnimal</td>
+                                <td class="IdAnimal">@eventoAnimal.Animal.Nombre</td>
                                 <td class="Cantidad">Preñada</td>
                                 <td>@eventoAnimal.Fecha</td>
                                 <td>
@@ -203,7 +202,14 @@
                 }
             ]
 
+            @section Scripts{
+@{
+    <partial name="_ValidationScriptsPartial" />
 
+}
+
+
+}
         }
     })
 </script>

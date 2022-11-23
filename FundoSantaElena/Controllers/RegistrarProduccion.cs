@@ -7,7 +7,7 @@ namespace FundoSantaElena.Controllers
 {
     public class RegistrarProduccion : Controller
     {
-        public static float litraje;
+
         private readonly AplicationDbContext _context;
         public RegistrarProduccion(AplicationDbContext context)
         {
@@ -15,47 +15,43 @@ namespace FundoSantaElena.Controllers
         }
         public IActionResult Index()
         {
-            litraje = 0;
+            
             IEnumerable<ProduccionAnimal> produccionAnimales = _context.ProduccionAnimales;
             IEnumerable<Animal> animales = _context.Animales;
-            foreach(ProduccionAnimal produccionAnimal in produccionAnimales)
-            {
-                litraje=litraje+float.Parse(produccionAnimal.Cantidad);
-            }
+
             ViewBag.Registrar = false;
             ViewBag.ProduccionAnimales = produccionAnimales;
             ViewBag.Animales = animales;
+            
             return View();
         }
         //Http post create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Index(ProduccionAnimal prodAnimal)
+
+        public IActionResult Index(ProduccionAnimal prodAnimal, string cantidad)
         {
-            
-            Debug.WriteLine(prodAnimal.Cantidad);
+            Debug.WriteLine("----------------");
+            Debug.WriteLine(prodAnimal.Id);
             Debug.WriteLine(prodAnimal.IdAnimal);
+            Debug.WriteLine(prodAnimal.Cantidad);
             Debug.WriteLine(prodAnimal.Fecha);
-            Debug.WriteLine(ModelState.IsValid);
-            if (ModelState.IsValid)
-            {
-                litraje = float.Parse(prodAnimal.Cantidad) + litraje;
-                _context.ProduccionAnimales.Add(prodAnimal);
-                _context.SaveChanges();
-                litraje = 0;
-                IEnumerable<ProduccionAnimal> produccionAnimales = _context.ProduccionAnimales;
-                IEnumerable<Animal> animales = _context.Animales;
-                foreach (ProduccionAnimal produccionAnimal in produccionAnimales)
-                {
-                    litraje = litraje + float.Parse(produccionAnimal.Cantidad);
-                }
-                ViewBag.Registrar = true;
-                ViewBag.ProduccionAnimales = produccionAnimales;
-                ViewBag.Animales = animales;
-                return View();
-            }
+
+            Debug.WriteLine("----------------");
+            IEnumerable<ProduccionAnimal> produccionAnimales = _context.ProduccionAnimales;
+            IEnumerable<Animal> animales = _context.Animales;
+
+            ViewBag.Registrar = true;
+            ViewBag.ProduccionAnimales = produccionAnimales;
+            ViewBag.Animales = animales;
+            
+            prodAnimal.Animal = _context.Animales.Find(prodAnimal.IdAnimal);
+            _context.ProduccionAnimales.Add(prodAnimal);
+            _context.SaveChanges();
+
             return View();
         }
+
         public IActionResult Editar(int? id)
         {
             IEnumerable<ProduccionAnimal> produccionAnimales = _context.ProduccionAnimales;
@@ -80,13 +76,10 @@ namespace FundoSantaElena.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Editar(ProduccionAnimal prodAnimal)
         {
-            if (ModelState.IsValid)
-            {
-                _context.ProduccionAnimales.Update(prodAnimal);
-                _context.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View();
+            prodAnimal.Animal = _context.Animales.Find(prodAnimal.IdAnimal);
+            _context.ProduccionAnimales.Update(prodAnimal);
+            _context.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         public IActionResult Eliminar(int? id)

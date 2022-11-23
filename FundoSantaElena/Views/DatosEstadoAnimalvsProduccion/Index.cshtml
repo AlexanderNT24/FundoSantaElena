@@ -36,20 +36,15 @@
                             <tr>
                                 <td>
                                     <div class="form-floating mb-3">
-                                        <input class="form-control" id="Fecha" onchange="enviarFormulario()" required asp-for="Fecha" type="date">
+                                        <input class="form-control" id="Fecha" onchange="enviarFormulario()" required name="Fecha" type="date">
                                         <label for="Fecha">Fecha</label>
 
 
                                     </div>
-                                    <select id="fechaFiltro" onchange="tomarFecha()" class="form-select" size="3" aria-label="size 3 select example">
-                                        <option value="hoy">Hoy</option>
-                                        <option value="semana">Esta semana</option>
-                                        <option value="mes">Este mes</option>
-                                        <option value="anio">Este año</option>
-                                    </select>
+
                                 <td>
                                     <div class="form-floating">
-                                        <select class="form-select" id="IdAnimal" onchange="enviarFormulario()" asp-for="IdAnimal">
+                                        <select class="form-select" id="IdAnimal" onchange="enviarFormulario()" name="IdAnimal">
                                             <option class="NombreId" value="0">Ninguno</option>
                                                 @foreach (var animal in animales)
                                                 {

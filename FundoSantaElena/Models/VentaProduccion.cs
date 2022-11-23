@@ -9,17 +9,14 @@ namespace FundoSantaElena.Models
         [Key]
         public int Id { get; set; }
         [Required(ErrorMessage = "Fecha obligatoria")]
-        [StringLength(maximumLength: 50, ErrorMessage = "El {0} debe ser minimo {2} y maximo {1} caracteres", MinimumLength = 5)]
-        public string Fecha { get; set; }
+        public DateTime Fecha { get; set; }
         [Required(ErrorMessage = "Detalles obligatorios")]
         [StringLength(maximumLength: 10, ErrorMessage = "El {0} debe ser minimo {2} y maximo {1} caracteres", MinimumLength = 0)]
         public string Destino { get; set; }
         [Required(ErrorMessage = "Cantidad obligatoria")]
-        [StringLength(maximumLength: 10, ErrorMessage = "El {0} debe ser minimo {2} y maximo {1} caracteres", MinimumLength = 0)]
-        public string Cantidad { get; set; }
+        public double Cantidad { get; set; }
         [Required(ErrorMessage = "Precio obligatorio")]
-        [StringLength(maximumLength: 10, ErrorMessage = "El {0} debe ser minimo {2} y maximo {1} caracteres", MinimumLength = 0)]
-        public string Precio { get; set; }
+        public double Precio { get; set; }
         public bool ValidarEventos(EventoAnimal evento)
         {
             if (evento.Id == 0) return false;

@@ -82,7 +82,7 @@
                 @if (eventoAnimales.Count() > 0)
                 {
                     <thead>
-                    <td>@Html.DisplayNameFor(eventoAnimales=>eventoAnimales.IdAnimal)</td>
+                    <td>Nombre</td>
                     <td>@Html.DisplayNameFor(eventoAnimales=>eventoAnimales.Detalles)</td>
                     <td>@Html.DisplayNameFor(eventoAnimales=>eventoAnimales.Fecha)</td>
                     </thead>
@@ -92,7 +92,7 @@
                             if (eventoAnimal.Detalles == "IA" || eventoAnimal.Detalles == "Monta")
                             {
                                 <tr>
-                                    <td class="IdAnimal">@eventoAnimal.IdAnimal</td>
+                                    <td class="IdAnimal">@eventoAnimal.Animal.Nombre</td>
                                     <td class="Cantidad">@eventoAnimal.Detalles</td>
                                     <td>@eventoAnimal.Fecha</td>
                                     <td>

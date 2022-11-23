@@ -36,9 +36,16 @@ namespace FundoSantaElena.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Index(ProduccionAnimal pAnimales)
         {
+            string fechas = Request.Form["Fecha"];
+            Debug.WriteLine("name->"+ fechas);
 
-            IEnumerable<ProduccionAnimal> produccionAnimales = _context.ProduccionAnimales.FromSqlRaw("SELECT [Id],[Fecha],[Cantidad],[IdAnimal]FROM[FundoSantaElena].[dbo].[ProduccionAnimales]WHERE Fecha = '" + pAnimales.Fecha + "'").ToList();
-            IEnumerable<EventoAnimal> eventoAnimales = _context.EventoAnimal.FromSqlRaw("SELECT TOP (1000) [Id],[Fecha],[Detalles],[IdAnimal]FROM[FundoSantaElena].[dbo].[EventoAnimal]WHERE FECHA = '" + pAnimales.Fecha + "'").ToList();
+
+            IEnumerable<ProduccionAnimal> produccionAnimales = _context.ProduccionAnimales.FromSqlRaw("SELECT [Id],[Fecha],[Cantidad],[IdAnimal]" +
+                "FROM[FundoSantaElena].[dbo].[ProduccionAnimales]" +
+                "WHERE Fecha = '" + fechas + "'").ToList();
+            IEnumerable<EventoAnimal> eventoAnimales = _context.EventoAnimal.FromSqlRaw("SELECT TOP (1000) [Id],[Fecha],[Detalles],[IdAnimal]" +
+                "FROM[FundoSantaElena].[dbo].[EventoAnimal]" +
+                "WHERE FECHA = '" + fechas + "'").ToList();
             IEnumerable<Animal> animales = _context.Animales;
 
             ViewBag.Animales = animales;

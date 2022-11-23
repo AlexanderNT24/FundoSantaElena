@@ -10,11 +10,9 @@ namespace FundoSantaElena.Models
         [StringLength(maximumLength: 50, ErrorMessage = "El {0} debe ser minimo {2} y maximo {1} caracteres", MinimumLength = 5)]
         public string Nombre { get; set; }
         [Required(ErrorMessage = "Fecha Nacimiento obligatorio")]
-        [StringLength(maximumLength: 50, ErrorMessage = "El {0} debe ser minimo {2} y maximo {1} caracteres", MinimumLength = 5)]
-        public string FechaNacimiento { get; set; }
+        public DateTime FechaNacimiento { get; set; }
         [Required(ErrorMessage = "Sexo obligatorio")]
-        [StringLength(maximumLength: 1, ErrorMessage = "El {0} debe ser minimo {2} y maximo {1} caracteres", MinimumLength = 1)]
-        public string Sexo { get; set; }
+        public char Sexo { get; set; }
         [Required(ErrorMessage = "Foto obligatoria")]
         [StringLength(maximumLength: 1000, ErrorMessage = "El {0} debe ser minimo {2} y maximo {1} caracteres", MinimumLength = 5)]
         public string Foto { get; set; }
