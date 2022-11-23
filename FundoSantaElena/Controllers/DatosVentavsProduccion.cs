@@ -32,6 +32,8 @@ namespace FundoSantaElena.Controllers
             ViewBag.ProduccionAnimales = produccionAnimales;
             ViewBag.VentaProduccion = ventaProduccion;
 
+            ViewBag.FiltroFecha = "";
+            ViewBag.FiltroAnimal= "";
             return View();
         }
 
@@ -40,11 +42,48 @@ namespace FundoSantaElena.Controllers
         public IActionResult Index(ProduccionAnimal pAnimales)
         {
             string fechasVanilla = Request.Form["Fecha"];
-
+            ViewBag.FiltroAnimal = "";
             var fechas = fechasVanilla.Split('/');
             //var fechas = Convert.ToString(pAnimales.Fecha).Split('/');
             Debug.WriteLine("Entrada->" + fechasVanilla);
             // pAnimales.Fecha
+            if(fechasVanilla=="" && pAnimales.IdAnimal!=0)
+            {
+                double totalProduccionAnimal = 0;
+                var sqlAnimalProd = "SELECT [Id],[Fecha],[Cantidad],[IdAnimal]" +
+                        "FROM[FundoSantaElena].[dbo].[ProduccionAnimales] " +
+                        "WHERE IdAnimal=" + pAnimales.IdAnimal;
+                Debug.WriteLine("AnimalProd->" + sqlAnimalProd);
+                var sqlAnimal = "SELECT [Id],[Nombre],[FechaNacimiento],[Sexo],[Foto],[Raza]" +
+                        "FROM[FundoSantaElena].[dbo].[Animales] " +
+                        "WHERE [Id]=" + pAnimales.IdAnimal;
+                Debug.WriteLine("AnimalProd->" + sqlAnimal);
+                IEnumerable<Animal> animales = _context.Animales;
+                IEnumerable<ProduccionAnimal> produccionAnimales = _context.ProduccionAnimales.FromSqlRaw(sqlAnimalProd).ToList();
+                IEnumerable<VentaProduccion> ventaProduccion = _context.VentaProduccion;
+                ViewBag.ProduccionAnimales = produccionAnimales;
+                foreach (var item in produccionAnimales)
+                {
+                    totalProduccionAnimal = item.Cantidad + totalProduccionAnimal;
+                }
+                pAnimales.Animal = _context.Animales.Find(pAnimales.IdAnimal);
+                ViewBag.FiltroAnimal = "Para: " + pAnimales.Animal.Nombre;
+
+                ViewBag.Animales = animales;
+                ViewBag.TotalProduccion = 0;
+                ViewBag.TotalVenta = 0;
+                ViewBag.TotalVentaCantidad = 0;
+                ViewBag.Perdida = 0;
+                ViewBag.Post = true;
+                ViewBag.ProduccionAnimales = produccionAnimales;
+                ViewBag.VentaProduccion = ventaProduccion;
+                ViewBag.TotalProduccionAnimal = totalProduccionAnimal;
+                ViewBag.FiltroFecha = "";
+
+
+                return View();
+            }
+
 
             if (fechas.Length > 1)
             {
@@ -86,18 +125,25 @@ namespace FundoSantaElena.Controllers
                 double totalProduccionAnimal = 0;
                 if (pAnimales.IdAnimal == 0)
                 {
-                    IEnumerable<ProduccionAnimal> produccionAnimales = _context.ProduccionAnimales.FromSqlRaw("SELECT [Id],[Fecha],[Cantidad],[IdAnimal]FROM[FundoSantaElena].[dbo].[ProduccionAnimales]WHERE [Fecha] BETWEEN '" + fechaRango + "' AND '" + fechaActual + "'").ToList();
+                    IEnumerable<ProduccionAnimal> produccionAnimales = _context.ProduccionAnimales.FromSqlRaw("SELECT [Id],[Fecha],[Cantidad],[IdAnimal]" +
+                        "FROM[FundoSantaElena].[dbo].[ProduccionAnimales]" +
+                        "WHERE [Fecha] BETWEEN '" + fechaRango + "' AND '" + fechaActual + "'").ToList();
                     ViewBag.ProduccionAnimales = produccionAnimales;
-
+                    
+                    
                 }
                 else
                 {
-                    IEnumerable<ProduccionAnimal> produccionAnimales = _context.ProduccionAnimales.FromSqlRaw("SELECT [Id],[Fecha],[Cantidad],[IdAnimal]FROM[FundoSantaElena].[dbo].[ProduccionAnimales] WHERE Fecha BETWEEN '" + fechaRango + "' AND '" + fechaActual + "' AND IdAnimal=" + pAnimales.IdAnimal).ToList();
+                    IEnumerable<ProduccionAnimal> produccionAnimales = _context.ProduccionAnimales.FromSqlRaw("SELECT [Id],[Fecha],[Cantidad],[IdAnimal]" +
+                        "FROM[FundoSantaElena].[dbo].[ProduccionAnimales] " +
+                        "WHERE Fecha BETWEEN '" + fechaRango + "' AND '" + fechaActual + "' AND IdAnimal=" + pAnimales.IdAnimal).ToList();
                     ViewBag.ProduccionAnimales = produccionAnimales;
                     foreach (var item in produccionAnimales)
                     {
                         totalProduccionAnimal = item.Cantidad + totalProduccionAnimal;
                     }
+                    pAnimales.Animal = _context.Animales.Find(pAnimales.IdAnimal);
+                    ViewBag.FiltroAnimal = "Para: " + pAnimales.Animal.Nombre;
                 }
                 ViewBag.TotalProduccionAnimal = totalProduccionAnimal;
                 ViewBag.Post = true;
@@ -107,7 +153,7 @@ namespace FundoSantaElena.Controllers
                 ViewBag.TotalVentaCantidad = ventaCantidadTotal;
                 ViewBag.TotalVenta = ventaTotal;
                 ViewBag.TotalProduccion = totalProduccion;
-                Debug.WriteLine("Fecha" + pAnimales.IdAnimal);
+                ViewBag.FiltroFecha = "Desde: "+ fechaRango + " hasta: "+ fechaActual;
 
             }
 
@@ -148,7 +194,7 @@ namespace FundoSantaElena.Controllers
                         "FROM[FundoSantaElena].[dbo].[ProduccionAnimales]" +
                         "WHERE Fecha = '" + fechasVanilla + "'").ToList();
                     ViewBag.ProduccionAnimales = produccionAnimales;
-
+                   
                 }
                 else
                 {
@@ -160,6 +206,8 @@ namespace FundoSantaElena.Controllers
                     {
                         totalProduccionAnimal = item.Cantidad + totalProduccionAnimal;
                     }
+                    pAnimales.Animal = _context.Animales.Find(pAnimales.IdAnimal);
+                    ViewBag.FiltroAnimal = "Para: " + pAnimales.Animal.Nombre;
                 }
                 ViewBag.TotalProduccionAnimal = totalProduccionAnimal;
                 ViewBag.Post = true;
@@ -169,7 +217,7 @@ namespace FundoSantaElena.Controllers
                 ViewBag.TotalVenta = ventaTotal;
                 ViewBag.TotalProduccion = totalProduccion;
                 Debug.WriteLine("Fecha" + pAnimales.IdAnimal);
-
+                ViewBag.FiltroFecha = fechasVanilla;
             }
             
             return View();
